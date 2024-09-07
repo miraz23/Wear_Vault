@@ -106,4 +106,16 @@ document.addEventListener("DOMContentLoaded", function (){
     document.getElementById("reset-link-close").addEventListener("click", function () {
         document.getElementById("reset-link-panel").classList.remove("reset-link-open");
     });
+
+    /*----------------------------------------- banner -----------------------------------------*/
+
+    const banners = document.querySelectorAll(".banner");
+    let currentIndex = 0;
+    
+    function showNextBanner() {
+        banners[currentIndex].classList.remove("active");
+        currentIndex = (currentIndex + 1) % banners.length;
+        banners[currentIndex].classList.add("active");
+    }
+    setInterval(showNextBanner, 5000);
 });
