@@ -51,6 +51,16 @@ document.addEventListener("DOMContentLoaded", function (){
         }
     };
 
+    /*----------------------------------------- cart -----------------------------------------*/
+
+    document.getElementById("cart-icon").addEventListener("click", function () {
+        document.getElementById("cart-panel").classList.toggle("cart-open");
+    });
+
+    document.getElementById("cart-close").addEventListener("click", function () {
+        document.getElementById("cart-panel").classList.remove("cart-open");
+    });
+
     /*----------------------------------------- log -----------------------------------------*/
 
     document.getElementById("log-icon").addEventListener("click", function () {
