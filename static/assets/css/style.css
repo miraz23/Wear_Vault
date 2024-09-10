@@ -767,3 +767,54 @@ nav {
     font-size: 15px;
     font-weight: 300;
 }
+
+
+/*----------------------------------------- footer -----------------------------------------*/
+
+
+footer{
+    margin-top: 100px;
+    padding: 50px 36px 0px 36px;
+    box-shadow: 0 0 15px 15px rgba(0, 0, 0, 0.1);
+    background-color: #bab3a6;
+}
+
+.footer{
+    text-align: center;
+    padding-top: 40px;
+}
+
+.footer-logo img{
+    filter: invert(100%);
+}
+
+.footer .footer-link ul{
+    gap: 40px;
+    font-size: 20px;
+    padding: 30px;
+}
+
+.footer .footer-link a{
+    text-decoration: none;
+}
+
+.footer-icon{
+    padding: 5px 0px;
+}
+
+.footer-icon i{
+    padding: 0px 10px;
+    font-size: 25px;
+}
+
+.footer-copyright{
+    padding-top: 30px;
+}
+
+.footer-copyright p{
+    color: #fff;
+    font-size: 16px;
+    margin: 0 -36px 0 -36px;
+    padding: 10px;
+    background: #2A2A28;
+}
