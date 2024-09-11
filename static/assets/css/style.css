@@ -704,6 +704,15 @@ nav {
     margin-bottom: 50px;
 }
 
+.category-title h3{
+    font-size: 40px;
+}
+
+.category-title p{
+    font-size: 20px;
+    font-weight: 250;
+}
+
 .category-items {
     display: flex;
     justify-content: center;
@@ -766,6 +775,177 @@ nav {
 .category-info p {
     font-size: 15px;
     font-weight: 300;
+}
+
+/* --------------------------------------------- trending --------------------------------------------- */
+
+#trending{
+    margin: 200px 0;
+}
+
+.trending {
+    display: flex;
+    justify-content: center;
+}
+
+.trending-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.trending-title h3{
+    font-size: 40px;
+}
+
+.trending-title p{
+    font-size: 20px;
+    font-weight: 250;
+}
+
+.trending-single {
+    position: relative;
+    margin: 0px 10px;
+}
+
+.trending-single img {
+    width: 400px;
+    height: 610px;
+    display: block;
+}
+
+.trending-single::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 610px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.trending-single-contents {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+}
+
+.trending-single-contents h3 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.trending-single-contents p {
+    margin: 10px 0px;
+    font-size: 15px;
+}
+
+.trending-single-contents-button {
+    display: flex;
+    justify-content: center;
+}
+
+.trending-single-contents-button button{
+    font-size: 15px;
+    color: white;
+    background-color: #b67c54;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+    Gap: 10px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.trending-single-contents-button button:hover {
+    opacity: 0.85;
+    color: white;
+    transition: 0.3 ease;
+}
+
+.trending-double {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.trending-double-contents {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.trending-double-contents::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.trending-double-contents img {
+    width: 250px;
+    height: 300px;
+    display: block;
+}
+
+.trending-double-contents-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+}
+
+.trending-double-contents-info h3 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.trending-double-contents-info p {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 10px 0px;
+}
+
+.trending-double-contents-button {
+    display: flex;
+    justify-content: center;
+}
+
+.trending-double-contents-button button {
+    font-size: 12px;
+    color: #333;
+    background-color: #bab3a6;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+    Gap: 10px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.trending-double-contents-button button svg path{
+    stroke: black;
+}
+
+.trending-double-contents-button button:hover {
+    background-color: #b67c54;
+    cursor: pointer;
+    transition: 0.3 ease;
 }
 
 
