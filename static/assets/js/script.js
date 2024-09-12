@@ -118,4 +118,50 @@ document.addEventListener("DOMContentLoaded", function (){
         banners[currentIndex].classList.add("active");
     }
     setInterval(showNextBanner, 5000);
+
+    /*----------------------------------------- arrivals -----------------------------------------*/
+
+    const arrivals = document.querySelectorAll('.arrivals-product');
+    const arrivalsPrevButton = document.querySelector('.arrivals-prev');
+    const arrivalsNextButton = document.querySelector('.arrivals-next');
+    
+    let arrivalsCurrentIndex = 0;
+    
+    function updateArrivalsPosition() {
+        const offset = arrivalsCurrentIndex * -104;
+        arrivals.forEach((product, index) => {
+            const scale = product.style.transform.includes('scale(1.05)') ? 'scale(1.03)' : 'scale(1)'; // Preserve scale
+            product.style.transform = `translateX(${offset}%) ${scale}`;
+            product.style.transition = 'transform 0.3s ease-in-out';
+        });
+    }
+    
+    arrivalsPrevButton.addEventListener('click', () => {
+        if (arrivalsCurrentIndex > 0) {
+            arrivalsCurrentIndex--;
+            updateArrivalsPosition();
+        }
+    });
+    
+    arrivalsNextButton.addEventListener('click', () => {
+        if (arrivalsCurrentIndex < arrivals.length - 5) {
+            arrivalsCurrentIndex++;
+            updateArrivalsPosition();
+        }
+    });
+    
+    updateArrivalsPosition();
+    
+    
+    // hover effect
+
+    arrivals.forEach((product) => {
+        product.addEventListener('mouseenter', () => {
+            product.style.transform = product.style.transform.replace('scale(1)', 'scale(1.03)');
+        });
+    
+        product.addEventListener('mouseleave', () => {
+            product.style.transform = product.style.transform.replace('scale(1.03)', 'scale(1)');
+        });
+    });
 });
