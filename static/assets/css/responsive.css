@@ -1,0 +1,93 @@
+@media (max-width: 767px){
+
+body{
+    overflow-x: hidden;
+}
+    
+/* --------------------------------------------- category --------------------------------------------- */
+
+.category-title h3{
+    font-size: 35px;
+}
+
+.category-title p{
+    font-size: 18px;
+    font-weight: 250;
+}
+
+.category{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.category-items .category-row{
+    grid-template-columns: repeat(1, 0fr);
+}
+
+/* --------------------------------------------- trending --------------------------------------------- */
+
+.trending {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.trending-title{
+    margin: 0 16px;
+}
+
+.trending-title h3{
+    font-size: 35px;
+}
+
+.trending-title p{
+    font-size: 18px;
+}
+
+.trending .trending-single img {
+    width: 350px;
+    height: 450px;
+}
+
+.trending .trending-single::before {
+    width: 350px;
+    height: 450px;
+}
+
+.trending .trending-single-contents h3 {
+    font-size: 25px;
+}
+
+.trending .trending-single-contents p {
+    font-size: 12px;
+}
+
+.trending .trending-double {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.trending .trending-double-contents::before {
+    width: 170px;
+    height: 250px;
+}
+
+.trending .trending-double-contents img {
+    width: 170px;
+    height: 250px;
+}
+
+.trending .trending-double-contents-info h3 {
+    font-size: 15px;
+}
+
+.trending .trending-double-contents-info p {
+    font-size: 8px;
+}
+
+}

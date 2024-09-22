@@ -771,11 +771,13 @@ nav {
     font-size: 20px;
     font-weight: 550;
     width: 230px;
+    cursor: pointer;
 }
 
 .category-info p {
     font-size: 15px;
     font-weight: 300;
+    cursor: pointer;
 }
 
 /* --------------------------------------------- arrivals --------------------------------------------- */
@@ -969,12 +971,13 @@ nav {
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease-in-out;
-    Gap: 10px;
+    gap: 5px;
+    outline: none;
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .trending-single-contents-button button:hover {
@@ -1044,12 +1047,13 @@ nav {
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease-in-out;
-    Gap: 10px;
+    gap: 5px;
+    outline: none;
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .trending-double-contents-button button svg path{
