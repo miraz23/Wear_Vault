@@ -1,8 +1,4 @@
 @media (max-width: 767px){
-
-body{
-    overflow-x: hidden;
-}
     
 /* --------------------------------------------- category --------------------------------------------- */
 
@@ -24,6 +20,42 @@ body{
 
 .category-items .category-row{
     grid-template-columns: repeat(1, 0fr);
+}
+
+/* --------------------------------------------- arrivals --------------------------------------------- */
+
+.arrivals-title h3{
+    font-size: 35px;
+}
+
+.arrivals-title p{
+    font-size: 18px;
+    font-weight: 250;
+}
+
+.arrivals .arrivals-wrapper{
+    margin: 0 10px 40px;
+}
+
+.arrivals .arrivals-wrapper .arrivals-slide-button{
+    display: none;
+}
+
+.arrivals-list .arrivals-product{
+    overflow: hidden;
+}
+
+.arrivals-list .arrivals-product-image img{
+    min-width: 91vw;
+    min-height: 60vh;
+}
+
+.arrivals .arrivals-product-info h3 {
+    font-size: 20px;
+}
+
+.arrivals .arrivals-product-info p {
+    font-size: 18px;
 }
 
 /* --------------------------------------------- trending --------------------------------------------- */

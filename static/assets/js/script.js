@@ -8,6 +8,55 @@ document.addEventListener("DOMContentLoaded", function (){
         if (window.scrollY > 0) header.classList.add('scrolled');
         else header.classList.remove('scrolled');
     });
+
+    /*----------------------------------------- banner -----------------------------------------*/
+
+    const banners = document.querySelectorAll(".banner");
+    let currentIndex = 0;
+    
+    function showNextBanner() {
+        banners[currentIndex].classList.remove("active");
+        currentIndex = (currentIndex + 1) % banners.length;
+        banners[currentIndex].classList.add("active");
+    }
+    setInterval(showNextBanner, 5000);
+
+
+    /*----------------------------------------- arrivals -----------------------------------------*/
+
+
+    document.querySelectorAll('.arrivals-product').forEach((item, index)=>{
+        item.addEventListener('mouseenter', () => {
+            item.style.transform = 'scale(1.02)';
+        });
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = 'scale(1)';
+        });
+    });
+
+    const swiper = new Swiper('.arrivals-wrapper', {
+
+        loop: true,
+        grabCursor: true,
+        spaceBetween: 15,
+
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+
+        breakpoints:{
+            0:{
+                slidesPerView: 1,
+            },
+            768:{
+                slidesPerView: 2,
+            },
+            1024:{
+                slidesPerView: 5,
+            }
+        }
+    });
     
     /*----------------------------------------- search -----------------------------------------*/
 
@@ -107,61 +156,4 @@ document.addEventListener("DOMContentLoaded", function (){
         document.getElementById("reset-link-panel").classList.remove("reset-link-open");
     });
 
-    /*----------------------------------------- banner -----------------------------------------*/
-
-    const banners = document.querySelectorAll(".banner");
-    let currentIndex = 0;
-    
-    function showNextBanner() {
-        banners[currentIndex].classList.remove("active");
-        currentIndex = (currentIndex + 1) % banners.length;
-        banners[currentIndex].classList.add("active");
-    }
-    setInterval(showNextBanner, 5000);
-
-    /*----------------------------------------- arrivals -----------------------------------------*/
-
-    const arrivals = document.querySelectorAll('.arrivals-product');
-    const arrivalsPrevButton = document.querySelector('.arrivals-prev');
-    const arrivalsNextButton = document.querySelector('.arrivals-next');
-    
-    let arrivalsCurrentIndex = 0;
-    
-    function updateArrivalsPosition() {
-        const offset = arrivalsCurrentIndex * -104;
-        arrivals.forEach((product, index) => {
-            const scale = product.style.transform.includes('scale(1.05)') ? 'scale(1.03)' : 'scale(1)'; // Preserve scale
-            product.style.transform = `translateX(${offset}%) ${scale}`;
-            product.style.transition = 'transform 0.3s ease-in-out';
-        });
-    }
-    
-    arrivalsPrevButton.addEventListener('click', () => {
-        if (arrivalsCurrentIndex > 0) {
-            arrivalsCurrentIndex--;
-            updateArrivalsPosition();
-        }
-    });
-    
-    arrivalsNextButton.addEventListener('click', () => {
-        if (arrivalsCurrentIndex < arrivals.length - 5) {
-            arrivalsCurrentIndex++;
-            updateArrivalsPosition();
-        }
-    });
-    
-    updateArrivalsPosition();
-    
-    
-    // hover effect
-
-    arrivals.forEach((product) => {
-        product.addEventListener('mouseenter', () => {
-            product.style.transform = product.style.transform.replace('scale(1)', 'scale(1.03)');
-        });
-    
-        product.addEventListener('mouseleave', () => {
-            product.style.transform = product.style.transform.replace('scale(1.03)', 'scale(1)');
-        });
-    });
 });

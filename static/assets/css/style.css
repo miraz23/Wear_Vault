@@ -1,7 +1,6 @@
 body {
     color: #222222;
     font-family: "DM Sans", sans-serif;
-    overflow-x: hidden;
 }
 
 html {
@@ -782,14 +781,10 @@ nav {
 
 /* --------------------------------------------- arrivals --------------------------------------------- */
 
-#arrivals {
-    margin: 0 10px;
-}
-
-.arrivals {
+.arrivals-title {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .arrivals-title {
@@ -808,36 +803,62 @@ nav {
     font-weight: 250;
 }
 
-.arrivals-product {
-    min-width: 269px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    justify-items: center;
-    text-align: center;
+.arrivals{
+    display: flex;
+    justify-content: center;
+}
+
+.arrivals-wrapper{
+    overflow: hidden;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.arrivals-list .arrivals-product{
+    color: #000;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .arrivals-product-container {
-    width: 100%;
-    height: 400px;
     position: relative;
+    display: inline-block;
+}
+
+.arrivals-product-container:hover .arrivals-product-image:before {
+    content: "";
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 .arrivals-product-svg {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
     position: absolute;
-    background: rgba(7, 7, 7, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
     opacity: 0;
-    transition: 0.6s;
 }
 
-.arrivals-product-svg:hover {
+.arrivals-product-container:hover .arrivals-product-svg {
+    display: block;
     opacity: 1;
+}
+
+.arrivals-list .arrivals-product img{
+    width: 100%;
+    height: 350px;
 }
 
 .arrivals-product-svg button{
@@ -856,14 +877,12 @@ nav {
     transform: scale(1.1);
 }
 
-.arrivals-product-container img {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-}
-
-.arrivals-product-info {
-    padding: 25px 10px;
+.arrivals .arrivals-product-info{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 
 .arrivals-product-info h3 {
@@ -876,27 +895,18 @@ nav {
     font-weight: 300;
 }
 
-.arrivals-prev,
-.arrivals-next {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #bab3a6;
-    border-radius: 100%;
-    width: 75px;
-    height: 75px;
+.arrivals-wrapper .arrivals-slide-button{
+    color: #000;
 }
 
-.arrivals-prev:hover,
-.arrivals-next:hover {
-    transform: scale(1.1);
-    cursor: pointer;
+.arrivals-wrapper .arrivals-slide-button:hover{
+    transform: scale(1.05);
 }
 
 /* --------------------------------------------- trending --------------------------------------------- */
 
 #trending{
-    margin: 200px 0;
+    margin: 100px 0;
 }
 
 .trending {
