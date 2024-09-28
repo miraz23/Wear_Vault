@@ -9,6 +9,19 @@ document.addEventListener("DOMContentLoaded", function (){
         else header.classList.remove('scrolled');
     });
 
+    const menuIcon = document.querySelector('.nav-menu-icon');
+    const navMenu = document.getElementById('nav-menu');
+    const removeMenuButton = document.querySelector('.nav-menu-remove');
+  
+    menuIcon.addEventListener('click', function() {
+      navMenu.classList.toggle('open');
+    });
+  
+    removeMenuButton.addEventListener('click', function() {
+      navMenu.classList.remove('open');
+    });
+      
+
     /*----------------------------------------- banner -----------------------------------------*/
 
     const banners = document.querySelectorAll(".banner");

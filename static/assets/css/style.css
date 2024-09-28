@@ -148,6 +148,14 @@ nav {
     transform: scale(1.1);
 }
 
+nav .nav-menu{
+    display: none;
+}
+
+nav .nav-menu-icon{
+    display: none;
+}
+
 /* ---------- search ---------- */
 
 .search-panel {

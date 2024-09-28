@@ -1,5 +1,83 @@
 @media (max-width: 767px){
-    
+
+
+/* --------------------------------------------- header ---------------------------------------------*/
+
+body header {
+    padding: 25px 50px;
+}
+
+header .nav-logo img{
+    width: 70px;
+    height: 30px;
+}
+
+header nav .nav-menu-icon{
+    display: block;
+}
+
+header nav .nav-link, 
+header nav .nav-bar{
+    display: none;
+}
+
+header nav .nav-menu{
+    display: block;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    opacity: 0;
+    transition: 0.5s;
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.2);
+}
+  
+header nav .nav-menu.open {
+    width: 350px;
+    opacity: 1;
+}
+
+header nav .nav-menu .nav-menu-bar{
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 50px;
+    align-items: center;
+} 
+
+header nav .nav-menu .nav-menu-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+}
+
+header nav .nav-menu .nav-menu-link ul li{
+    padding: 15px;
+    text-align: center;
+}
+
+header nav .nav-menu-link ul{
+    font-size: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+header nav .nav-menu-link ul li a:hover{
+    color: #000;
+    text-decoration: none;
+}
+
+header nav .nav-menu-bar span{
+    font-size: 25px;
+}
+
+header nav .nav-menu-bar a svg:hover{
+    transform: scale(1.1);
+}
+ 
 /* --------------------------------------------- category --------------------------------------------- */
 
 .category-title h3{
