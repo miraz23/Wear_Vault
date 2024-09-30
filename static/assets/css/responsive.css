@@ -200,4 +200,28 @@ header nav .nav-menu-bar a svg:hover{
     font-size: 8px;
 }
 
+/*----------------------------------------- footer -----------------------------------------*/
+
+.footer{
+    padding: 0px;
+}
+
+.footer-logo img{
+    width: 70px;
+    height: 30px;
+    margin: 10px;
+}
+
+.footer .footer-link ul{
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer .footer-copyright p{
+    font-size: 13px;
+}
+
 }
