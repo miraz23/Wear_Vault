@@ -34,6 +34,18 @@ document.addEventListener("DOMContentLoaded", function (){
     }
     setInterval(showNextBanner, 5000);
 
+    /*----------------------------------------- banner mobile-----------------------------------------*/
+
+    const bannersMobile = document.querySelectorAll(".banner-mobile");
+    let currentIndexMobile = 0;
+    
+    function showNextBannerMobile() {
+        bannersMobile[currentIndexMobile].classList.remove("active");
+        currentIndexMobile = (currentIndexMobile + 1) % bannersMobile.length;
+        bannersMobile[currentIndexMobile].classList.add("active");
+    }
+    setInterval(showNextBannerMobile, 5000);
+
 
     /*----------------------------------------- arrivals -----------------------------------------*/
 

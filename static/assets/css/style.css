@@ -699,6 +699,13 @@ nav .nav-menu-icon{
     transform: scale(1.05);
 }
 
+.home {
+    display: block;
+}
+
+.home-mobile {
+    display: none;
+}
 
 /* --------------------------------------------- category --------------------------------------------- */
 
