@@ -463,4 +463,30 @@ header nav .nav-menu-bar a svg:hover{
     transform: scale(1.1);
 }
 
+/* --------------------------------------------- category ---------------------------------------------*/
+
+.category-items .category-row{
+    grid-template-columns: repeat(2, 0fr);
+}
+
+/* --------------------------------------------- arrivals --------------------------------------------- */
+
+.arrivals .arrivals-wrapper .arrivals-slide-button{
+    display: none;
+}
+
+.arrivals-list .arrivals-product-image img{
+    min-width: 100%;
+    min-height: 55vh;
+}
+
+.arrivals .arrivals-product-info h3 {
+    font-size: 22px;
+    padding: 10px 0;
+}
+
+.arrivals .arrivals-product-info p {
+    font-size: 18px;
+}
+
 }
