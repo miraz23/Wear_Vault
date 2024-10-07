@@ -489,4 +489,19 @@ header nav .nav-menu-bar a svg:hover{
     font-size: 18px;
 }
 
+/* --------------------------------------------- trending --------------------------------------------- */
+
+#trending .trending {
+    display: grid;
+    grid-template-columns: repeat(2, 0fr);
+    justify-items: center;
+    margin-right: 10px;
+}
+
+/*----------------------------------------- footer -----------------------------------------*/
+
+.footer-link li{
+    font-size: 18px;
+}
+
 }
