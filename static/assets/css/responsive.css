@@ -10,8 +10,8 @@
         font-size: 35px;
     }
     
-    .banner-mobile .banner-mobile-content h3{
-        margin-top: 40px;
+    .banner-mobile .banner-vertical-text{
+        padding: 20px;
         font-size: 18px;
     }
     
@@ -38,7 +38,9 @@ header nav .nav-menu-icon{
 }
 
 header nav .nav-link, 
-header nav .nav-bar{
+.nav-bar .nav-search #search-icon,
+.nav-bar .nav-log #log-icon,
+.nav-bar .nav-cart #cart-icon{
     display: none;
 }
 
@@ -97,6 +99,14 @@ header nav .nav-menu-bar span{
 
 header nav .nav-menu-bar a svg:hover{
     transform: scale(1.1);
+}
+
+/* ---------- search ---------- */
+
+.search-panel .search-content{
+    display: grid;
+    grid-template-columns: repeat(2, 0fr);
+    margin: 0 0 100px 0;
 }
  
 /* --------------------------------------------- home --------------------------------------------- */
@@ -403,7 +413,9 @@ header nav .nav-menu-icon{
 }
 
 header nav .nav-link, 
-header nav .nav-bar{
+.nav-bar .nav-search a,
+.nav-bar .nav-log a,
+.nav-bar .nav-cart a{
     display: none;
 }
 
@@ -462,6 +474,43 @@ header nav .nav-menu-bar span{
 
 header nav .nav-menu-bar a svg:hover{
     transform: scale(1.1);
+}
+
+.search-panel .search-content{
+    display: grid;
+    grid-template-columns: repeat(3, 0fr);
+    margin: 0 0 100px 0;
+}
+
+.nav-log .sign-panel,
+.nav-log .reset-panel,
+.nav-log .reset-link-panel,
+.nav-log .log-panel {
+    width: 450px;
+}
+
+.cart-content .cart-item img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.cart-item-details .cart-item-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.cart-item-details .cart-item-quantity,
+.cart-item-details .cart-item-price {
+    font-size: 18px;
+    margin: 0;
+    color: #666;
+}
+
+.nav-cart .cart-panel {
+    width: 450px;
 }
 
 /* --------------------------------------------- home ---------------------------------------------*/
@@ -540,7 +589,7 @@ header nav .nav-menu-bar a svg:hover{
     color: rgba(0, 0, 0, 0.3);
 }
 
-.banner-mobile-content h2{
+.banner-mobile .banner-mobile-content h2{
     color: #fff;
     font-size: 50px;
     font-weight: 300;
@@ -642,6 +691,214 @@ header nav .nav-menu-bar a svg:hover{
 
 .footer-link li{
     font-size: 18px;
+}
+
+}
+
+@media (min-width: 1024px) and (max-width: 1200px){
+
+/* --------------------------------------------- header ---------------------------------------------*/
+
+.cart-content .cart-item img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.cart-item-details .cart-item-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.cart-item-details .cart-item-quantity,
+.cart-item-details .cart-item-price {
+    font-size: 18px;
+    margin: 0;
+    color: #666;
+}
+
+.nav-log .sign-panel,
+.nav-log .reset-panel,
+.nav-log .reset-link-panel,
+.nav-log .log-panel {
+    width: 450px;
+}
+
+.nav-cart .cart-panel {
+    width: 450px;
+}
+
+/* --------------------------------------------- home ---------------------------------------------*/
+
+#home  .home {
+    display: none;
+}
+
+#home  .home-mobile {
+    display: block;
+}
+
+.home-mobile a{
+    text-decoration: none;
+}
+
+.banner-mobile {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+.banner-mobile.active {
+    opacity: 1;
+    z-index: 2;
+    animation: slideIn 1s forwards;
+}
+
+.banner-mobile:not(.active) {
+    animation: slideOut 1s forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+.banner-mobile-content {
+    position: absolute;
+    top: 12%;
+    color: black;
+    text-transform: uppercase;
+}
+
+.banner-mobile-content h1{
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 50px;
+    position: relative;
+    z-index: 0;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.banner-mobile .banner-mobile-content h2{
+    color: #fff;
+    font-size: 60px;
+    font-weight: 300;
+    margin-top: 40%;
+    line-height: 100px;
+    z-index: 2;
+    position: relative;
+    font-family: 'Rock Salt';
+}
+
+.banner-vertical-text{
+    position: absolute;
+    right: -50px;
+    top: 60%;
+    transform: translateX(15%) rotate(90deg);
+    text-transform: lowercase;
+    font-size: 28px;
+    font-weight: 700;
+    font-family: "Rock salt";
+    line-height: 30px;
+    letter-spacing: 2px;
+    z-index: 2;
+}
+
+.banner-mobile-image img {
+    height: 90vh;
+    object-fit: cover;
+    z-index: 1;
+    position: relative;
+    filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.5));
+}
+
+.banner-mobile-image:before{
+    content: "";
+    background: rgba(0, 0, 0, 0.15);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.banner-mobile-button {
+    position: absolute;
+    bottom: 35%;
+    padding: 15px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+    outline: none;
+    background-color: #444;
+    text-decoration: none;
+    z-index: 2;
+    border-radius: 5px;
+}
+
+.banner-mobile-button:hover{
+    color: #fff;
+    transform: scale(1.02);
+}
+
+/* --------------------------------------------- arrivals ---------------------------------------------*/
+
+.arrivals .arrivals-wrapper .arrivals-slide-button{
+    display: none;
+}
+
+/* --------------------------------------------- trending ---------------------------------------------*/
+
+.trending .trending-single img {
+    width: 300px;
+    height: 510px;
+}
+
+.trending .trending-single::before {
+    width: 300px;
+    height: 510px;
+}
+
+.trending .trending-double-contents::before {
+    width: 200px;
+    height: 250px;
+}
+
+.trending .trending-double-contents img {
+    width: 200px;
+    height: 250px;
+}
+
+.trending .trending-double-contents-info h3 {
+    font-size: 20px;
 }
 
 }

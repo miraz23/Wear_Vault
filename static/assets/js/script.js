@@ -85,35 +85,44 @@ document.addEventListener("DOMContentLoaded", function (){
     
     /*----------------------------------------- search -----------------------------------------*/
 
-    document.querySelector('#search-icon').addEventListener('click', function () {
-        document.querySelector('#search-panel').style.display = 'block';
-    
-        const categories = [
-            { image: '/static/images/prod-1.JPG', name: 'Drop Shoulder' },
-            { image: '/static/images/prod-2.JPG', name: 'Baggy Joggers' },
-            { image: '/static/images/prod-3.JPG', name: 'Baggy Shirts' },
-            { image: '/static/images/prod-4.JPG', name: 'Cargo Pants' },
-            { image: '/static/images/prod-5.JPG', name: 'Head Wear' },
-            { image: '/static/images/prod-6.JPG', name: 'Baggy Shorts' }
-        ];
-    
-        const searchContent = document.querySelector('.search-content');
-    
-        for (let i = 0; i < categories.length; i++) {
-            const category = categories[i];
-            const categoryDiv = document.createElement('div');
-            categoryDiv.classList.add('search-category');
+    function setupToggle() {
         
-            categoryDiv.innerHTML = `
-                <div class="search-category">
-                    <img src="${category.image}" width="200" height="250">
-                    <h2>${category.name}</h2>
-                </div>`;
+        var md = window.matchMedia("(max-width: 1024px)").matches;
+        var iconId = md ? "#search-menu-icon" : "#search-icon";
+
+        document.querySelector(iconId).addEventListener('click', function () {
+            document.querySelector('#search-panel').style.display = 'block';
         
-            searchContent.appendChild(categoryDiv);
-        }
-    });
-    
+            const categories = [
+                { image: '/static/images/prod-1.JPG', name: 'Drop Shoulder' },
+                { image: '/static/images/prod-2.JPG', name: 'Baggy Joggers' },
+                { image: '/static/images/prod-3.JPG', name: 'Baggy Shirts' },
+                { image: '/static/images/prod-4.JPG', name: 'Cargo Pants' },
+                { image: '/static/images/prod-5.JPG', name: 'Head Wear' },
+                { image: '/static/images/prod-6.JPG', name: 'Baggy Shorts' }
+            ];
+        
+            const searchContent = document.querySelector('.search-content');
+        
+            for (let i = 0; i < categories.length; i++) {
+                const category = categories[i];
+                const categoryDiv = document.createElement('div');
+                categoryDiv.classList.add('search-category');
+            
+                categoryDiv.innerHTML = `
+                    <div class="search-category">
+                        <img src="${category.image}" width="200" height="250">
+                        <h2>${category.name}</h2>
+                    </div>`;
+            
+                searchContent.appendChild(categoryDiv);
+            }
+        });
+    }
+
+    setupToggle();
+    window.addEventListener('resize', setupToggle);
+
     document.querySelector('#search-close').addEventListener('click', function () {
         document.querySelector('#search-panel').style.display = 'none';
         document.querySelector('.search-content').innerHTML = '';
@@ -131,7 +140,12 @@ document.addEventListener("DOMContentLoaded", function (){
         document.getElementById("cart-panel").classList.toggle("cart-open");
     });
 
+    document.getElementById("cart-menu-icon").addEventListener("click", function () {
+        document.getElementById("cart-panel").classList.toggle("cart-open");
+    });
+
     document.getElementById("cart-close").addEventListener("click", function () {
+        navMenu.classList.remove('open');
         document.getElementById("cart-panel").classList.remove("cart-open");
     });
 
@@ -141,7 +155,12 @@ document.addEventListener("DOMContentLoaded", function (){
         document.getElementById("log-panel").classList.toggle("log-open");
     });
 
+    document.getElementById("log-menu-icon").addEventListener("click", function () {
+        document.getElementById("log-panel").classList.toggle("log-open");
+    });
+
     document.getElementById("log-close").addEventListener("click", function () {
+        navMenu.classList.remove('open');
         document.getElementById("log-panel").classList.remove("log-open");
     });
 

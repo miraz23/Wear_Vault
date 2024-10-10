@@ -1,3 +1,7 @@
+*{
+    margin: 0;
+}
+
 body {
     color: #222222;
     font-family: "DM Sans", sans-serif;
@@ -271,6 +275,7 @@ nav .nav-menu-icon{
     margin: 0 90px;
     flex-wrap: wrap;
     gap: 5px;
+    justify-content: center;
 }
 
 .search-category{
@@ -312,11 +317,13 @@ nav .nav-menu-icon{
 
 /* ---------- cart ---------- */
 
-#cart-icon{
+#cart-icon,
+#cart-menu-icon{
     position: relative;
 }
 
-#cart-icon span{
+#cart-icon span,
+#cart-menu-icon span{
     position: absolute;
     background-color: red;
     width: 20px;
@@ -332,7 +339,8 @@ nav .nav-menu-icon{
     cursor: pointer;
 }
 
-#cart-icon span:hover{
+#cart-icon span:hover,
+#cart-menu-icon span:hover{
     transform: scale(1.1);
 }
 
@@ -347,6 +355,7 @@ nav .nav-menu-icon{
     transition: right 0.5s ease-in-out;
     display: flex;
     flex-direction: column;
+    z-index: 2;
 }
 
 .cart-open {
@@ -559,9 +568,9 @@ nav .nav-menu-icon{
     transition: 0.1s;
 }
 
-.log-content #reset,
-.log-content #sign-in,
-.sign-content #log-icon{
+.log-panel .log-content #reset,
+.log-panel .log-content #sign-in,
+.log-panel .sign-content #log-icon{
     cursor: pointer;
     color: #000;
 }
@@ -655,21 +664,19 @@ nav .nav-menu-icon{
     background-color: #bab3a6;
     z-index: 3;
     display: flex;
-    gap: 250px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .banner-image img {
-    margin: 15% -40%;
+    margin: 0 -40%;
     transform: rotate(5deg);
     border: 10px solid #fff;
     box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.15);
 }
 
 .banner-image-info{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: -30px;
+    padding: 50px;
 }
 
 .banner-image-info h1{
