@@ -94,12 +94,12 @@ document.addEventListener("DOMContentLoaded", function (){
             document.querySelector('#search-panel').style.display = 'block';
         
             const categories = [
-                { image: '/static/images/prod-1.JPG', name: 'Drop Shoulder' },
-                { image: '/static/images/prod-2.JPG', name: 'Baggy Joggers' },
-                { image: '/static/images/prod-3.JPG', name: 'Baggy Shirts' },
-                { image: '/static/images/prod-4.JPG', name: 'Cargo Pants' },
-                { image: '/static/images/prod-5.JPG', name: 'Head Wear' },
-                { image: '/static/images/prod-6.JPG', name: 'Baggy Shorts' }
+                { image: './prod-1.JPG', name: 'Drop Shoulder' },
+                { image: './prod-2.JPG', name: 'Baggy Joggers' },
+                { image: './prod-3.JPG', name: 'Baggy Shirts' },
+                { image: './prod-4.JPG', name: 'Cargo Pants' },
+                { image: './prod-5.JPG', name: 'Head Wear' },
+                { image: './prod-6.JPG', name: 'Baggy Shorts' }
             ];
         
             const searchContent = document.querySelector('.search-content');
