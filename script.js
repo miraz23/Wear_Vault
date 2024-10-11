@@ -85,43 +85,63 @@ document.addEventListener("DOMContentLoaded", function (){
     
     /*----------------------------------------- search -----------------------------------------*/
 
-    function setupToggle() {
+    document.querySelector("#search-icon").addEventListener('click', function () {
+        document.querySelector('#search-panel').style.display = 'block';
+    
+        const categories = [
+            { image: './prod-1.JPG', name: 'Drop Shoulder' },
+            { image: './prod-2.JPG', name: 'Baggy Joggers' },
+            { image: './prod-3.JPG', name: 'Baggy Shirts' },
+            { image: './prod-4.JPG', name: 'Cargo Pants' },
+            { image: './prod-5.JPG', name: 'Head Wear' },
+            { image: './prod-6.JPG', name: 'Baggy Shorts' }
+        ];
+    
+        const searchContent = document.querySelector('.search-content');
+    
+        for (let i = 0; i < categories.length; i++) {
+            const category = categories[i];
+            const categoryDiv = document.createElement('div');
+            categoryDiv.classList.add('search-category');
         
-        var md = window.matchMedia("(max-width: 1024px)").matches;
-        var iconId = md ? "#search-menu-icon" : "#search-icon";
+            categoryDiv.innerHTML = `
+                <div class="search-category">
+                    <img src="${category.image}" width="200" height="250">
+                    <h2>${category.name}</h2>
+                </div>`;
+        
+            searchContent.appendChild(categoryDiv);
+        }
+    });
 
-        document.querySelector(iconId).addEventListener('click', function () {
-            document.querySelector('#search-panel').style.display = 'block';
+    document.querySelector("#search-menu-icon").addEventListener('click', function () {
+        document.querySelector('#search-panel').style.display = 'block';
+    
+        const categories = [
+            { image: './prod-1.JPG', name: 'Drop Shoulder' },
+            { image: './prod-2.JPG', name: 'Baggy Joggers' },
+            { image: './prod-3.JPG', name: 'Baggy Shirts' },
+            { image: './prod-4.JPG', name: 'Cargo Pants' },
+            { image: './prod-5.JPG', name: 'Head Wear' },
+            { image: './prod-6.JPG', name: 'Baggy Shorts' }
+        ];
+    
+        const searchContent = document.querySelector('.search-content');
+    
+        for (let i = 0; i < categories.length; i++) {
+            const category = categories[i];
+            const categoryDiv = document.createElement('div');
+            categoryDiv.classList.add('search-category');
         
-            const categories = [
-                { image: './prod-1.JPG', name: 'Drop Shoulder' },
-                { image: './prod-2.JPG', name: 'Baggy Joggers' },
-                { image: './prod-3.JPG', name: 'Baggy Shirts' },
-                { image: './prod-4.JPG', name: 'Cargo Pants' },
-                { image: './prod-5.JPG', name: 'Head Wear' },
-                { image: './prod-6.JPG', name: 'Baggy Shorts' }
-            ];
+            categoryDiv.innerHTML = `
+                <div class="search-category">
+                    <img src="${category.image}" width="200" height="250">
+                    <h2>${category.name}</h2>
+                </div>`;
         
-            const searchContent = document.querySelector('.search-content');
-        
-            for (let i = 0; i < categories.length; i++) {
-                const category = categories[i];
-                const categoryDiv = document.createElement('div');
-                categoryDiv.classList.add('search-category');
-            
-                categoryDiv.innerHTML = `
-                    <div class="search-category">
-                        <img src="${category.image}" width="200" height="250">
-                        <h2>${category.name}</h2>
-                    </div>`;
-            
-                searchContent.appendChild(categoryDiv);
-            }
-        });
-    }
-
-    setupToggle();
-    window.addEventListener('resize', setupToggle);
+            searchContent.appendChild(categoryDiv);
+        }
+    });
 
     document.querySelector('#search-close').addEventListener('click', function () {
         document.querySelector('#search-panel').style.display = 'none';

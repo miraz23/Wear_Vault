@@ -934,6 +934,7 @@ nav .nav-menu-icon{
 .trending {
     display: flex;
     justify-content: center;
+    margin-right: 10px;
 }
 
 .trending-title {
