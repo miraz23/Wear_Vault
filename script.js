@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function (){
         
             categoryDiv.innerHTML = `
                 <div class="search-category">
-                    <img src="${category.image}" width="200" height="250">
+                    <img src="${category.image}" width="180" height="200">
                     <h2>${category.name}</h2>
                 </div>`;
         
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function (){
         
             categoryDiv.innerHTML = `
                 <div class="search-category">
-                    <img src="${category.image}" width="200" height="250">
+                    <img src="${category.image}" width="180" height="200">
                     <h2>${category.name}</h2>
                 </div>`;
         

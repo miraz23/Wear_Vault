@@ -272,7 +272,6 @@ nav .nav-menu-icon{
 
 .search-content{
     display: flex;
-    margin: 0 90px;
     flex-wrap: wrap;
     gap: 5px;
     justify-content: center;
@@ -645,9 +644,9 @@ nav .nav-menu-icon{
 }
 
 .banner-info h1 {
-    font-size: 45px;
+    font-size: 40px;
     font-weight: 900;
-    line-height: 56px;
+    line-height: 50px;
     text-transform: uppercase;
     margin-bottom: 40px;
 }
@@ -669,6 +668,8 @@ nav .nav-menu-icon{
 }
 
 .banner-image img {
+    width: 80%;
+    height: 70%;
     margin: 0 -40%;
     transform: rotate(5deg);
     border: 10px solid #fff;
@@ -957,8 +958,8 @@ nav .nav-menu-icon{
 }
 
 .trending-single img {
-    width: 400px;
-    height: 610px;
+    width: 350px;
+    height: 500px;
     display: block;
 }
 
@@ -967,8 +968,8 @@ nav .nav-menu-icon{
     position: absolute;
     top: 0;
     left: 0;
-    width: 400px;
-    height: 610px;
+    width: 350px;
+    height: 500px;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -1035,14 +1036,14 @@ nav .nav-menu-icon{
     position: absolute;
     top: 0;
     left: 0;
-    width: 250px;
-    height: 300px;
+    width: 220px;
+    height: 245px;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
 .trending-double-contents img {
-    width: 250px;
-    height: 300px;
+    width: 220px;
+    height: 245px;
     display: block;
 }
 
@@ -1056,7 +1057,7 @@ nav .nav-menu-icon{
 }
 
 .trending-double-contents-info h3 {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
 }
