@@ -1137,6 +1137,78 @@ nav .nav-menu-icon{
     margin: 0px 50px;
 }
 
+/*----------------------------------------- contact -----------------------------------------*/
+
+.contact {
+    margin: 150px 100px;
+}
+
+.contact .contact-info {
+    width: 100%;
+    background: #fff;
+}
+
+.contact .contact-info i {
+    font-size: 20px;
+    color: #333;
+    float: left;
+    width: 44px;
+    height: 44px;
+    background: #bab3a6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+}
+
+.contact .contact-info h4 {
+    padding: 0 0 0 60px;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #493c3e;
+}
+
+.contact .contact-info p {
+    padding: 0 0 0 60px;
+    margin-bottom: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.contact .contact-info .contact-info-email,
+.contact .contact-info .contact-info-phone {
+    margin-top: 40px;
+}
+
+.contact .contact-info .contact-info-email:hover i,
+.contact .contact-info .contact-info-address:hover i,
+.contact .contact-info .contact-info-phone:hover i {
+    background: #333;
+    color: #bab3a6;
+    cursor: pointer;
+}
+
+.contact form .contact-form-input{
+    padding: 10px 0;
+}
+
+.contact form button{
+    width: 100px;
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #fff;
+    outline: none;
+    background-color: #222;
+    transition: background-color 0.3s ease;
+}
+
+.contact form button:hover {
+    transform: scale(1.01);
+}
+
 /*----------------------------------------- footer -----------------------------------------*/
 
 

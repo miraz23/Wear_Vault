@@ -381,6 +381,12 @@ header nav .nav-menu-bar a svg:hover{
     flex-direction: column;
 }
 
+/*----------------------------------------- contact -----------------------------------------*/
+
+#contact .contact {
+    margin: 100px 30px;
+}
+
 /*----------------------------------------- footer -----------------------------------------*/
 
 .footer{
@@ -917,6 +923,10 @@ header nav .nav-menu-bar a svg:hover{
 
 .trending .trending-double-contents-info h3 {
     font-size: 20px;
+}
+
+#about, #contact{
+    height: 100vh;
 }
 
 }

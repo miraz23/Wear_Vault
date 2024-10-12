@@ -54,7 +54,8 @@
                     </li>
                     {% url 'about' as url %}
                     <li><a class="{% if request.path == url %} active {% endif %}" href="{{url}}">About Us</a></li>
-                    <li><a href="">Contact Us</a></li>
+                    {% url 'contact' as url %}
+                    <li><a class="{% if request.path == url %} active {% endif %}" href="{{url}}">Contact Us</a></li>
                 </ul>
             </div>
             
