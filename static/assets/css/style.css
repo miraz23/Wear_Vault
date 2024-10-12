@@ -81,6 +81,10 @@ nav {
     padding-bottom: 5px;
 }
 
+.nav-link>ul>li>a.active {
+    border-bottom: 4px solid #000;
+}
+
 .nav-link>ul>li>a:hover{
     border-bottom: 4px solid #000;
     transition: 0.1s ease-in;
@@ -1100,6 +1104,38 @@ nav .nav-menu-icon{
     transition: 0.3 ease;
 }
 
+
+/*----------------------------------------- about -----------------------------------------*/
+
+
+#about{
+    margin-top: 100px;
+}
+
+.about-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.about-title h3{
+    font-size: 40px;
+    padding: 20px;
+}
+
+.about-title p{
+    font-size: 20px;
+    font-weight: 250;
+}
+
+#about strong {
+    color: #bab3a6;
+    font-weight: bold;
+}
+
+#about .row {
+    font-size: 16px;
+    margin: 0px 50px;
+}
 
 /*----------------------------------------- footer -----------------------------------------*/
 

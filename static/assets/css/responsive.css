@@ -369,6 +369,18 @@ header nav .nav-menu-bar a svg:hover{
     font-size: 8px;
 }
 
+/*----------------------------------------- about -----------------------------------------*/
+
+.about .about-title p{
+    padding: 30px;
+}
+
+.about{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 /*----------------------------------------- footer -----------------------------------------*/
 
 .footer{
