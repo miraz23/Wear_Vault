@@ -35,6 +35,8 @@
 
             <div class="col-lg-8 mt-5 mt-lg-0">
                 <form action="" method="post">
+                    {% csrf_token %}
+
                     <label for="contact-name">Name</label>
                     <div class="contact-form-input">
                         <input type="text" class="form-control p-4" id="contact-name" name="contact-name" required />
@@ -45,7 +47,7 @@
                         <input type="email" class="form-control p-4" id="contact-email" name="contact-email" required />
                     </div>
 
-                    <label for="contact_subject">Subject</label>
+                    <label for="contact-subject">Subject</label>
                     <div class="contact-form-input">
                         <input type="text" class="form-control p-4" id="contact-subject" name="contact-subject" required />
                     </div>
@@ -55,7 +57,7 @@
                         <input type="text" class="form-control p-4" id="contact-message" name="contact-message" required />
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-dark">Submit</button>
+                    <button type="submit">Submit</button>
                 </form>
             </div>
         </div>
