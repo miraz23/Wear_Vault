@@ -163,25 +163,20 @@ nav .nav-menu-icon{
 /* ---------- search ---------- */
 
 .search-panel {
-    display: none;
     position: fixed;
-    z-index: 1000;
+    top: -100%;
     left: 0;
-    top: 0;
     width: 100vw;
     height: 100vh;
     overflow: auto;
-    background-color: #fff;
-    animation: fade 0.3s ease-in-out;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: top 0.5s ease-in-out;
+    z-index: 999;
 }
 
-@keyframes fade{
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+.search-open {
+    top: 0;
 }
 
 .search-header {
@@ -312,6 +307,11 @@ nav .nav-menu-icon{
     text-align: center;
     transform: translate(-50%, -50%);
     text-transform: uppercase;
+}
+
+.search-content .search-category img{
+    width: 180px;
+    height: 200px;
 }
 
 /* ---------- cart ---------- */

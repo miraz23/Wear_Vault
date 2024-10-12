@@ -85,74 +85,17 @@ document.addEventListener("DOMContentLoaded", function (){
     
     /*----------------------------------------- search -----------------------------------------*/
 
-    document.querySelector("#search-icon").addEventListener('click', function () {
-        document.querySelector('#search-panel').style.display = 'block';
-    
-        const categories = [
-            { image: './prod-1.JPG', name: 'Drop Shoulder' },
-            { image: './prod-2.JPG', name: 'Baggy Joggers' },
-            { image: './prod-3.JPG', name: 'Baggy Shirts' },
-            { image: './prod-4.JPG', name: 'Cargo Pants' },
-            { image: './prod-5.JPG', name: 'Head Wear' },
-            { image: './prod-6.JPG', name: 'Baggy Shorts' }
-        ];
-    
-        const searchContent = document.querySelector('.search-content');
-    
-        for (let i = 0; i < categories.length; i++) {
-            const category = categories[i];
-            const categoryDiv = document.createElement('div');
-            categoryDiv.classList.add('search-category');
-        
-            categoryDiv.innerHTML = `
-                <div class="search-category">
-                    <img src="${category.image}" width="180" height="200">
-                    <h2>${category.name}</h2>
-                </div>`;
-        
-            searchContent.appendChild(categoryDiv);
-        }
+    document.getElementById("search-icon").addEventListener("click", function () {
+        document.getElementById("search-panel").classList.toggle("search-open");
     });
 
-    document.querySelector("#search-menu-icon").addEventListener('click', function () {
-        document.querySelector('#search-panel').style.display = 'block';
-    
-        const categories = [
-            { image: './prod-1.JPG', name: 'Drop Shoulder' },
-            { image: './prod-2.JPG', name: 'Baggy Joggers' },
-            { image: './prod-3.JPG', name: 'Baggy Shirts' },
-            { image: './prod-4.JPG', name: 'Cargo Pants' },
-            { image: './prod-5.JPG', name: 'Head Wear' },
-            { image: './prod-6.JPG', name: 'Baggy Shorts' }
-        ];
-    
-        const searchContent = document.querySelector('.search-content');
-    
-        for (let i = 0; i < categories.length; i++) {
-            const category = categories[i];
-            const categoryDiv = document.createElement('div');
-            categoryDiv.classList.add('search-category');
-        
-            categoryDiv.innerHTML = `
-                <div class="search-category">
-                    <img src="${category.image}" width="180" height="200">
-                    <h2>${category.name}</h2>
-                </div>`;
-        
-            searchContent.appendChild(categoryDiv);
-        }
+    document.getElementById("search-menu-icon").addEventListener("click", function () {
+        document.getElementById("search-panel").classList.toggle("search-open");
     });
-
-    document.querySelector('#search-close').addEventListener('click', function () {
-        document.querySelector('#search-panel').style.display = 'none';
-        document.querySelector('.search-content').innerHTML = '';
+    
+    document.getElementById("search-close").addEventListener("click", function () {
+        document.getElementById("search-panel").classList.remove("search-open");
     });
-
-    window.onclick = function (event) {
-        if (event.target == document.querySelector('#search-panel')) {
-            document.querySelector('#search-panel').style.display = 'none';
-        }
-    };
 
     /*----------------------------------------- cart -----------------------------------------*/
 
