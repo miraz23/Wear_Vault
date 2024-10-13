@@ -143,24 +143,24 @@ document.addEventListener("DOMContentLoaded", function (){
     document.getElementById("reset").addEventListener("click", function () {
         document.getElementById("log-panel").classList.remove("log-open");
         document.getElementById("sign-panel").classList.remove("sign-open");
-        document.getElementById("reset-panel").classList.toggle("reset-open");
+        document.getElementById("reset-link-panel").classList.toggle("reset-open");
     });
 
-    document.getElementById("reset-close").addEventListener("click", function () {
-        document.getElementById("reset-panel").classList.remove("reset-open");
+    document.getElementById("reset-link-close").addEventListener("click", function () {
+        document.getElementById("reset-link-panel").classList.remove("reset-open");
     });
 
-    /*----------------------------------------- reset link -----------------------------------------*/
+    /*----------------------------------------- reset password -----------------------------------------*/
 
     document.getElementById("reset-link").addEventListener("click", function () {
         document.getElementById("log-panel").classList.remove("log-open");
         document.getElementById("sign-panel").classList.remove("sign-open");
-        document.getElementById("reset-panel").classList.remove("reset-open");
-        document.getElementById("reset-link-panel").classList.toggle("reset-link-open");
+        document.getElementById("reset-link-panel").classList.remove("reset-open");
+        document.getElementById("reset-password-panel").classList.toggle("reset-password-open");
     });
 
-    document.getElementById("reset-link-close").addEventListener("click", function () {
-        document.getElementById("reset-link-panel").classList.remove("reset-link-open");
+    document.getElementById("reset-password-close").addEventListener("click", function () {
+        document.getElementById("reset-password-panel").classList.remove("reset-password-open");
     });
 
 });

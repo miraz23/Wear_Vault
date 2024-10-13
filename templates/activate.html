@@ -1,0 +1,8 @@
+{% autoescape off %}
+
+Hi {{user.username}}
+Please Click This Link below to verify your account
+
+http://127.0.0.1:8000{% url 'activate' uidb64=uid token=token %}
+
+{% endautoescape %}

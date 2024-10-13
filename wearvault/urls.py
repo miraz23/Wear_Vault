@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from wearvault import views
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     path('about', views.aboutUs, name="about"),
     path('contact', views.contactUs, name="contact"),
+    path('auth/', include("authentication.urls")),
 ]
