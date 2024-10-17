@@ -1,0 +1,84 @@
+{% extends "base.html" %} 
+{% block title %} Wear Vault | Quick View {% endblock title %}
+{% block content %}
+{% load static %}
+
+<section id="quick-view">
+    <div class="quick-view">
+        <div class="quick-view-images">
+            <div class="quick-view-images-top">
+                <img src="{% static '/images/prod-1.JPG' %}" alt="">
+            </div>
+
+            <div class="quick-view-images-bottom">
+                <img src="" alt="">
+                <img src="{% static '/images/prod-2.JPG' %}" alt="">
+                <img src="{% static '/images/prod-3.JPG' %}" alt="">
+            </div>
+        </div>
+
+        <div class="quick-view-info">
+            <h3>Wear Vault - Drop Shoulder Premium</h3>
+            <p class="quick-view-info-price">$ 15.60</p>
+            <p class="quick-view-info-description">Introducing WearVault's Drop Shoulder Premium T-Shirt, a perfect
+                blend of urban style and relaxed comfort. Designed with an oversized fit and drop shoulders, this
+                tee offers a casual yet refined silhouette. Made from high-quality, soft fabric, it ensures both
+                durability and long-lasting comfort. The minimalist front contrasts with bold, artistic back
+                graphics, transforming the shirt into a standout piece that goes beyond basic fashion. Ideal for
+                those who embrace individuality, WearVault's premium tee elevates streetwear to a new level of
+                personal expression.</p>
+
+            <div class="quick-view-info-option">
+                <div class="quick-view-info-option-section">
+                    <p>Color</p>
+                    <select id="color">
+                        <option value="">Choose an option</option>
+                        <option value="red">Red</option>
+                        <option value="grey">Grey</option>
+                        <option value="Green">Green</option>
+                    </select>
+                </div>
+
+                <div class="quick-view-info-option-section">
+                    <p>Size</p>
+                    <select id="size">
+                        <option value="">Choose an option</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                        <option value="XXXL">XXXL</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="quick-view-info-cart">
+                <div class="quick-view-info-cart-quantity">
+                    <button id="decrease" class="quick-view-info-cart-quantity-button">-</button>
+                    <input type="number" id="quantity" value="1" readonly>
+                    <button id="increase" class="quick-view-info-cart-quantity-button">+</button>
+                </div>
+
+                <button class="quick-view-info-cart-add-to-cart">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-cart" viewBox="0 0 16 16">
+                        <path
+                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                    </svg>
+
+                    ADD TO CART
+                </button>
+            </div>
+
+            <p class="quick-view-info-features">SKU: <span>Elegance - ND</span></p>
+            <p class="quick-view-info-features">Categories: <span>Best seller</span>, <span>Featured</span>,
+                <span>Half Sleeve</span>, <span>New arrival</span>
+            </p>
+            <p class="quick-view-info-features">Tags: <span>Drop Shoulders</span></p>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
