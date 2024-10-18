@@ -1217,6 +1217,118 @@ nav .nav-menu-icon{
     transform: scale(1.01);
 }
 
+/*----------------------------------------- shop -----------------------------------------*/
+
+#shop{
+    margin: 100px 50px;
+}
+
+.shop-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.shop-title h3{
+    font-size: 40px;
+    padding: 20px;
+}
+
+.shop-title p{
+    font-size: 20px;
+    font-weight: 250;
+}
+
+.shop{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);    
+    row-gap: 40px;
+}
+
+.shop-product{
+    width: 250px;
+    color: #000;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s;
+}
+
+.shop-product:hover{
+    transform: scale(1.01);
+}
+
+.shop-product-image img{
+    width: 250px;
+    height: 350px;
+}
+
+.shop-product-image-wrapper:hover .shop-product-image:before {
+    content: "";
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 350px;
+}
+
+.shop-product-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    opacity: 0;
+}
+
+.shop-product-image-wrapper:hover .shop-product-button {
+    display: block;
+    opacity: 1;
+}
+
+.shop-product-button button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    border: none;
+    outline: none;
+}
+
+.shop-product-button button:hover {
+    transform: scale(1.1);
+}
+
+.shop-product-info{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.shop-product-info h3 {
+    font-size: 16px;
+    font-weight: 550;
+}
+
+.shop-product-info h3:hover{
+    cursor: pointer;
+}
+
+.shop-product-info p {
+    font-size: 12.5px;
+    font-weight: 300;
+}
+
 /*----------------------------------------- quick view -----------------------------------------*/
 
 .quick-view {

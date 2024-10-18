@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from wearvault import views
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +26,7 @@ urlpatterns = [
     path('about', views.aboutUs, name="about"),
     path('contact', views.contactUs, name="contact"),
     path('auth/', include("authentication.urls")),
+    path('shop/', include("shop.urls")),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
