@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from shop.models import product
 from math import ceil
 
@@ -17,3 +17,15 @@ def shop(request):
     data = {'allProds':allProds}
 
     return render(request, "shop.html", data)
+
+def productDetails(request, id):
+    prod = get_object_or_404(product, id=id)
+    colors = prod.product_color.split(",")
+    sizes = prod.product_size.split(",")
+
+    data = {
+        'product': prod,
+        'colors': colors,
+        'sizes': sizes,
+    }
+    return render(request, "quickview.html", data)

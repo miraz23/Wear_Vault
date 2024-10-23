@@ -1333,13 +1333,13 @@ nav .nav-menu-icon{
 
 .quick-view {
     display: flex;
-    margin: 50px;
+    justify-content: space-between;
+    margin: 150px 50px;
 }
 
 .quick-view-images {
     display: flex;
     flex-direction: column;
-    margin-right: 50px;
 }
 
 .quick-view-images img {
@@ -1351,11 +1351,13 @@ nav .nav-menu-icon{
 }
 
 .quick-view-images-top {
+    display: flex;
     margin-bottom: 10px;
+    gap: 10px;
 }
 
 .quick-view-images-top img {
-    width: 600px;
+    max-width: 300px;
     display: block;
 }
 
@@ -1368,8 +1370,12 @@ nav .nav-menu-icon{
 
 
 .quick-view-images-bottom img {
-    width: 190px;
+    max-width: 195px;
     display: block;
+}
+
+.quick-view-info{
+    padding: 0 50px;
 }
 
 .quick-view-info h3 {
