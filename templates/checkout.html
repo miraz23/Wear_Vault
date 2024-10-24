@@ -1,0 +1,86 @@
+{% extends "base.html" %} 
+{% block title %}Wear Vault | Checkout{% endblock title %} 
+{% block content %} 
+
+<section id="checkout">
+    <div class="checkout">
+
+        <div class="checkout-title">
+            <h3>Checkout Page</h3>
+            <p>You're just a few steps away from completing your purchase. Review your items and ensure all your details are correct before finalizing your order. </p>
+        </div>
+
+        <div class="checkout-container">
+            <div class="checkout-review">
+                <h2>Step 1 - My Cart Checkout - Review Your Cart Items</h2>
+                <div>
+                    <ul class="list-group" id="items">
+
+                    </ul>
+                 
+                    <div class="checkout-total">
+                        <p>Your Cart Total Is <b>$ <span id="totalprice"></span> <span id="amount"></span></b>. Enter your details below & place your order. Thank you for using Wear Vault.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="checkout-form">
+                <h2>Step 2 - Enter Address & Other Details:</h2>
+                <form method="post">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="itemsJson" id="itemsJson">
+                    <input type="hidden" id="amt" name="amt">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputname">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{user.email}}" required>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputAddress">Address</label>
+                            <input type="text" class="form-control" id="address1" name="address1" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputAddress">Address line 2</label>
+                            <input type="text" class="form-control" id="address2" name="address2" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">City</label>
+                            <input type="text" class="form-control" id="city" name="city" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputState">State</label>
+                            <input type="text" class="form-control" id="state" name="state" required>
+                        </div>
+                        </div>
+
+                     <div class="form-row">
+                     <div class="form-group col-md-6">
+                            <label for="inputZip">Pin Code</label>
+                            <input type="number" class="form-control" id="zip_code" name="zip_code" required>
+                        </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputZip">Phone Number</label>
+                        <input type="number" class="form-control" id="phone" name="phone" required>
+                    </div>
+                    <br>
+
+
+                    <button id="btn" type="submit">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
