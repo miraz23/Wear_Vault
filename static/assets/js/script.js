@@ -164,3 +164,150 @@ document.addEventListener("DOMContentLoaded", function (){
     });
 
 });
+
+/*----------------------------------------- cart functionality -----------------------------------------*/
+    
+    // Initialize cart from localStorage
+    let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+    updateCartPanel(cart);
+    
+    // Function to update the cart when quantity changes
+    function updateCartQuantity(idstr) {
+        let qtyInput = document.getElementById('quantity' + idstr);
+        let qty = parseInt(qtyInput.value);
+        
+        if (cart[idstr]) {
+            cart[idstr][0] = qty; // Update the quantity in the cart
+        }
+        
+        // Save updated cart to localStorage and update UI
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartPanel(cart);
+    }
+    
+    // Add to cart functionality
+    document.querySelectorAll('.divpr').forEach(div => {
+        div.addEventListener('click', function(event) {
+            if (event.target.classList.contains('cart')) {
+                let idstr = event.target.id.toString();
+                let qtyInput = document.getElementById('quantity' + idstr); // Get the quantity input
+                let qty = parseInt(qtyInput.value); // Get the current quantity
+            
+                if (cart[idstr] !== undefined) {
+                    cart[idstr][0] += qty; // Increment quantity
+                } else {
+                    // Get product details
+                    let name = document.getElementById('name' + idstr).innerHTML;
+                    let price = document.getElementById('price' + idstr).innerHTML;
+                    let imageUrl = document.getElementById('image' + idstr).getAttribute('src');  // Assuming you have an img tag with this ID in the HTML
+                    
+                    cart[idstr] = [qty, name, price, imageUrl];  // Add image URL to cart data
+                }
+            
+                // Save cart to localStorage and update UI
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartPanel(cart);
+            
+                // Open the cart panel after adding an item
+                document.getElementById("cart-panel").classList.add("cart-open");
+            }
+        });
+    });
+    
+    // Function to handle quantity increase
+    document.querySelectorAll('[id^="increase"]').forEach(button => {
+        button.addEventListener('click', function() {
+            let idstr = button.id.replace('increase', ''); // Get product ID
+            let qtyInput = document.getElementById('quantity' + idstr);
+            qtyInput.value = parseInt(qtyInput.value) + 1;  // Increase quantity
+        
+            // Update cart with new quantity
+            updateCartQuantity(idstr);
+        });
+    });
+    
+    // Function to handle quantity decrease
+    document.querySelectorAll('[id^="decrease"]').forEach(button => {
+        button.addEventListener('click', function() {
+            let idstr = button.id.replace('decrease', ''); // Get product ID
+            let qtyInput = document.getElementById('quantity' + idstr);
+            let newQty = parseInt(qtyInput.value) - 1; // Decrease quantity
+        
+            // Prevent quantity from going below 1
+            if (newQty > 0) {
+                qtyInput.value = newQty; 
+                // Update cart with new quantity
+                updateCartQuantity(idstr);
+            }
+        });
+    });
+    
+    // Prevent manual negative input in quantity field
+    document.querySelectorAll('[id^="quantity"]').forEach(input => {
+        input.addEventListener('blur', function() {
+            let qty = parseInt(input.value);
+            let idstr = input.id.replace('quantity', '');
+        
+            if (qty < 1 || isNaN(qty)) {
+                input.value = 1;
+                updateCartQuantity(idstr); // Update cart to reflect this change
+            }
+        });
+    });
+    
+    
+    // Function to update the sliding cart panel
+    function updateCartPanel(cart) {
+        let cartContent = "";
+        let total = 0;
+        var totalItems = 0;
+    
+        for (let item in cart) {
+            let qty = cart[item][0];
+            let name = cart[item][1];
+            let price = parseFloat(cart[item][2]);
+            let imageUrl = cart[item][3];
+        
+            // Calculate total for each item
+            total += qty * price;
+            totalItems += qty;
+        
+            // Generate HTML for each cart item
+            cartContent += `
+                <div class="cart-item">
+                    <img src="${imageUrl}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <p class="cart-item-name">${name}</p>
+                        <p class="cart-item-quantity">${qty} x $${price}</p>
+                        <p class="cart-item-price">$${(qty * price).toFixed(2)}</p>
+                    </div>
+                    <span class="cart-remove-item" data-id="${item}">✕</span>
+                </div>`;
+        }
+    
+        // Update the cart panel HTML
+        document.querySelector('.cart-content').innerHTML = cartContent;
+        document.querySelector('.cart-footer h5').innerHTML = `Total: $${total.toFixed(2)}`;
+        document.getElementById('cart').textContent = totalItems;
+    }
+    
+    // Clear the cart
+    function clearCart() {
+        cart = {};
+        localStorage.clear();
+        updateCartPanel(cart);
+    }
+    
+    document.getElementById('clear-cart').addEventListener('click', function(event) {
+        clearCart();
+    });
+    
+    // Remove individual item
+    document.querySelector('.cart-content').addEventListener('click', function(event) {
+        if (event.target.classList.contains('cart-remove-item')) {
+            let id = event.target.getAttribute('data-id');
+            delete cart[id];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartPanel(cart);
+        }
+    });

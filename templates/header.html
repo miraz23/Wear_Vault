@@ -144,45 +144,13 @@
                 </div>
             
                 <div class="nav-cart">
-                    <a id="cart-icon">
+                    <a id="cart-icon"><button type="button" id="cart-button" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
-                        </svg>
-                        <span>2</span>
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                        </svg><span id="cart">0</span></button>
                     </a>
-                    <div id="cart-panel" class="cart-panel">
-                        <div class="cart-header">
-                            <h2><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
-                                </svg>Shopping cart
-                            </h2>
-                            <span id="cart-close" class="cart-close">✕</span>
-                        </div>
-                        <div class="cart-content">
-                            <div class="cart-item">
-                                <img src="{% static '/images/prod-1.JPG' %}" class="cart-item-image">
-                                <div class="cart-item-details">
-                                    <p class="cart-item-name">Drop Shoulder</p>
-                                    <p class="cart-item-quantity">1 x 1350.00</p>
-                                    <p class="cart-item-price">$1350</p>
-                                </div>
-                                <span class="cart-remove-item">✕</span>
-                            </div>
-                            <div class="cart-item">
-                                <img src="{% static '/images/prod-2.JPG' %}" class="cart-item-image">
-                                <div class="cart-item-details">
-                                    <p class="cart-item-name">Baggy Joggers</p>
-                                    <p class="cart-item-quantity">1 x 1350.00</p>
-                                    <p class="cart-item-price">$1350</p>
-                                </div>
-                                <span class="cart-remove-item">✕</span>
-                            </div>
-                        </div>
-                        <div class="cart-footer">
-                            <h5>Total: $ 2700.00</h5>
-                            <a href="/shop/checkout/"><button>Checkout</button></a>
-                        </div>
-                    </div> 
+    
+                    {% include "cart.html" %}
                 </div>                       
             </div>
             

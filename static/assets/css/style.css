@@ -325,6 +325,12 @@ nav .nav-menu-icon{
     position: relative;
 }
 
+#cart-button{
+    outline: none;
+    border: none;
+    background: none;
+}
+
 #cart-icon span,
 #cart-menu-icon span{
     position: absolute;
@@ -441,12 +447,18 @@ nav .nav-menu-icon{
     padding: 10px 0px;
 }
 
+.cart-footer-button{
+    display: flex;
+    justify-content: space-between;
+}
+
 .cart-footer button {
-    width: 100%;
-    padding: 10px;
+
+    padding: 10px 33px;
     font-size: 18px;
     cursor: pointer;
     color: #fff;
+    border: none;
     outline: none;
     background-color: #222;
     transition: background-color 0.3s ease;
@@ -1334,7 +1346,7 @@ nav .nav-menu-icon{
 .quick-view {
     display: flex;
     justify-content: space-between;
-    margin: 150px 50px;
+    margin: 100px 50px;
 }
 
 .quick-view-images {
@@ -1378,12 +1390,12 @@ nav .nav-menu-icon{
     padding: 0 50px;
 }
 
-.quick-view-info h3 {
+.quick-view-info h5 {
     margin-top: 25px;
     font-size: 30px;
 }
 
-.quick-view-info-price {
+.quick-view-info h6 {
     font-size: 20px;
     font-weight: 300;
 }
@@ -1453,24 +1465,36 @@ select option {
 }
 
 .quick-view-info-cart-quantity-button {
-    width: 30px;
-    height: 30px;
     background-color: #f0f0f0;
     border: 1px solid #333;
     font-size: 20px;
     cursor: pointer;
+    padding: 0px 10px ;
+    display: flex;
+    align-items: center;
 }
 
-#quantity {
-    width: 40px;
+.quick-view-info-cart-quantity-button button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quick-view-info-cart-quantity .quantity {
+    width: 50px;
+    height: 32px;
     text-align: center;
     border: 1px solid #333;
-    height: 30px;
     margin: 0 5px;
     font-size: 16px;
 }
 
-.quick-view-info-cart-add-to-cart {
+.quick-view-info-cart .cart {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    width: 320px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1478,25 +1502,19 @@ select option {
     color: #333;
     font-size: 16px;
     padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    transition: 0.5s;
-    font-weight: bold;
-    gap: 10px;
+    transition: background-color 0.5s ease;
 }
 
-.quick-view-info-cart-add-to-cart:hover {
+.quick-view-info-cart .cart:hover {
     background-color: #b67c54;
     cursor: pointer;
-    transition: 0.3 ease;
 }
 
 .quick-view-info-cart-add-to-cart span {
     margin-right: 8px;
 }
 
-/* Checkout */
+/*----------------------------------------- checkout -----------------------------------------*/
 
 #checkout{
     margin: 100px 80px;

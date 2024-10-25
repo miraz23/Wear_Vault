@@ -7,7 +7,7 @@
     <div class="quick-view">
         <div class="quick-view-images">
             <div class="quick-view-images-top">
-                <img src="/media/{{ product.product_image_1 }}" alt="{{ product.product_name }}">
+                <img id="imagepr{{product.id}}" src="/media/{{ product.product_image_1 }}" alt="{{ product.product_name }}">
                 <img src="/media/{{ product.product_image_2 }}" alt="{{ product.product_name }}">
             </div>
 
@@ -19,8 +19,10 @@
         </div>
 
         <div class="quick-view-info">
-            <h3>{{ product.product_name }}</h3>
-            <p class="quick-view-info-price">$ {{ product.product_price }}</p>
+            <h5 class="card-title mt-2" id="namepr{{product.id}}">{{product.product_name}}</h5>
+            <h6 class="card-title mb-3">
+                $ <span id="pricepr{{product.id}}">{{product.product_price}}</span>
+            </h6>
             <p class="quick-view-info-description">{{ product.product_desc }}</p>
 
             <div class="quick-view-info-option">
@@ -47,17 +49,16 @@
 
             <div class="quick-view-info-cart">
                 <div class="quick-view-info-cart-quantity">
-                    <button id="decrease" class="quick-view-info-cart-quantity-button">-</button>
-                    <input type="number" id="quantity" value="1">
-                    <button id="increase" class="quick-view-info-cart-quantity-button">+</button>
+                    <button id="decreasepr{{product.id}}" class="quick-view-info-cart-quantity-button"><span>-</span></button>
+                    <input type="number" class="quantity" id="quantitypr{{product.id}}" value="1" min="1">
+                    <button id="increasepr{{product.id}}" class="quick-view-info-cart-quantity-button"><span>+</span></button>
                 </div>
-
-                <button class="quick-view-info-cart-add-to-cart">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
-                    </svg>
-                    ADD TO CART
-                </button>
+                
+                <span id="divpr{{product.id}}" class="divpr">
+                    <button id="pr{{product.id}}" class="cart">
+                      ADD TO CART <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+                </span>
             </div>
 
             <p class="quick-view-info-features">SKU: <span>{{ product.id }}</span></p>
@@ -65,5 +66,12 @@
         </div>
     </div>
 </section>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  
+ 
 
 {% endblock content %}
