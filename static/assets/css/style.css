@@ -813,6 +813,10 @@ nav .nav-menu-icon{
     height: 150px;
 }
 
+.category-info a{
+    text-decoration: none;
+}
+
 .category-info h3 {
     font-size: 20px;
     font-weight: 550;
@@ -1276,6 +1280,11 @@ nav .nav-menu-icon{
 .shop-product-image img{
     width: 250px;
     height: 350px;
+}
+
+.shop-product-image-wrapper{
+    position: relative;
+    display: inline-block;
 }
 
 .shop-product-image-wrapper:hover .shop-product-image:before {

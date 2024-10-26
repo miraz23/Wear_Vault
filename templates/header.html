@@ -48,12 +48,12 @@
                             <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg></a>
                         <ul>
-                            <li><a href="">Drop Shoulders</a></li>
-                            <li><a href="">Baggy Joggers</a></li>
-                            <li><a href="">Baggy Shirts</a></li>
-                            <li><a href="">Cargo Pants </a></li>
-                            <li><a href="">Head Wear</a></li>
-                            <li><a href="">Baggy Shorts</a></li>
+                            <li><a href="{% url 'shop_category' 'drop-shoulders' %}">Drop Shoulders</a></li>
+                            <li><a href="{% url 'shop_category' 'baggy-joggers' %}">Baggy Joggers</a></li>
+                            <li><a href="{% url 'shop_category' 'baggy-shirts' %}">Baggy Shirts</a></li>
+                            <li><a href="{% url 'shop_category' 'cargo-pants' %}">Cargo Pants</a></li>
+                            <li><a href="{% url 'shop_category' 'head-wear' %}">Head Wear</a></li>
+                            <li><a href="{% url 'shop_category' 'baggy-shorts' %}">Baggy Shorts</a></li>
                         </ul>
                     </li>
                     {% url 'about' as url %}
