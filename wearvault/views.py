@@ -1,8 +1,25 @@
 from django.shortcuts import render, redirect
 from contact.models import contact
+from shop.models import product
 
 def index(request):
-    return render(request, "index.html")
+    drop_shoulders_count = product.objects.filter(product_category='drop-shoulders').count()
+    baggy_joggers_count = product.objects.filter(product_category='baggy-joggers').count()
+    baggy_shirts_count = product.objects.filter(product_category='baggy-shirts').count()
+    cargo_pants_count = product.objects.filter(product_category='cargo-pants').count()
+    head_wear_count = product.objects.filter(product_category='head-wear').count()
+    baggy_shorts_count = product.objects.filter(product_category='baggy-shorts').count()
+
+    data={
+        'drop_shoulders_count' : drop_shoulders_count,
+        'baggy_joggers_count' : baggy_joggers_count,
+        'baggy_shirts_count' : baggy_shirts_count,
+        'cargo_pants_count' : cargo_pants_count,
+        'head_wear_count' : head_wear_count,
+        'baggy_shorts_count' : baggy_shorts_count
+    }
+
+    return render(request, "index.html", data)
 
 def aboutUs(request):
     return render(request, "about.html")
