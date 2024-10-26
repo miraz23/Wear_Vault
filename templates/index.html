@@ -178,200 +178,30 @@
             <div class="arrivals-wrapper">
                 <div class="arrivals-list swiper-wrapper">
                     
+                    {% for product in latest_arrivals %}
                     <div class="arrivals-product swiper-slide">
                         <div class="arrivals-product-container">
                             <div class="arrivals-product-image">
-                                <img src="{% static '/images/prod-1.JPG' %}" alt="">
+                                <img src="{{ product.product_image_1.url }}" alt="{{ product.product_name }}">
                             </div>
                             <div class="arrivals-product-svg">
-                                <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                                    </svg>
-                                </button>
+                                <a href="/shop/product-details/{{ product.id }}/">
+                                    <button>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                                        </svg>
+                                    </button>
+                                </a>
                             </div>
                         </div>
         
                         <div class="arrivals-product-info">
-                            <h3>Drop Shoulder</h3>
-                            <p>$17.80</p>
+                            <h3>{{ product.product_name }}</h3>
+                            <p>${{ product.product_price }}</p>
                         </div>
                     </div>
-        
-                    <div class="arrivals-product swiper-slide">
-                        <div class="arrivals-product-container">
-                            <div class="arrivals-product-image">
-                                <img src="{% static '/images/prod-2.JPG' %}" alt="">
-                            </div>
-                            <div class="arrivals-product-svg">
-                                <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-        
-                        <div class="arrivals-product-info">
-                            <h3>Baggy Jogger</h3>
-                            <p>$17.80</p>
-                        </div>
-                    </div>
-        
-                    <div class="arrivals-product swiper-slide">
-                        <div class="arrivals-product-container">
-                            <div class="arrivals-product-image">
-                                <img src="{% static '/images/prod-3.JPG' %}" alt="">
-                            </div>
-
-                            <div class="arrivals-product-svg">
-                                <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-        
-                        <div class="arrivals-product-info">
-                            <h3>Baggy Shirts</h3>
-                            <p>$17.80</p>
-                        </div>
-                    </div>
-        
-                    <div class="arrivals-product swiper-slide">
-                        <div class="arrivals-product-container">
-                            <div class="arrivals-product-image">
-                                <img src="{% static '/images/prod-4.JPG' %}" alt="">
-                            </div>
-
-                            <div class="arrivals-product-svg">
-                                <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-        
-                        <div class="arrivals-product-info">
-                            <h3>Cargo Pant</h3>
-                            <p>$17.80</p>
-                        </div>
-                    </div>
-                    
-                    <div class="arrivals-product swiper-slide">
-                        <div class="arrivals-product-container">
-                            <div class="arrivals-product-image">
-                                <img src="{% static '/images/prod-5.JPG' %}" alt="">
-                            </div>
-
-                            <div class="arrivals-product-svg">
-                                <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-        
-                        <div class="arrivals-product-info">
-                            <h3>Head Wear</h3>
-                            <p>$17.80</p>
-                        </div>
-                    </div>
-        
-                    <div class="arrivals-product swiper-slide">
-                        <div class="arrivals-product-container">
-                            <div class="arrivals-product-image">
-                                <img src="{% static '/images/prod-6.JPG' %}" alt="">
-                            </div>
-
-                            <div class="arrivals-product-svg">
-                                <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-        
-                        <div class="arrivals-product-info">
-                            <h3>Baggy Short</h3>
-                            <p>$17.80</p>
-                        </div>
-                    </div>
-                    
-                    <div class="arrivals-product swiper-slide">
-                        <div class="arrivals-product-container">
-                            <div class="arrivals-product-image">
-                                <img src="{% static '/images/prod-4.JPG' %}" alt="">
-                            </div>
-
-                            <div class="arrivals-product-svg">
-                                <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-        
-                        <div class="arrivals-product-info">
-                            <h3>Cargo Pant</h3>
-                            <p>$17.80</p>
-                        </div>
-                    </div>
-                    
-                    <div class="arrivals-product swiper-slide">
-                        <div class="arrivals-product-container">
-                            <div class="arrivals-product-image">
-                                <img src="{% static '/images/prod-5.JPG' %}" alt="">
-                            </div>
-
-                            <div class="arrivals-product-svg">
-                                <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-        
-                        <div class="arrivals-product-info">
-                            <h3>Head Wear</h3>
-                            <p>$17.80</p>
-                        </div>
-                    </div>
-        
-                    <div class="arrivals-product swiper-slide">
-                        <div class="arrivals-product-container">
-                            <div class="arrivals-product-image">
-                                <img src="{% static '/images/prod-6.JPG' %}" alt="">
-                            </div>
-                            <div class="arrivals-product-svg">
-                                <button>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-        
-                        <div class="arrivals-product-info">
-                            <h3>Baggy Short</h3>
-                            <p>$17.80</p>
-                        </div>
-                    </div>
+                    {% endfor %}
                     
                 </div>
 

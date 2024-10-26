@@ -11,6 +11,11 @@ class product(models.Model):
         ('head-wear', 'Head Wear'),
         ('baggy-shorts', 'Baggy Shorts'),
     ]
+    
+    LATEST_ARRIVAL_CHOICES = [
+        ('yes', 'Yes'),
+        ('no', 'No'),
+    ]
 
     product_id = models.AutoField
     product_name = models.CharField(max_length=100)
@@ -24,6 +29,7 @@ class product(models.Model):
     product_image_3 = models.ImageField(upload_to='images')
     product_image_4 = models.ImageField(upload_to='images')
     product_image_5 = models.ImageField(upload_to='images')
+    latest_arrival = models.CharField(max_length=3, choices=LATEST_ARRIVAL_CHOICES, default='no')
 
     def __str__(self):
         return self.product_name

@@ -861,7 +861,7 @@ nav .nav-menu-icon{
 
 .arrivals-wrapper{
     overflow: hidden;
-    max-width: 1200px;
+    width: 1200px;
     display: flex;
     align-items: center;
     padding: 10px;

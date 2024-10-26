@@ -10,13 +10,16 @@ def index(request):
     head_wear_count = product.objects.filter(product_category='head-wear').count()
     baggy_shorts_count = product.objects.filter(product_category='baggy-shorts').count()
 
+    latest_arrivals = product.objects.filter(latest_arrival='yes')
+
     data={
         'drop_shoulders_count' : drop_shoulders_count,
         'baggy_joggers_count' : baggy_joggers_count,
         'baggy_shirts_count' : baggy_shirts_count,
         'cargo_pants_count' : cargo_pants_count,
         'head_wear_count' : head_wear_count,
-        'baggy_shorts_count' : baggy_shorts_count
+        'baggy_shorts_count' : baggy_shorts_count,
+        'latest_arrivals': latest_arrivals,
     }
 
     return render(request, "index.html", data)
