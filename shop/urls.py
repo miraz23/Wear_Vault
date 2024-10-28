@@ -5,5 +5,4 @@ urlpatterns = [
     path('', views.shop, name="shop"),
     path('<str:category>/', views.shop, name='shop_category'),
     path('product-details/<int:id>/', views.productDetails, name="productDetails"),
-    path('checkout/', views.checkout, name="checkout"),
 ]

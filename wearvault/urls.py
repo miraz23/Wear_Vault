@@ -19,6 +19,7 @@ from wearvault import views
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from shop.views import checkout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +28,7 @@ urlpatterns = [
     path('contact', views.contactUs, name="contact"),
     path('auth/', include("authentication.urls")),
     path('shop/', include("shop.urls")),
+    path('checkout', checkout, name="checkout"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

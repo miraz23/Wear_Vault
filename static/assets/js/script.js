@@ -163,6 +163,70 @@ document.addEventListener("DOMContentLoaded", function (){
         document.getElementById("reset-password-panel").classList.remove("reset-password-open");
     });
 
+    
+
+    /*----------------------------------------- checkout -----------------------------------------*/
+
+
+    var cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+    
+    console.log(cart);
+
+    var sum = 0;
+    var totalPrice = 0;
+    var itemsContainer = document.getElementById('items');
+    var itemsJson = document.getElementById('itemsJson');
+
+    if (Object.keys(cart).length === 0) {
+        var emptyCartMessage = document.createElement('p');
+        emptyCartMessage.textContent = 'Your cart is empty, please add some items to your cart before checking out!';
+        itemsContainer.appendChild(emptyCartMessage);
+    } 
+    else {
+        for (var item in cart) {
+            if (cart.hasOwnProperty(item)) {
+                let name = cart[item][1];
+                let qty = cart[item][0];
+                let itemPrice = cart[item][2];
+                sum += qty;
+                totalPrice += qty * itemPrice;
+
+                var listItem = document.createElement('li');
+                listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+
+                var nameDiv = document.createElement('div');
+                nameDiv.className = 'col-md-5';
+                nameDiv.textContent = name;
+
+                var priceDiv = document.createElement('div');
+                priceDiv.className = 'col-md-5';
+                priceDiv.innerHTML = `<b> Price : ${itemPrice}</b>`;
+
+                var badgeSpan = document.createElement('span');
+                badgeSpan.className = 'badge badge-primary badge-pill';
+                badgeSpan.textContent = qty;
+
+                listItem.appendChild(nameDiv);
+                listItem.appendChild(priceDiv);
+                listItem.appendChild(badgeSpan);
+                itemsContainer.appendChild(listItem);
+            }
+        }
+        document.getElementById('totalprice').textContent = totalPrice;
+    }
+
+    if (itemsJson) {
+        itemsJson.value = JSON.stringify(cart);
+    }
+
+    var thank = "{{ thank }}"
+    if (thank) {    
+        localStorage.clear();
+        // document.location = "/";
+    }
+
+    document.getElementById("amt").value = totalPrice;
+
 });
 
 /*----------------------------------------- cart functionality -----------------------------------------*/

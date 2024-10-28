@@ -38,7 +38,7 @@ def productDetails(request, id):
 def checkout(request):
     if not request.user.is_authenticated:
         messages.warning(request,"Login & Try Again")
-        return redirect('/auth/login')
+        return redirect('/')
 
     if request.method=="POST":
         items_json = request.POST.get('itemsJson', '')
