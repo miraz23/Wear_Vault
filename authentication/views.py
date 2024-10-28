@@ -24,7 +24,7 @@ def signup(request):
 
             if get_user_model().objects.filter(email=email).exists():
                 messages.warning(request, "YOU ARE ALREADY REGISTERED WITH THIS EMAIL")
-                return redirect('/auth/signup/')
+                return redirect('/')
 
             user = form.save(commit=False)
             user.is_active = False
@@ -42,11 +42,11 @@ def signup(request):
             email_message = EmailMessage(email_subject,message,settings.EMAIL_HOST_USER,[user.email])
             email_message.send()
             messages.success(request,"ACTIVATE YOUR ACCOUNT BY CLICKING THE LINK IN YOUR GMAIL")
-            return redirect('/auth/login/')
+            return redirect('/')
         
         else:
             messages.warning(request,"INVALID PASSWORD")
-            return redirect('/auth/signup/')
+            return redirect('/')
             
     else:
         form = signupForm()
@@ -57,18 +57,22 @@ def signup(request):
 
 
 class ActivateAccountView(View):
-    def get(self,request,uidb64,token):
+    def get(self, request, uidb64, token):
         try:
-            uid=force_str(urlsafe_base64_decode(uidb64))
-            user=User.objects.get(pk=uid)
-        except Exception as identifier:
-            user=None
-        if user is not None and generate_token.check_token(user,token):
-            user.is_active=True
+            uid = force_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+
+        if user is not None and generate_token.check_token(user, token):
+            user.is_active = True
             user.save()
-            messages.info(request,"ACCOUNT ACTIVATED SUCCESSFULLY")
-            return redirect('/auth/login')
-        return render(request,'activatefail.html')
+            login(request, user)
+            messages.info(request, "ACCOUNT ACTIVATED AND LOGGED IN SUCCESSFULLY")
+            return redirect('/')
+
+        messages.error(request, "ACTIVATION LINK IS INVALID")
+        return render(request, 'activatefail.html')
 
 class RequestResetEmailView(View):
     def get(self,request):
@@ -93,7 +97,7 @@ class RequestResetEmailView(View):
             return redirect('/')
         else:
             messages.info(request,"YOU ARE NOT REGISTERED")
-            return redirect('/auth/signup/')
+            return redirect('/')
 
 
 
@@ -134,7 +138,7 @@ class SetNewPasswordView(View):
             user.set_password(password)
             user.save()
             messages.success(request,"PASSWORD RESET SUCCESS")
-            return redirect('/auth/login/')
+            return redirect('/')
 
         except DjangoUnicodeDecodeError as identifier:
             messages.error(request,"SOMETHING WENT WRONG")
@@ -162,7 +166,7 @@ def handlelogin(request):
             
         else:
             messages.error(request, "INVALID EMAIL OR PASSWORD")
-            return redirect('/auth/login')
+            return redirect('/')
     
     form = AuthenticationForm()
     return render(request,'login.html')
@@ -171,4 +175,4 @@ def handlelogin(request):
 def handlelogout(request):
     logout(request)
     messages.info(request,"LOG OUT SUCCESS")
-    return redirect('/auth/login')
+    return redirect('/')

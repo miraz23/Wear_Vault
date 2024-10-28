@@ -7,7 +7,7 @@
         <span id="sign-close" class="sign-close">✕</span>
     </div>
     <div class="sign-content">
-        <form method="POST">
+        <form action="/auth/signup/" method="POST">
             {% csrf_token %}
           
             <label for="email">Enter Email</label>
