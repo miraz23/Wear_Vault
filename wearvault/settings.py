@@ -10,8 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+
+
 from pathlib import Path
 from django.contrib import messages
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -122,8 +129,8 @@ USE_TZ = True
 # SENDING EMAILS
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'noreply.wearvault@gmail.com'
-EMAIL_HOST_PASSWORD = 'spdn mila jscr qoxe'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 
 
@@ -154,6 +161,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MESSAGE_TAGS = {
     messages.ERROR:'danger'
 }
+
+
+
+import paypalrestsdk
+
+PAYPAL_CLIENT_ID = os.environ.get('PAYPAL_CLIENT_ID')
+PAYPAL_CLIENT_SECRET = os.environ.get('PAYPAL_CLIENT_SECRET')
+
+
+paypalrestsdk.configure({
+    "mode": "live",
+    "client_id": PAYPAL_CLIENT_ID,
+    "client_secret": PAYPAL_CLIENT_SECRET
+})
+
+
 
 #---------------------------------------------Admin UI---------------------------------------------#
 

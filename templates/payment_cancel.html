@@ -1,0 +1,34 @@
+{% extends "base.html" %} 
+{% block title %} Wear Vault | Payment Cancelled {% endblock title %}
+{% block content %}
+
+<section id="payment-confirmation">
+    <div class="payment-confirmation">
+        <div class="payment-confirmation-icon">
+            <svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" fill="#FF5252" />
+                <path d="M8 8l8 8M16 8l-8 8" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div>
+
+        <div class="payment-confirmation-contents">
+            <h3>Cancelled</h3>
+            <p>Your payment could not be processed.</p>
+            <span>We couldn't complete your payment at this time.</span>
+        </div>
+
+        <div class="payment-confirmation-button">
+            <a href="/">    
+                <button>
+                    RETURN HOME
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-width="2" d="M9 18l6-6-6-6" />
+                    </svg>
+                </button>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from shop.models import product, order, orderUpdate
 from math import ceil
 from django.contrib import messages
+import paypalrestsdk
 
 def shop(request, category=None):
     allProds = []
@@ -35,28 +36,113 @@ def productDetails(request, id):
     }
     return render(request, "quickview.html", data)
 
+
+
 def checkout(request):
     if not request.user.is_authenticated:
-        messages.warning(request,"Login & Try Again")
+        messages.warning(request, "Login & Try Again")
         return redirect('/')
-
-    if request.method=="POST":
+    
+    if request.method == "POST":
         items_json = request.POST.get('itemsJson', '')
         name = request.POST.get('name', '')
         amount = request.POST.get('amt')
         email = request.POST.get('email', '')
         address1 = request.POST.get('address1', '')
-        address2 = request.POST.get('address2','')
+        address2 = request.POST.get('address2', '')
         city = request.POST.get('city', '')
         state = request.POST.get('state', '')
         zip_code = request.POST.get('zip_code', '')
         phone = request.POST.get('phone', '')
-        Order = order(items_json=items_json,name=name,amount=amount, email=email, address1=address1,address2=address2,city=city,state=state,zip_code=zip_code,phone=phone)
-        print(amount)
-        Order.save()
-        update = orderUpdate(order_id=Order.order_id,update_desc="the order has been placed")
-        update.save()
-        thank = True
+
+
+        order_instance = order.objects.create(
+            items_json=items_json,
+            amount=amount,
+            name=name,
+            email=email,
+            address1=address1,
+            address2=address2,
+            city=city,
+            state=state,
+            zip_code=zip_code,
+            phone=phone,
+        )
+        request.session['order_id'] = order_instance.order_id
+
+
+        payment = paypalrestsdk.Payment({
+            "intent": "sale",
+            "payer": {
+                "payment_method": "paypal"},
+            "redirect_urls": {
+                "return_url": f"http://localhost:8000/shop/payment/success/",
+                "cancel_url": f"http://localhost:8000/shop/payment/cancel/"
+            },
+            "transactions": [{
+                "item_list": {
+                    "items": [{
+                        "name": "Your Product Name",
+                        "sku": "Your Product SKU",
+                        "price": amount,
+                        "currency": "USD",
+                        "quantity": 1}]},
+                "amount": {
+                    "total": amount,
+                    "currency": "USD"},
+                "description": "Order description."
+            }]
+        })
+
+        if payment.create():
+            print("Payment created successfully")
+            for link in payment.links:
+                if link.rel == "approval_url":
+                    approval_url = str(link.href)
+                    return redirect(approval_url)
+                
+            print("Payment ID:", payment.id)
+            print("Order ID set in session:", request.session['order_id'])
+        else:
+            print(payment.error)
 
     return render(request, 'checkout.html')
+
+
+def payment_success(request):
+    payment_id = request.GET.get('paymentId')
+    payer_id = request.GET.get('PayerID')
+
+    order_id = request.session.get('order_id')
+    print("Order ID retrieved from session:", order_id)
+
+    if not order_id:
+        messages.error(request, "Order ID not found in session.")
+        return redirect('shop')
+
+    payment = paypalrestsdk.Payment.find(payment_id)
+    if payment.execute({"payer_id": payer_id}):
+        try:
+            Order = get_object_or_404(order, order_id=order_id)
+            Order.paymentstatus = "Paid"
+            Order.oid = payment_id
+            Order.amountpaid = Order.amount
+            Order.save()
+
+            update = orderUpdate(order_id=Order.order_id, update_desc="The order has been placed")
+            update.save()
+
+            return render(request, 'payment_success.html')
+        except Exception as e:
+            print("Error fetching order:", e)
+            messages.error(request, "There was an error processing your order.")
+            return redirect('shop')
+    else:
+        messages.error(request, "Payment execution failed.")
+        return render(request, 'payment_error.html')
+
+
+def payment_cancel(request):
+    return render(request, 'payment_cancel.html')
+
     

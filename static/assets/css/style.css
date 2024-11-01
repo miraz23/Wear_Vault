@@ -1581,6 +1581,69 @@ select option {
     transform: scale(1.02);
 }
 
+/*----------------------------------------- payment confirmation -----------------------------------------*/
+
+.payment-confirmation {
+    display: flex;
+    flex-direction: column;
+    margin: 180px;
+}
+
+.payment-confirmation-icon {
+    display: flex;
+    justify-content: center;
+}
+
+.payment-confirmation-contents {
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: #222222;
+}
+
+.payment-confirmation-contents h3 {
+    font-size: 40px;
+}
+
+.payment-confirmation-contents p {
+    font-size: 25px;
+    font-weight: 350;
+}
+
+.payment-confirmation-contents span {
+    font-size: 20px;
+    font-weight: 250;
+}
+
+.payment-confirmation-button {
+    display: flex;
+    justify-content: center;
+}
+
+.payment-confirmation-button button {
+    text-decoration: none;
+    display: flex;
+    padding: 12px 20px;
+    background-color: #bab3a6;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    border: none;
+    align-items: center;
+}
+
+.payment-confirmation-button a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.payment-confirmation-button button:hover {
+    background-color: #b67c54;
+    cursor: pointer;
+}
+
 /*----------------------------------------- footer -----------------------------------------*/
 
 
