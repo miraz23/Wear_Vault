@@ -254,9 +254,20 @@ document.addEventListener("DOMContentLoaded", function (){
         div.addEventListener('click', function(event) {
             if (event.target.classList.contains('cart')) {
                 let idstr = event.target.id.toString();
+
+                // Get selected color and size
+                let color = document.getElementById('color').value;
+                let size = document.getElementById('size').value;
                 let qtyInput = document.getElementById('quantity' + idstr); // Get the quantity input
                 let qty = parseInt(qtyInput.value); // Get the current quantity
-            
+
+                // Validate color and size selection
+                if (!color || !size) {
+                    alert("Please select both color and size options before adding to cart.");
+                    return; // Stop function execution if color or size is not selected
+                }
+
+                // Proceed with adding to cart if color and size are selected
                 if (cart[idstr] !== undefined) {
                     cart[idstr][0] += qty; // Increment quantity
                 } else {
@@ -264,8 +275,9 @@ document.addEventListener("DOMContentLoaded", function (){
                     let name = document.getElementById('name' + idstr).innerHTML;
                     let price = document.getElementById('price' + idstr).innerHTML;
                     let imageUrl = document.getElementById('image' + idstr).getAttribute('src');  // Assuming you have an img tag with this ID in the HTML
-                    
-                    cart[idstr] = [qty, name, price, imageUrl];  // Add image URL to cart data
+
+                    // Store color and size in the cart data
+                    cart[idstr] = [qty, name, price, color, size, imageUrl];  // Add color and size to cart data
                 }
             
                 // Save cart to localStorage and update UI
