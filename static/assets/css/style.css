@@ -980,6 +980,10 @@ nav .nav-menu-icon{
     font-weight: 250;
 }
 
+.trending a{
+    text-decoration: none;
+}
+
 .trending-single {
     position: relative;
     margin: 0px 10px;
@@ -1091,8 +1095,7 @@ nav .nav-menu-icon{
 }
 
 .trending-double-contents-info p {
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 13px;
     margin: 10px 0px;
 }
 
