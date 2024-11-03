@@ -1353,6 +1353,38 @@ nav .nav-menu-icon{
     font-weight: 300;
 }
 
+.shop-buttons{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.shop-buttons #seeMoreBtn, .shop-buttons #seeLessBtn{
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #bab3a6;
+    color: #333;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin-top: 50px;
+    border-radius: 100px;
+    transition: background-color 0.5s ease;
+}
+
+.shop-buttons #seeLessBtn{
+    display: none;
+}
+
+.shop-buttons #seeMoreBtn:hover, .shop-buttons #seeLessBtn:hover {
+    background-color: #b67c54;
+    cursor: pointer;
+}
+
 /*----------------------------------------- quick view -----------------------------------------*/
 
 .quick-view {

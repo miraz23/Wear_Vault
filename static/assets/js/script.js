@@ -387,3 +387,46 @@ document.addEventListener("DOMContentLoaded", function (){
             updateCartPanel(cart);
         }
     });
+
+
+    /*----------------------------------------- load products -----------------------------------------*/
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const products = document.querySelectorAll(".shop-product");
+      const seeMoreBtn = document.getElementById("seeMoreBtn");
+      const seeLessBtn = document.getElementById("seeLessBtn");
+
+      let visibleCount = 20;
+
+      const showProducts = () => {
+        products.forEach((product, index) => {
+          product.style.display = index < visibleCount ? "block" : "none";
+        });
+      };
+
+      seeMoreBtn.addEventListener("click", () => {
+        visibleCount += 20;
+        showProducts();
+        seeLessBtn.style.display = "inline-block";
+
+
+        if (visibleCount >= products.length) {
+          seeMoreBtn.style.display = "none";
+        }
+      });
+
+
+      seeLessBtn.addEventListener("click", () => {
+        visibleCount = Math.max(20, visibleCount - 20);
+        showProducts();
+        seeMoreBtn.style.display = "inline-block";
+
+        if (visibleCount === 20) {
+          seeLessBtn.style.display = "none";
+        }
+      });
+
+
+      showProducts();
+    });
