@@ -294,15 +294,20 @@ header nav .nav-menu-bar a svg:hover{
 
 .arrivals-list .arrivals-product-image img{
     min-width: 91vw;
-    min-height: 60vh;
+    min-height: 70vh;
+}
+
+.arrivals-product .arrivals-product-info{
+    margin: 10px;
 }
 
 .arrivals .arrivals-product-info h3 {
-    font-size: 20px;
+    font-size: 30px;
+    padding-top: 10px;
 }
 
 .arrivals .arrivals-product-info p {
-    font-size: 18px;
+    font-size: 25px;
 }
 
 /* --------------------------------------------- trending --------------------------------------------- */
@@ -553,12 +558,12 @@ header nav .nav-menu-bar a svg:hover{
 }
 
 .arrivals .arrivals-product-info h3 {
-    font-size: 22px;
+    font-size: 25px;
     padding: 10px 0;
 }
 
 .arrivals .arrivals-product-info p {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 /*----------------------------------------- footer -----------------------------------------*/
@@ -566,5 +571,21 @@ header nav .nav-menu-bar a svg:hover{
 .footer-link li{
     font-size: 18px;
 }
+
+}
+
+
+@media (min-width: 2100px){
+    /* --------------------------------------------- category ---------------------------------------------*/
+
+.category-items .category-row{
+    grid-template-columns: repeat(6, 0fr);
+}
+
+/* --------------------------------------------- arrivals --------------------------------------------- */
+
+.arrivals-wrapper{
+    width: 2000px;
+}    
 
 }
