@@ -342,7 +342,7 @@ document.addEventListener("DOMContentLoaded", function (){
             let qty = cart[item][0];
             let name = cart[item][1];
             let price = parseFloat(cart[item][2]);
-            let imageUrl = cart[item][3];
+            let imageUrl = cart[item][5];
         
             // Calculate total for each item
             total += qty * price;

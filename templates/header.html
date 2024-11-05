@@ -92,30 +92,42 @@
                         
                         <h3>Our Categories</h3>
                         <div class="search-content">
-                            <div class="search-category">
-                                <img src="{% static '/images/prod-1.JPG' %}" width="180" height="200">
-                                <h2>Drop Shoulder</h2>
-                            </div>
-                            <div class="search-category">
-                                <img src="{% static '/images/prod-2.JPG' %}" width="180" height="200">
-                                <h2>Baggy Joggers</h2>
-                            </div>
-                            <div class="search-category">
-                                <img src="{% static '/images/prod-3.JPG' %}" width="180" height="200">
-                                <h2>Baggy Shirts</h2>
-                            </div>
-                            <div class="search-category">
-                                <img src="{% static '/images/prod-4.JPG' %}" width="180" height="200">
-                                <h2>Cargo Pants</h2>
-                            </div>
-                            <div class="search-category">
-                                <img src="{% static '/images/prod-5.JPG' %}" width="180" height="200">
-                                <h2>Head Wear</h2>
-                            </div>
-                            <div class="search-category">
-                                <img src="{% static '/images/prod-6.JPG' %}" width="180" height="200">
-                                <h2>Baggy Shorts</h2>
-                            </div>
+                            <a href="{% url 'shop_category' 'drop-shoulders' %}">
+                                <div class="search-category">
+                                    <img src="{% static '/images/prod-1.JPG' %}" width="180" height="200">
+                                    <h2>Drop Shoulder</h2>
+                                </div>
+                            </a>
+                            <a href="{% url 'shop_category' 'baggy-joggers' %}">
+                                <div class="search-category">
+                                    <img src="{% static '/images/prod-2.JPG' %}" width="180" height="200">
+                                    <h2>Baggy Joggers</h2>
+                                </div>
+                            </a>
+                            <a href="{% url 'shop_category' 'baggy-shirts' %}">
+                                <div class="search-category">
+                                    <img src="{% static '/images/prod-3.JPG' %}" width="180" height="200">
+                                    <h2>Baggy Shirts</h2>
+                                </div>
+                            </a>
+                            <a href="{% url 'shop_category' 'cargo-pants' %}">
+                                <div class="search-category">
+                                    <img src="{% static '/images/prod-4.JPG' %}" width="180" height="200">
+                                    <h2>Cargo Pants</h2>
+                                </div>
+                            <a>
+                            <a href="{% url 'shop_category' 'head-wear' %}">
+                                <div class="search-category">
+                                    <img src="{% static '/images/prod-5.JPG' %}" width="180" height="200">
+                                    <h2>Head Wear</h2>
+                                </div>
+                            </a>
+                            <a href="{% url 'shop_category' 'baggy-shorts' %}">
+                                <div class="search-category">
+                                    <img src="{% static '/images/prod-6.JPG' %}" width="180" height="200">
+                                    <h2>Baggy Shorts</h2>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from contact.models import contact
 from shop.models import product, order
 import json
-
+from django.db.models import Case, When
 def index(request):
     # Counts for each category
     drop_shoulders_count = product.objects.filter(product_category='drop-shoulders').count()
@@ -24,8 +24,10 @@ def index(request):
 
     # Sorted products by quantity in descending order and get top 6
     top_product_codes = sorted(product_counts, key=product_counts.get, reverse=True)[:6]
-    
-    trending_products = product.objects.filter(id__in=[int(code[2:]) for code in top_product_codes])
+
+    # Preserve order of top products by creating a Case/When expression
+    order_by_case = Case(*[When(id=int(code[2:]), then=pos) for pos, code in enumerate(top_product_codes)])
+    trending_products = product.objects.filter(id__in=[int(code[2:]) for code in top_product_codes]).order_by(order_by_case)
 
 
     data = {

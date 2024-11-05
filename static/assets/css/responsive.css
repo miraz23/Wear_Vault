@@ -307,66 +307,29 @@ header nav .nav-menu-bar a svg:hover{
 
 /* --------------------------------------------- trending --------------------------------------------- */
 
-.trending {
+.trending-product{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
-.trending-title{
-    margin: 0 16px;
+.trending-product .trending-product-image{
+    order: 1;
 }
 
-.trending-title h3{
-    font-size: 35px;
+.trending-product .trending-product-info p{
+    padding: 10px 0;
 }
 
-.trending-title p{
-    font-size: 18px;
+.trending-product .trending-product-image img{
+    margin: 0 0 40px 0;
 }
 
-.trending .trending-single img {
-    width: 350px;
-    height: 450px;
-}
-
-.trending .trending-single::before {
-    width: 350px;
-    height: 450px;
-}
-
-.trending .trending-single-contents h3 {
-    font-size: 25px;
-}
-
-.trending .trending-single-contents p {
-    font-size: 12px;
-}
-
-.trending .trending-double {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.trending .trending-double-contents::before {
-    width: 170px;
-    height: 250px;
-}
-
-.trending .trending-double-contents img {
-    width: 170px;
-    height: 250px;
-}
-
-.trending .trending-double-contents-info h3 {
-    font-size: 15px;
-}
-
-.trending .trending-double-contents-info p {
-    font-size: 8px;
+.trending-product .trending-product-info{
+    order: 2;
+    padding-right: 0;
 }
 
 /*----------------------------------------- about -----------------------------------------*/
@@ -413,7 +376,7 @@ header nav .nav-menu-bar a svg:hover{
 
 }
 
-@media (min-width: 768px) and (max-width: 991px){
+@media (min-width: 768px) and (max-width: 1024px){
 
 /* --------------------------------------------- header ---------------------------------------------*/
 
@@ -533,141 +496,43 @@ header nav .nav-menu-bar a svg:hover{
 
 /* --------------------------------------------- home ---------------------------------------------*/
 
-#home  .home {
+.home .banner{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    background: linear-gradient(to right, #f0f0f0 50%, #bab3a6 50%);
+}
+
+.banner .banner-image, .banner .banner-image-info{
     display: none;
 }
 
-#home  .home-mobile {
+.banner .banner-image-tab, .banner .banner-image-info-tab{
     display: block;
 }
 
-.home-mobile a{
-    text-decoration: none;
+.banner .banner-image-info-tab{
+    padding: 0;
 }
 
-.banner-mobile {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: absolute;
-    opacity: 0;
-    z-index: 1;
-    transition: opacity 1s ease-in-out;
-    transition: opacity 1s ease-in-out;
+.banner .banner-image-tab img {
+    width: 400px;
+    height: 500px;
+    transform: rotate(0deg);
+    border: 10px solid #fff;
+    box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.15);
 }
 
-.banner-mobile.active {
-    opacity: 1;
-    z-index: 2;
-    animation: slideIn 1s forwards;
+.banner .banner-image-info-tab h1{
+    margin: 20px;
 }
 
-.banner-mobile:not(.active) {
-    animation: slideOut 1s forwards;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideOut {
-    from {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-}
-
-.banner-mobile-content {
-    position: absolute;
-    top: 12%;
-    color: black;
-    text-transform: uppercase;
-}
-
-.banner-mobile-content h1{
-    font-size: 50px;
-    font-weight: bold;
-    line-height: 50px;
-    position: relative;
-    z-index: 0;
-    color: rgba(0, 0, 0, 0.3);
-}
-
-.banner-mobile .banner-mobile-content h2{
-    color: #fff;
-    font-size: 50px;
-    font-weight: 300;
-    margin-top: 15%;
-    line-height: 90px;
-    z-index: 2;
-    position: relative;
-    font-family: 'Rock Salt';
-}
-
-.banner-vertical-text{
-    position: absolute;
-    right: -50px;
-    top: 60%;
-    transform: translateX(15%) rotate(90deg);
+.banner .banner-image-info-tab h1{
     text-transform: lowercase;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
     font-family: "Rock salt";
-    line-height: 30px;
-    letter-spacing: 2px;
-    z-index: 2;
-}
-
-.banner-mobile-image img {
-    height: 90vh;
-    object-fit: cover;
-    z-index: 1;
-    position: relative;
-    filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.5));
-}
-
-.banner-mobile-image:before{
-    content: "";
-    background: rgba(0, 0, 0, 0.15);
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-}
-
-.banner-mobile-button {
-    position: absolute;
-    bottom: 35%;
-    padding: 15px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    color: #fff;
-    outline: none;
-    background-color: #444;
-    text-decoration: none;
-    z-index: 2;
-    border-radius: 5px;
-}
-
-.banner-mobile-button:hover{
-    color: #fff;
-    transform: scale(1.02);
 }
 
 /* --------------------------------------------- category ---------------------------------------------*/
@@ -696,237 +561,10 @@ header nav .nav-menu-bar a svg:hover{
     font-size: 18px;
 }
 
-/* --------------------------------------------- trending --------------------------------------------- */
-
-#trending .trending {
-    display: grid;
-    grid-template-columns: repeat(2, 0fr);
-    justify-items: center;
-    margin-right: 10px;
-}
-
 /*----------------------------------------- footer -----------------------------------------*/
 
 .footer-link li{
     font-size: 18px;
-}
-
-}
-
-@media (min-width: 992px) and (max-width: 1199px){
-
-/* --------------------------------------------- header ---------------------------------------------*/
-
-.cart-content .cart-item img {
-    width: 130px;
-    height: 130px;
-    object-fit: cover;
-    margin-right: 10px;
-}
-
-.cart-item-details .cart-item-name {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0;
-}
-
-.cart-item-details .cart-item-quantity,
-.cart-item-details .cart-item-price {
-    font-size: 18px;
-    margin: 0;
-    color: #666;
-}
-
-.nav-log .sign-panel,
-.nav-log .reset-panel,
-.nav-log .reset-link-panel,
-.nav-log .log-panel {
-    width: 450px;
-}
-
-.nav-cart .cart-panel {
-    width: 450px;
-}
-
-.search-panel .search-content{
-    display: grid;
-    grid-template-columns: repeat(3, 0fr);
-    gap: 10px;
-}
-
-/* --------------------------------------------- home ---------------------------------------------*/
-
-#home  .home {
-    display: none;
-}
-
-#home  .home-mobile {
-    display: block;
-}
-
-.home-mobile a{
-    text-decoration: none;
-}
-
-.banner-mobile {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: absolute;
-    opacity: 0;
-    z-index: 1;
-    transition: opacity 1s ease-in-out;
-    transition: opacity 1s ease-in-out;
-}
-
-.banner-mobile.active {
-    opacity: 1;
-    z-index: 2;
-    animation: slideIn 1s forwards;
-}
-
-.banner-mobile:not(.active) {
-    animation: slideOut 1s forwards;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideOut {
-    from {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-}
-
-.banner-mobile-content {
-    position: absolute;
-    top: 12%;
-    color: black;
-    text-transform: uppercase;
-}
-
-.banner-mobile-content h1{
-    font-size: 50px;
-    font-weight: bold;
-    line-height: 50px;
-    position: relative;
-    z-index: 0;
-    color: rgba(0, 0, 0, 0.3);
-}
-
-.banner-mobile .banner-mobile-content h2{
-    color: #fff;
-    font-size: 60px;
-    font-weight: 300;
-    margin-top: 40%;
-    line-height: 100px;
-    z-index: 2;
-    position: relative;
-    font-family: 'Rock Salt';
-}
-
-.banner-vertical-text{
-    position: absolute;
-    right: -50px;
-    top: 60%;
-    transform: translateX(15%) rotate(90deg);
-    text-transform: lowercase;
-    font-size: 28px;
-    font-weight: 700;
-    font-family: "Rock salt";
-    line-height: 30px;
-    letter-spacing: 2px;
-    z-index: 2;
-}
-
-.banner-mobile-image img {
-    height: 90vh;
-    object-fit: cover;
-    z-index: 1;
-    position: relative;
-    filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.5));
-}
-
-.banner-mobile-image:before{
-    content: "";
-    background: rgba(0, 0, 0, 0.15);
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-}
-
-.banner-mobile-button {
-    position: absolute;
-    bottom: 35%;
-    padding: 15px 20px;
-    font-size: 20px;
-    cursor: pointer;
-    color: #fff;
-    outline: none;
-    background-color: #444;
-    text-decoration: none;
-    z-index: 2;
-    border-radius: 5px;
-}
-
-.banner-mobile-button:hover{
-    color: #fff;
-    transform: scale(1.02);
-}
-
-/* --------------------------------------------- arrivals ---------------------------------------------*/
-
-.arrivals .arrivals-wrapper .arrivals-slide-button{
-    display: none;
-}
-
-/* --------------------------------------------- trending ---------------------------------------------*/
-
-.trending .trending-single img {
-    width: 300px;
-    height: 510px;
-}
-
-.trending .trending-single::before {
-    width: 300px;
-    height: 510px;
-}
-
-.trending .trending-double-contents::before {
-    width: 200px;
-    height: 250px;
-}
-
-.trending .trending-double-contents img {
-    width: 200px;
-    height: 250px;
-}
-
-.trending .trending-double-contents-info h3 {
-    font-size: 20px;
-}
-
-#about, #contact{
-    height: 100vh;
 }
 
 }
