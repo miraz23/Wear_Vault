@@ -101,12 +101,16 @@ header nav .nav-menu-bar a svg:hover{
     transform: scale(1.1);
 }
 
-/* ---------- search ---------- */
+.search-category-container .search-category-item {
+    width: calc(100% / 2 - 10px);
+}
+.search-category h2 {
+    font-size: 20px;
+}
 
-.search-panel .search-content{
-    display: grid;
-    grid-template-columns: repeat(2, 0fr);
-    margin: 0 0 100px 0;
+.search-category-item .search-overlay {
+    font-size: 14px;
+    padding: 8px;
 }
  
 /* --------------------------------------------- home --------------------------------------------- */
@@ -399,9 +403,9 @@ header nav .nav-menu-icon{
 }
 
 header nav .nav-link, 
-.nav-bar .nav-search a,
-.nav-bar .nav-log a,
-.nav-bar .nav-cart a{
+.nav-bar .nav-search #search-icon,
+.nav-bar .nav-log #log-icon,
+.nav-bar .nav-cart #cart-icon{
     display: none;
 }
 
@@ -462,10 +466,8 @@ header nav .nav-menu-bar a svg:hover{
     transform: scale(1.1);
 }
 
-.search-panel .search-content{
-    display: grid;
-    grid-template-columns: repeat(3, 0fr);
-    margin: 0 0 100px 0;
+.search-category-container .search-category-item {
+    width: calc(100% / 3 - 10px);
 }
 
 .nav-log .sign-panel,
@@ -563,6 +565,38 @@ header nav .nav-menu-bar a svg:hover{
 }
 
 .arrivals .arrivals-product-info p {
+    font-size: 20px;
+}
+
+/*----------------------------------------- about -----------------------------------------*/
+
+.about .about-title h3{
+    font-size: 50px;
+    padding: 20px;
+}
+
+.about .about-title p{
+    font-size: 22px;
+    font-weight: 250;
+}
+
+.about .row p{
+    font-size: 25px;
+    font-weight: 250;
+}
+
+/*----------------------------------------- footer -----------------------------------------*/
+
+.shop-title{
+    padding: 40px;
+}
+
+.shop-title h1{
+    font-size: 45px;
+}
+
+.shop-title p{
+    padding: 0 40px;
     font-size: 20px;
 }
 

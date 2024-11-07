@@ -5,11 +5,10 @@
         <h4><svg width="25" height="25" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.5 21C15.7467 21 20 16.5228 20 11C20 5.47715 15.7467 1 10.5 1C5.25329 1 1 5.47715 1 11C1 16.5228 5.25329 21 10.5 21Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             <path d="M26 27L18 19" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>Search</h4>
+        </svg>What Are You Looking For?</h4>
         <button id="search-close">✕</button>
     </div>
     
-    <h2>What Are You Looking For?</h2>
     <div class="search-bar">
         <form action="">
             <input type="text" placeholder="Type to search..." />
@@ -17,43 +16,34 @@
         </form>
     </div>
     
-    <h3>Our Categories</h3>
-    <div class="search-content">
-        <a href="{% url 'shop_category' 'drop-shoulders' %}">
-            <div class="search-category">
-                <img src="{% static '/images/prod-1.JPG' %}" width="180" height="200">
-                <h2>Drop Shoulder</h2>
+    <div class="search-category">
+        <h2>Our Products</h2>
+        <div class="search-category-container">
+            <div class="search-category-item">
+                <img src="{% static '/images/prod-1.JPG' %}">
+                <div class="search-overlay">DROP SHOULDER <br> $20.00 </div>
             </div>
-        </a>
-        <a href="{% url 'shop_category' 'baggy-joggers' %}">
-            <div class="search-category">
-                <img src="{% static '/images/prod-2.JPG' %}" width="180" height="200">
-                <h2>Baggy Joggers</h2>
+            <div class="search-category-item">
+                <img src="{% static '/images/prod-2.JPG' %}">
+                <div class="search-overlay">BAGGY JOGGERS</div>
             </div>
-        </a>
-        <a href="{% url 'shop_category' 'baggy-shirts' %}">
-            <div class="search-category">
-                <img src="{% static '/images/prod-3.JPG' %}" width="180" height="200">
-                <h2>Baggy Shirts</h2>
+            <div class="search-category-item">
+                <img src="{% static '/images/prod-3.JPG' %}">
+                <div class="search-overlay">BAGGY SHIRTS</div>
             </div>
-        </a>
-        <a href="{% url 'shop_category' 'cargo-pants' %}">
-            <div class="search-category">
-                <img src="{% static '/images/prod-4.JPG' %}" width="180" height="200">
-                <h2>Cargo Pants</h2>
+            <div class="search-category-item">
+                <img src="{% static '/images/prod-4.JPG' %}">
+                <div class="search-overlay">CARGO PANTS</div>
             </div>
-        <a>
-        <a href="{% url 'shop_category' 'head-wear' %}">
-            <div class="search-category">
-                <img src="{% static '/images/prod-5.JPG' %}" width="180" height="200">
-                <h2>Head Wear</h2>
+            <div class="search-category-item">
+                <img src="{% static '/images/prod-5.JPG' %}">
+                <div class="search-overlay">HEAD WEAR</div>
             </div>
-        </a>
-        <a href="{% url 'shop_category' 'baggy-shorts' %}">
-            <div class="search-category">
-                <img src="{% static '/images/prod-6.JPG' %}" width="180" height="200">
-                <h2>Baggy Shorts</h2>
+            <div class="search-category-item">
+                <img src="{% static '/images/prod-6.JPG' %}">
+                <div class="search-overlay">BAGGY SHORTS</div>
             </div>
-        </a>
+        </div>
     </div>
+    
 </div>
