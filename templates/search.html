@@ -10,39 +10,28 @@
     </div>
     
     <div class="search-bar">
-        <form action="">
-            <input type="text" placeholder="Type to search..." />
-            <button>Search</button>
+        <form action="" method="get">
+            <input type="text" name="search" placeholder="Type to search..." value="{{ search_query }}">
+            <button type="submit">Search</button>
         </form>
     </div>
     
     <div class="search-category">
         <h2>Our Products</h2>
         <div class="search-category-container">
+
+            {% for product, range, nSlides in allProds %}
+            {% for i in product %}
+
             <div class="search-category-item">
-                <img src="{% static '/images/prod-1.JPG' %}">
-                <div class="search-overlay">DROP SHOULDER <br> $20.00 </div>
+                <a href="/shop/product-details/{{ i.id }}/">
+                    <img src="/media/{{i.product_image_1}}">
+                    <div class="search-overlay">{{i.product_name}} <br> ${{i.product_price}} </div>
+                </a>
             </div>
-            <div class="search-category-item">
-                <img src="{% static '/images/prod-2.JPG' %}">
-                <div class="search-overlay">BAGGY JOGGERS</div>
-            </div>
-            <div class="search-category-item">
-                <img src="{% static '/images/prod-3.JPG' %}">
-                <div class="search-overlay">BAGGY SHIRTS</div>
-            </div>
-            <div class="search-category-item">
-                <img src="{% static '/images/prod-4.JPG' %}">
-                <div class="search-overlay">CARGO PANTS</div>
-            </div>
-            <div class="search-category-item">
-                <img src="{% static '/images/prod-5.JPG' %}">
-                <div class="search-overlay">HEAD WEAR</div>
-            </div>
-            <div class="search-category-item">
-                <img src="{% static '/images/prod-6.JPG' %}">
-                <div class="search-overlay">BAGGY SHORTS</div>
-            </div>
+
+            {% endfor %}
+            {% endfor %}
         </div>
     </div>
     

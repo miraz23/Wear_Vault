@@ -3,7 +3,15 @@ from contact.models import contact
 from shop.models import product, order
 import json
 from django.db.models import Case, When
-def index(request):
+from math import ceil
+from django.db.models import Q
+from django.http import JsonResponse
+
+def index(request, category=None):
+    # Get search query from request
+    search_query = request.GET.get('search', '')
+    data = {}
+    
     # Counts for each category
     drop_shoulders_count = product.objects.filter(product_category='drop-shoulders').count()
     baggy_joggers_count = product.objects.filter(product_category='baggy-joggers').count()
@@ -15,20 +23,47 @@ def index(request):
     # Latest arrivals
     latest_arrivals = product.objects.filter(latest_arrival='yes')
 
-    # Trending products
+    # Trending products (as in your existing code)
     product_counts = {}
     for ord in order.objects.all():
         items = json.loads(ord.items_json)
         for product_code, details in items.items():
-            product_counts[product_code] = product_counts.get(product_code, 0) + details[0]  # Counting quantities
+            product_counts[product_code] = product_counts.get(product_code, 0) + details[0]
 
-    # Sorted products by quantity in descending order and get top 6
     top_product_codes = sorted(product_counts, key=product_counts.get, reverse=True)[:6]
-
-    # Preserve order of top products by creating a Case/When expression
     order_by_case = Case(*[When(id=int(code[2:]), then=pos) for pos, code in enumerate(top_product_codes)])
     trending_products = product.objects.filter(id__in=[int(code[2:]) for code in top_product_codes]).order_by(order_by_case)
 
+    # Filtered Products
+    allProds = []
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest' and search_query:
+        # Filter products with partial match on search_query
+        matching_products = product.objects.filter(
+            Q(product_name__icontains=search_query) | Q(product_category__icontains=search_query)
+        ).values('id', 'product_name', 'product_price', 'product_image_1')
+        
+        n = len(matching_products)
+        nSlides = n // 4 + ceil((n / 4) - (n // 4))
+        allProds.append([matching_products, range(1, nSlides), nSlides])
+
+        data = {'results': list(matching_products)}
+        return JsonResponse(data)
+    
+    else:
+        # Original code for category filtering or all products
+        if category:
+            prod = product.objects.filter(product_category=category)
+            n = len(prod)
+            nSlides = n // 4 + ceil((n / 4) - (n // 4))
+            allProds.append([prod, range(1, nSlides), nSlides])
+        else:
+            catprods = product.objects.values('product_category', 'id')
+            cats = {item['product_category'] for item in catprods}
+            for cat in cats:
+                prod = product.objects.filter(product_category=cat)
+                n = len(prod)
+                nSlides = n // 4 + ceil((n / 4) - (n // 4))
+                allProds.append([prod, range(1, nSlides), nSlides])
 
     data = {
         'drop_shoulders_count': drop_shoulders_count,
@@ -39,6 +74,7 @@ def index(request):
         'baggy_shorts_count': baggy_shorts_count,
         'latest_arrivals': latest_arrivals,
         'trending_products': trending_products,
+        'allProds': allProds,
     }
 
     return render(request, "index.html", data)

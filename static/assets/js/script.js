@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function (){
         }
     });
     
-    /*----------------------------------------- search -----------------------------------------*/
+    /*----------------------------------------- search panel-----------------------------------------*/
 
     document.getElementById("search-icon").addEventListener("click", function () {
         document.getElementById("search-panel").classList.toggle("search-open");
@@ -107,6 +107,34 @@ document.addEventListener("DOMContentLoaded", function (){
     
     document.getElementById("search-close").addEventListener("click", function () {
         document.getElementById("search-panel").classList.remove("search-open");
+    });
+
+
+    /*----------------------------------------- searching functionality -----------------------------------------*/
+
+    document.querySelector(".search-bar form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form submission
+        const searchQuery = document.querySelector("input[name='search']").value;
+    
+        fetch(`http://127.0.0.1:8000/?search=${encodeURIComponent(searchQuery)}`, {
+            headers: { "X-Requested-With": "XMLHttpRequest" },
+        })
+        .then(response => response.json())
+        .then(data => {
+            const container = document.querySelector(".search-category-container");
+            container.innerHTML = "";
+    
+            data.results.forEach(item => {
+                const productHTML = `
+                    <div class="search-category-item">
+                        <a href="/shop/product-details/${item.id}/">
+                            <img src="/media/${item.product_image_1}">
+                            <div class="search-overlay">${item.product_name}<br> $${item.product_price}</div>
+                        </a>
+                    </div>`;
+                container.innerHTML += productHTML;
+            });
+        });
     });
 
     /*----------------------------------------- cart -----------------------------------------*/
