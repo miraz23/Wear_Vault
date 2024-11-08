@@ -3,6 +3,10 @@ from shop.models import product, order, orderUpdate
 from math import ceil
 from django.contrib import messages
 import paypalrestsdk
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
+from django.conf import settings
 
 def shop(request, category=None):
     allProds = []
@@ -131,6 +135,30 @@ def payment_success(request):
 
             update = orderUpdate(order_id=Order.order_id, update_desc="The order has been placed")
             update.save()
+
+            # Send confirmation email to customer
+            recipient_name = Order.name
+            recipient_email = Order.email
+
+            recipient_email_subject = "Order Confirmation"
+            recipient_message = render_to_string('order-confirmation-email.html', {
+                'customer_name': recipient_name,
+                'order_id': Order.order_id,
+                'amount': Order.amount,
+                'payment_status': Order.paymentstatus,
+                'domain': get_current_site(request).domain,
+                'order_items': Order.formatted_items(),
+            })
+
+            recipient_email_message = EmailMessage(
+                recipient_email_subject,
+                recipient_message,
+                settings.EMAIL_HOST_USER,
+                [recipient_email]
+            )
+
+            recipient_email_message.content_subtype = "html"
+            recipient_email_message.send()
 
             return render(request, 'payment_success.html')
         except Exception as e:
