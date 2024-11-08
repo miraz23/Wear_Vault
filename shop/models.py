@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.html import format_html
+import json
 
 # Create your models here.
 
@@ -50,6 +52,28 @@ class order(models.Model):
     amountpaid=models.CharField(max_length=500,blank=True,null=True)
     paymentstatus=models.CharField(max_length=20,blank=True)
     phone = models.CharField(max_length=100,default="")
+
+    def formatted_items(self):
+        try:
+            items = json.loads(self.items_json)  # Parse items_json
+            formatted = ""
+            for item_id, details in items.items():
+                qty, name, price, color, size, image_url = details
+                formatted += f"""
+                    <div>
+                        <strong>Product Name:</strong> {name}<br>
+                        <strong>Quantity:</strong> {qty}<br>
+                        <strong>Price:</strong> ${price}<br>
+                        <strong>Color:</strong> {color}<br>
+                        <strong>Size:</strong> {size}<br>
+                        <img src="{image_url}" alt="{name}" style="width: 50px; height: 50px;"/><br><br>
+                    </div>
+                """
+            return format_html(formatted)
+        except (ValueError, KeyError, TypeError):
+            return "Invalid items format"
+
+    formatted_items.short_description = "Order Details"
 
     def __str__(self):
         return self.name
