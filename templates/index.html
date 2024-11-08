@@ -124,70 +124,83 @@
                 <div class="category-row">
 
                     <div class="category-list">
-                        <div class="category-list-img">
-                            <img src="{% static '/images/prod-1.JPG' %}" alt="">
-                        </div>
-
-                        <div class="category-info">
-                            <a href="{% url 'shop_category' 'drop-shoulders' %}"><h3>Drop Shoulders</h3></a>
-                            <p>{{ drop_shoulders_count }} Items</p>
-                        </div>
+                        <a href="{% url 'shop_category' 'drop-shoulders' %}">
+                            <div class="category-list-img">
+                                <img src="{% static '/images/prod-1.JPG' %}" alt="">
+                            </div>
+                        
+                            <div class="category-info">
+                                <h3>Drop Shoulders</h3>
+                                <p>{{ drop_shoulders_count }} Items</p>
+                            </div>
+                        </a>
                     </div>
 
                     <div class="category-list">
-                        <div class="category-list-img">
-                            <img src="{% static '/images/prod-2.JPG' %}" alt="">
-                        </div>
+                        <a href="{% url 'shop_category' 'baggy-joggers' %}">
+                            <div class="category-list-img">
+                                <img src="{% static '/images/prod-2.JPG' %}" alt="">
+                            </div>
 
-                        <div class="category-info">
-                            <a href="{% url 'shop_category' 'baggy-joggers' %}"><h3>Baggy Joggers</h3></a>
-                            <p>{{baggy_joggers_count}} Items</p>
-                        </div>
+                            <div class="category-info">
+                                <h3>Baggy Joggers</h3>
+                                <p>{{baggy_joggers_count}} Items</p>
+                            </div>
+                        </a>
                     </div>
 
                     <div class="category-list">
-                        <div class="category-list-img">
-                            <img src="{% static '/images/prod-3.JPG' %}" alt="">
-                        </div>
+                        <a href="{% url 'shop_category' 'baggy-shirts' %}">
+                            <div class="category-list-img">
+                                <img src="{% static '/images/prod-3.JPG' %}" alt="">
+                            </div>
 
-                        <div class="category-info">
-                            <a href="{% url 'shop_category' 'baggy-shirts' %}"><h3>Baggy Shirts</h3></a>
-                            <p>{{baggy_shirts_count}} Items</p>
-                        </div>
+                            <div class="category-info">
+                                <h3>Baggy Shirts</h3></a>
+                                <p>{{baggy_shirts_count}} Items</p>
+                            </div>
+                        </a>
                     </div>
 
                     <div class="category-list">
-                        <div class="category-list-img">
-                            <img src="{% static '/images/prod-4.JPG' %}" alt="">
-                        </div>
+                        <a href="{% url 'shop_category' 'cargo-pants' %}">
+                            <div class="category-list-img">
+                                <img src="{% static '/images/prod-4.JPG' %}" alt="">
+                            </div>
 
-                        <div class="category-info">
-                            <a href="{% url 'shop_category' 'cargo-pants' %}"><h3>Cargo Pants</h3></a>
-                            <p>{{cargo_pants_count}} Items</p>
-                        </div>
+                            <div class="category-info">
+                                <h3>Cargo Pants</h3></a>
+                                <p>{{cargo_pants_count}} Items</p>
+                            </div>
+                        </a>
                     </div>
 
                     <div class="category-list">
-                        <div class="category-list-img">
-                            <img src="{% static '/images/prod-5.JPG' %}" alt="">
-                        </div>
+                        <a href="{% url 'shop_category' 'head-wear' %}">
+                            <div class="category-list-img">
+                                <img src="{% static '/images/prod-5.JPG' %}" alt="">
+                            </div>
 
-                        <div class="category-info">
-                            <a href="{% url 'shop_category' 'head-wear' %}"><h3>Head Wear</h3></a>
-                            <p>{{head_wear_count}} Items</p>
-                        </div>
+                            <div class="category-info">
+                                <h3>Head Wear</h3>
+                                <p>{{head_wear_count}} Items</p>
+                            </div>
+                        </a>
                     </div>
 
                     <div class="category-list">
-                        <div class="category-list-img">
-                            <img src="{% static '/images/prod-6.JPG' %}" alt="">
-                        </div>
+                        <a href="{% url 'shop_category' 'baggy-shorts' %}">
+                            <div class="category-list-img">
+                                <img src="{% static '/images/prod-6.JPG' %}" alt="">
+                            </div>
 
-                        <div class="category-info">
-                            <a href="{% url 'shop_category' 'baggy-shorts' %}"><h3>Baggy Shorts</h3></a>
-                            <p>{{baggy_shorts_count}} Items</p>
-                        </div>
+                            <div class="category-info">
+                                <h3>Baggy Shorts</h3>
+                                <p>{{baggy_shorts_count}} Items</p>
+                            </div>
+                        </a>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -207,6 +220,7 @@
                     
                     {% for product in latest_arrivals %}
                     <div class="arrivals-product swiper-slide">
+                        <a href="/shop/product-details/{{ product.id }}/">
                         <div class="arrivals-product-container">
                             <div class="arrivals-product-image">
                                 <img src="{{ product.product_image_1.url }}" alt="{{ product.product_name }}">
@@ -221,12 +235,14 @@
                                     </button>
                                 </a>
                             </div>
-                        </div>
+                        </div></a>
         
+                        <a href="/shop/product-details/{{ product.id }}/">
                         <div class="arrivals-product-info">
                             <h3>{{ product.product_name }}</h3>
                             <p>${{ product.product_price }}</p>
                         </div>
+                        </a>
                     </div>
                     {% endfor %}
                     

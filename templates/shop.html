@@ -12,6 +12,7 @@
     {% for product, range, nSlides in allProds %}
       {% for i in product %}
         <div class="shop-product">
+          <a href="/shop/product-details/{{ i.id }}/">
           <div class="shop-product-image-wrapper">
 
             <div class="shop-product-image">
@@ -28,12 +29,14 @@
                 </button>
               </a>
             </div>
-          </div>
+          </div></a>
           
+          <a href="/shop/product-details/{{ i.id }}/">
           <div class="shop-product-info">
             <h3 id="namepr{{i.id}}">{{i.product_name}}</h3>
             <p>$ <span id="pricepr{{i.id}}"> {{i.product_price}}</span></p>
           </div>
+          </a>
         </div>
       {% endfor %}
     {% endfor %}

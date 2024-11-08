@@ -10,14 +10,15 @@
                 <li><a href="#category">Category</a></li>
                 <li><a href="#arrivals">Arrivals</a></li>
                 <li><a href="#trending">Trending</a></li>
-                <li><a href="#process">About Us</a></li>
-                <li><a href="#faq">Contact Us</a></li>
+                {% url 'about' as url %}
+                <li><a href="{{url}}">About Us</a></li>
+                {% url 'contact' as url %}
+                <li><a href="{{url}}">Contact Us</a></li>
             </ul>
         </div>
         <div class="footer-icon">
+            <a href="https://www.instagram.com/wearvaultau"><i class="bi bi-instagram"></i></a>
             <a href="#facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#youtube"><i class="bi bi-youtube"></i></a>
             <a href="#twitter"><i class="bi bi-twitter"></i></a>
         </div>
         <div class="footer-copyright">

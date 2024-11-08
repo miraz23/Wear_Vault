@@ -804,7 +804,7 @@ nav .nav-menu-icon{
     height: 150px;
 }
 
-.category-info a{
+.category-list a{
     text-decoration: none;
 }
 
@@ -865,6 +865,10 @@ nav .nav-menu-icon{
     flex-direction: column;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.arrivals-product a:hover{
+    text-decoration: none;
 }
 
 .arrivals-product-container {
@@ -1172,6 +1176,11 @@ nav .nav-menu-icon{
 
 .shop-product:hover{
     transform: scale(1.01);
+}
+
+.shop-product a:hover{
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .shop-product-image img{
