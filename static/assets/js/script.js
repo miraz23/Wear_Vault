@@ -207,160 +207,152 @@ document.addEventListener("DOMContentLoaded", function (){
 
     /*----------------------------------------- checkout -----------------------------------------*/
 
-var cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
-
-console.log(cart);
-
-var sum = 0;
-var totalPrice = 0;
-var itemsContainer = document.getElementById('items');
-var itemsJson = document.getElementById('itemsJson');
-
-if (Object.keys(cart).length === 0) {
-    var emptyCartMessage = document.createElement('p');
-    emptyCartMessage.textContent = 'Your cart is empty, please add some items to your cart before checking out!';
-    itemsContainer.appendChild(emptyCartMessage);
-} 
-else {
-    for (var item in cart) {
-        if (cart.hasOwnProperty(item)) {
-            let name = cart[item][1];
-            let qty = cart[item][0];
-            let itemPrice = cart[item][2];
-            sum += qty;
-            totalPrice += qty * itemPrice;
-
-            var listItem = document.createElement('li');
-            listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
-
-            var nameDiv = document.createElement('div');
-            nameDiv.className = 'col-md-5';
-            nameDiv.textContent = name;
-
-            var priceDiv = document.createElement('div');
-            priceDiv.className = 'col-md-5';
-            priceDiv.innerHTML = `<b> Price : ${itemPrice}</b>`;
-
-            var badgeSpan = document.createElement('span');
-            badgeSpan.className = 'badge badge-primary badge-pill';
-            badgeSpan.textContent = qty;
-
-            listItem.appendChild(nameDiv);
-            listItem.appendChild(priceDiv);
-            listItem.appendChild(badgeSpan);
-            itemsContainer.appendChild(listItem);
-        }
-    }
-    document.getElementById('totalprice').textContent = totalPrice;
-}
-
-if (itemsJson) {
-    itemsJson.value = JSON.stringify(cart);
-}
-
-var thank = "{{ thank }}"
-if (thank) {    
-    localStorage.clear();
-    // document.location = "/";
-}
-
-document.getElementById("amt").value = totalPrice;
-
-});
-
-/*----------------------------------------- cart functionality -----------------------------------------*/
-
-// Initialize cart from localStorage
-let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
-updateCartPanel(cart);
-
-// Function to update the cart when quantity changes
-function updateCartQuantity(idstr, color, size) {
-    let qtyInput = document.getElementById('quantity' + idstr);
-    let qty = parseInt(qtyInput.value);
+    var cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
     
-    // Create unique ID for the color-size variation
-    let uniqueId = `${idstr}_${color}_${size}`;
+    console.log(cart);
+    
+    var sum = 0;
+    var totalPrice = 0;
+    var itemsContainer = document.getElementById('items');
+    var itemsJson = document.getElementById('itemsJson');
+    
+    if (Object.keys(cart).length === 0) {
+        var emptyCartMessage = document.createElement('p');
+        emptyCartMessage.textContent = 'Your cart is empty, please add some items to your cart before checking out!';
+        itemsContainer.appendChild(emptyCartMessage);
+    } 
+    else {
+        for (var item in cart) {
+            if (cart.hasOwnProperty(item)) {
+                let name = cart[item][1];
+                let qty = cart[item][0];
+                let itemPrice = cart[item][2];
+                let color = cart[item][3];
+                let size = cart[item][4];
+                sum += qty;
+                totalPrice += qty * itemPrice;
+            
+                var listItem = document.createElement('li');
+                listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+            
+                var nameDiv = document.createElement('div');
+                nameDiv.className = 'col-md-3';
+                nameDiv.textContent = name;
+            
+                var colorDiv = document.createElement('div');
+                colorDiv.className = 'col-md-2';
+                colorDiv.textContent = `Color: ${color}`;
+            
+                var sizeDiv = document.createElement('div');
+                sizeDiv.className = 'col-md-2';
+                sizeDiv.textContent = `Size: ${size}`;
+            
+                var priceDiv = document.createElement('div');
+                priceDiv.className = 'col-md-3';
+                priceDiv.innerHTML = `<b> Price: $${itemPrice}</b>`;
+            
+                var badgeSpan = document.createElement('span');
+                badgeSpan.className = 'badge badge-primary badge-pill';
+                badgeSpan.textContent = qty;
+            
+                listItem.appendChild(nameDiv);
+                listItem.appendChild(colorDiv);
+                listItem.appendChild(sizeDiv);
+                listItem.appendChild(priceDiv);
+                listItem.appendChild(badgeSpan);
+                itemsContainer.appendChild(listItem);
+            }
+        }
+        document.getElementById('totalprice').textContent = `$${totalPrice.toFixed(2)}`;
+    }
+    
+    if (itemsJson) {
+        itemsJson.value = JSON.stringify(cart);
+    }
+    
+    var thank = "{{ thank }}"
+    if (thank) {    
+        localStorage.clear();
+        // document.location = "/";
+    }
+    
+    document.getElementById("amt").value = totalPrice;
 
-    if (cart[uniqueId]) {
-        cart[uniqueId][0] = qty; // Update the quantity in the cart
+});
+
+    /*----------------------------------------- cart functionality -----------------------------------------*/
+
+    // Initialize cart from localStorage
+    let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+    updateCartPanel(cart);
+
+    // Function to update the cart when quantity changes
+    function updateCartQuantity(idstr, color, size) {
+        let qtyInput = document.getElementById('quantity' + idstr);
+        let qty = parseInt(qtyInput.value);
+
+        // Create unique ID for the color-size variation
+        let uniqueId = `${idstr}_${color}_${size}`;
+
+        if (cart[uniqueId]) {
+            cart[uniqueId][0] = qty; // Update the quantity in the cart
+        }
+
+        // Save updated cart to localStorage and update UI
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartPanel(cart);
     }
 
-    // Save updated cart to localStorage and update UI
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartPanel(cart);
-}
+    // Add to cart functionality
+    document.querySelectorAll('.divpr').forEach(div => {
+        div.addEventListener('click', function(event) {
+            if (event.target.classList.contains('cart')) {
+                let idstr = event.target.id.toString();
 
-// Add to cart functionality
-document.querySelectorAll('.divpr').forEach(div => {
-    div.addEventListener('click', function(event) {
-        if (event.target.classList.contains('cart')) {
-            let idstr = event.target.id.toString();
+                // Get selected color and size
+                let color = document.getElementById('color').value;
+                let size = document.getElementById('size').value;
+                let qtyInput = document.getElementById('quantity' + idstr); // Get the quantity input
+                let qty = parseInt(qtyInput.value); // Get the current quantity
 
-            // Get selected color and size
-            let color = document.getElementById('color').value;
-            let size = document.getElementById('size').value;
-            let qtyInput = document.getElementById('quantity' + idstr); // Get the quantity input
-            let qty = parseInt(qtyInput.value); // Get the current quantity
+                // Validate color and size selection
+                if (!color || !size) {
+                    alert("Please select both color and size options before adding to cart.");
+                    return; // Stop function execution if color or size is not selected
+                }
 
-            // Validate color and size selection
-            if (!color || !size) {
-                alert("Please select both color and size options before adding to cart.");
-                return; // Stop function execution if color or size is not selected
+                // Create unique key for each color-size variation
+                let uniqueId = `${idstr}_${color}_${size}`;
+
+                // Proceed with adding to cart if color and size are selected
+                if (cart[uniqueId] !== undefined) {
+                    cart[uniqueId][0] += qty; // Increment quantity
+                } else {
+                    // Get product details
+                    let name = document.getElementById('name' + idstr).innerHTML;
+                    let price = document.getElementById('price' + idstr).innerHTML;
+                    let imageUrl = document.getElementById('image' + idstr).getAttribute('src');
+
+                    // Store color and size in the cart data
+                    cart[uniqueId] = [qty, name, price, color, size, imageUrl];
+                }
+
+                // Save cart to localStorage and update UI
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartPanel(cart);
+
+                // Open the cart panel after adding an item
+                document.getElementById("cart-panel").classList.add("cart-open");
             }
-
-            // Create unique key for each color-size variation
-            let uniqueId = `${idstr}_${color}_${size}`;
-
-            // Proceed with adding to cart if color and size are selected
-            if (cart[uniqueId] !== undefined) {
-                cart[uniqueId][0] += qty; // Increment quantity
-            } else {
-                // Get product details
-                let name = document.getElementById('name' + idstr).innerHTML;
-                let price = document.getElementById('price' + idstr).innerHTML;
-                let imageUrl = document.getElementById('image' + idstr).getAttribute('src');
-
-                // Store color and size in the cart data
-                cart[uniqueId] = [qty, name, price, color, size, imageUrl];
-            }
-
-            // Save cart to localStorage and update UI
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartPanel(cart);
-
-            // Open the cart panel after adding an item
-            document.getElementById("cart-panel").classList.add("cart-open");
-        }
+        });
     });
-});
 
-// Function to handle quantity increase
-document.querySelectorAll('[id^="increase"]').forEach(button => {
-    button.addEventListener('click', function() {
-        let idstr = button.id.replace('increase', ''); // Get product ID
-        let qtyInput = document.getElementById('quantity' + idstr);
-        qtyInput.value = parseInt(qtyInput.value) + 1;  // Increase quantity
-
-        // Get selected color and size
-        let color = document.getElementById('color').value;
-        let size = document.getElementById('size').value;
-
-        // Update cart with new quantity
-        updateCartQuantity(idstr, color, size);
-    });
-});
-
-// Function to handle quantity decrease
-document.querySelectorAll('[id^="decrease"]').forEach(button => {
-    button.addEventListener('click', function() {
-        let idstr = button.id.replace('decrease', ''); // Get product ID
-        let qtyInput = document.getElementById('quantity' + idstr);
-        let newQty = parseInt(qtyInput.value) - 1; // Decrease quantity
-
-        // Prevent quantity from going below 1
-        if (newQty > 0) {
-            qtyInput.value = newQty;
+    // Function to handle quantity increase
+    document.querySelectorAll('[id^="increase"]').forEach(button => {
+        button.addEventListener('click', function() {
+            let idstr = button.id.replace('increase', ''); // Get product ID
+            let qtyInput = document.getElementById('quantity' + idstr);
+            qtyInput.value = parseInt(qtyInput.value) + 1;  // Increase quantity
 
             // Get selected color and size
             let color = document.getElementById('color').value;
@@ -368,88 +360,108 @@ document.querySelectorAll('[id^="decrease"]').forEach(button => {
 
             // Update cart with new quantity
             updateCartQuantity(idstr, color, size);
-        }
+        });
     });
-});
 
-// Prevent manual negative input in quantity field
-document.querySelectorAll('[id^="quantity"]').forEach(input => {
-    input.addEventListener('blur', function() {
-        let qty = parseInt(input.value);
-        let idstr = input.id.replace('quantity', '');
+    // Function to handle quantity decrease
+    document.querySelectorAll('[id^="decrease"]').forEach(button => {
+        button.addEventListener('click', function() {
+            let idstr = button.id.replace('decrease', ''); // Get product ID
+            let qtyInput = document.getElementById('quantity' + idstr);
+            let newQty = parseInt(qtyInput.value) - 1; // Decrease quantity
 
-        if (qty < 1 || isNaN(qty)) {
-            input.value = 1;
+            // Prevent quantity from going below 1
+            if (newQty > 0) {
+                qtyInput.value = newQty;
 
-            // Get selected color and size
-            let color = document.getElementById('color').value;
-            let size = document.getElementById('size').value;
+                // Get selected color and size
+                let color = document.getElementById('color').value;
+                let size = document.getElementById('size').value;
 
-            updateCartQuantity(idstr, color, size); // Update cart to reflect this change
-        }
+                // Update cart with new quantity
+                updateCartQuantity(idstr, color, size);
+            }
+        });
     });
-});
 
-// Function to update the sliding cart panel
-function updateCartPanel(cart) {
-    let cartContent = "";
-    let total = 0;
-    var totalItems = 0;
+    // Prevent manual negative input in quantity field
+    document.querySelectorAll('[id^="quantity"]').forEach(input => {
+        input.addEventListener('blur', function() {
+            let qty = parseInt(input.value);
+            let idstr = input.id.replace('quantity', '');
 
-    for (let item in cart) {
-        let qty = cart[item][0];
-        let name = cart[item][1];
-        let price = parseFloat(cart[item][2]);
-        let color = cart[item][3];
-        let size = cart[item][4];
-        let imageUrl = cart[item][5];
+            if (qty < 1 || isNaN(qty)) {
+                input.value = 1;
 
-        // Calculate total for each item
-        total += qty * price;
-        totalItems += qty;
+                // Get selected color and size
+                let color = document.getElementById('color').value;
+                let size = document.getElementById('size').value;
 
-        // Generate HTML for each cart item
-        cartContent += `
-            <div class="cart-item">
-                <div class="cart-item-image">
-                    <img src="${imageUrl}" class="cart-item-image">
-                </div>
-                <div class="cart-item-details">
-                    <p class="cart-item-name">${name}</p>
-                    <p class="cart-item-color-size">${color} - ${size}</p>
-                    <p class="cart-item-quantity">${qty} x $${price}</p>
-                    <p class="cart-item-price">$${(qty * price).toFixed(2)}</p>
-                </div>
-                <span class="cart-remove-item" data-id="${item}">✕</span>
-            </div>`;
+                updateCartQuantity(idstr, color, size); // Update cart to reflect this change
+            }
+        });
+    });
+
+    // Function to update the sliding cart panel
+    function updateCartPanel(cart) {
+        let cartContent = "";
+        let total = 0;
+        var totalItems = 0;
+
+        for (let item in cart) {
+            let qty = cart[item][0];
+            let name = cart[item][1];
+            let price = parseFloat(cart[item][2]);
+            let color = cart[item][3];
+            let size = cart[item][4];
+            let imageUrl = cart[item][5];
+
+            // Calculate total for each item
+            total += qty * price;
+            totalItems += qty;
+
+            // Generate HTML for each cart item
+            cartContent += `
+                <div class="cart-item">
+                    <div class="cart-item-image">
+                        <img src="${imageUrl}" class="cart-item-image">
+                    </div>
+                    <div class="cart-item-details">
+                        <p class="cart-item-name">${name}</p>
+                        <p class="cart-item-color-size">${color} - ${size}</p>
+                        <p class="cart-item-quantity">${qty} x $${price}</p>
+                        <p class="cart-item-price">$${(qty * price).toFixed(2)}</p>
+                    </div>
+                    <span class="cart-remove-item" data-id="${item}">✕</span>
+                </div>`;
+        }
+
+        // Update the cart panel HTML
+        document.querySelector('.cart-content').innerHTML = cartContent;
+        document.querySelector('.cart-footer h5').innerHTML = `Total: $${total.toFixed(2)}`;
+        document.getElementById('cart').textContent = totalItems;
     }
 
-    // Update the cart panel HTML
-    document.querySelector('.cart-content').innerHTML = cartContent;
-    document.querySelector('.cart-footer h5').innerHTML = `Total: $${total.toFixed(2)}`;
-    document.getElementById('cart').textContent = totalItems;
-}
-
-// Clear the cart
-function clearCart() {
-    cart = {};
-    localStorage.clear();
-    updateCartPanel(cart);
-}
-
-document.getElementById('clear-cart').addEventListener('click', function(event) {
-    clearCart();
-});
-
-// Remove individual item
-document.querySelector('.cart-content').addEventListener('click', function(event) {
-    if (event.target.classList.contains('cart-remove-item')) {
-        let id = event.target.getAttribute('data-id');
-        delete cart[id];
-        localStorage.setItem('cart', JSON.stringify(cart));
+    // Clear the cart
+    function clearCart() {
+        cart = {};
+        localStorage.clear();
         updateCartPanel(cart);
     }
-});
+
+    document.getElementById('clear-cart').addEventListener('click', function(event) {
+        clearCart();
+    });
+
+    // Remove individual item
+    document.querySelector('.cart-content').addEventListener('click', function(event) {
+        if (event.target.classList.contains('cart-remove-item')) {
+            let id = event.target.getAttribute('data-id');
+            delete cart[id];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartPanel(cart);
+        }
+    });
 
 
     /*----------------------------------------- load products -----------------------------------------*/
