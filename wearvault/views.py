@@ -23,7 +23,7 @@ def index(request, category=None):
     # Latest arrivals
     latest_arrivals = product.objects.filter(latest_arrival='yes')
 
-    # Trending products (as in your existing code)
+    # Trending products
     product_counts = {}
     for ord in order.objects.all():
         items = json.loads(ord.items_json)
@@ -31,8 +31,8 @@ def index(request, category=None):
             product_counts[product_code] = product_counts.get(product_code, 0) + details[0]
 
     top_product_codes = sorted(product_counts, key=product_counts.get, reverse=True)[:3]
-    order_by_case = Case(*[When(id=int(code[2:]), then=pos) for pos, code in enumerate(top_product_codes)])
-    trending_products = product.objects.filter(id__in=[int(code[2:]) for code in top_product_codes]).order_by(order_by_case)
+    order_by_case = Case(*[When(id=int(code.split('_')[0][2:]), then=pos) for pos, code in enumerate(top_product_codes)])
+    trending_products = product.objects.filter(id__in=[int(code.split('_')[0][2:]) for code in top_product_codes]).order_by(order_by_case)
 
     # Filtered Products
     allProds = []
