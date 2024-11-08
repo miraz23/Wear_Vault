@@ -40,7 +40,9 @@ def signup(request):
             })
 
             email_message = EmailMessage(email_subject,message,settings.EMAIL_HOST_USER,[user.email])
+            email_message.content_subtype = "html"
             email_message.send()
+
             messages.success(request,"ACTIVATE YOUR ACCOUNT BY CLICKING THE LINK IN YOUR GMAIL")
             return redirect('/')
         
@@ -91,6 +93,7 @@ class RequestResetEmailView(View):
             })
 
             email_message=EmailMessage(email_subject,message,settings.EMAIL_HOST_USER,[email])
+            email_message.content_subtype = "html"
             email_message.send()
 
             messages.info(request,"CHECK YOUR EMAIL")
