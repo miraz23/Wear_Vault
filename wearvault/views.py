@@ -39,7 +39,7 @@ def index(request, category=None):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest' and search_query:
         # Filter products with partial match on search_query
         matching_products = product.objects.filter(
-            Q(product_name__icontains=search_query) | Q(product_category__icontains=search_query)
+            Q(product_name__icontains=search_query)
         ).values('id', 'product_name', 'product_price', 'product_image_1')
         
         n = len(matching_products)

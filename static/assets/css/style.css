@@ -480,7 +480,6 @@ nav .nav-menu-icon{
 
 .sign-panel,
 .reset-link-panel,
-.reset-password-panel,
 .log-panel {
     position: fixed;
     top: 0;
@@ -497,15 +496,13 @@ nav .nav-menu-icon{
 
 .log-open,
 .sign-open,
-.reset-open,
-.reset-password-open {
+.reset-open {
     right: 0;
 }
 
 .log-header,
 .sign-header,
-.reset-link-header,
-.reset-password-header {
+.reset-link-header{
     color: #000;
     padding: 18px 20px;
     display: flex;
@@ -516,31 +513,27 @@ nav .nav-menu-icon{
 
 .log-header h2,
 .sign-header h2,
-.reset-link-header h2,
-.reset-password-header h2{
+.reset-link-header h2{
     font-size: 18px;
     margin: 0px;
 }
 
 .log-header svg,
 .sign-header svg,
-.reset-link-header svg,
-.reset-password-header svg{
+.reset-link-header svg{
     margin: 0 10px 5px 5px;
 }
 
 .log-close,
 .sign-close,
-.reset-link-close,
-.reset-password-close {
+.reset-link-close{
     cursor: pointer;
     font-size: 25px;
 }
 
 .log-content,
 .sign-content,
-.reset-link-content,
-.reset-password-content {
+.reset-link-content{
     flex-grow: 1;
     overflow-y: auto;
     padding: 50px 15px;
@@ -551,8 +544,7 @@ nav .nav-menu-icon{
 
 .log-content input,
 .sign-content input,
-.reset-link-content input,
-.reset-password-content input{
+.reset-link-content input{
     width: 250px;
 }
 
@@ -572,8 +564,7 @@ nav .nav-menu-icon{
 
 .log-content button,
 .sign-content button,
-.reset-link-content button,
-.reset-password-content button {
+.reset-link-content button{
     width: 100%;
     padding: 7px;
     margin: 5px 0 15px 0;
@@ -582,7 +573,7 @@ nav .nav-menu-icon{
     color: #fff;
     outline: none;
     background-color: #222;
-    transition: background-color 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .nav-log .log-content span{
@@ -592,10 +583,8 @@ nav .nav-menu-icon{
 
 .log-content button:hover,
 .sign-content button:hover,
-.reset-link-content button:hover,
-.reset-password-content button:hover {
+.reset-link-content button:hover{
     transform: scale(1.01);
-    transition: 0.1s;
 }
 
 .log-panel .log-content #reset,
@@ -609,6 +598,62 @@ nav .nav-menu-icon{
 .log-content #sign-in:hover,
 .sign-content #log-icon:hover{
     color: #444;
+}
+
+#reset-password{
+    height: 70vh;
+    margin: 100px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset-password-panel{
+    width: 600px;
+    margin: 0 auto;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reset-password-header{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #bab3a6;
+}
+
+.reset-password-header svg{
+    margin: 0 10px 5px 5px;
+}
+
+.reset-password-header h2{
+    font-size: 25px;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.reset-password-content{
+    padding: 50px;
+}
+
+.reset-password-content button{
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    font-size: 16px;
+    cursor: pointer;
+    color: #fff;
+    outline: none;
+    border: none;
+    background-color: #222;
+    transition: transform 0.3s ease;
+}
+
+.reset-password-content button:hover{
+    transform: scale(1.01);
 }
 
 /* --------------------------------------------- home ---------------------------------------------*/
