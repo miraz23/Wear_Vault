@@ -1206,106 +1206,59 @@ nav .nav-menu-icon{
     font-weight: 250;
 }
 
-.shop{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);    
-    row-gap: 40px;
+.shop {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  justify-items: center;
+  margin-top: 20px;
 }
 
-.shop-product{
-    width: 250px;
-    color: #000;
-    user-select: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.5s;
+.shop-product {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
 }
 
-.shop-product:hover{
-    transform: scale(1.01);
+.shop-product:hover {
+  transform: translateY(-5px);
 }
 
-.shop-product a:hover{
-    cursor: pointer;
+.shop-product a{
     text-decoration: none;
 }
 
-.shop-product-image img{
-    width: 250px;
-    height: 350px;
+.shop-product-image {
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
 }
 
-.shop-product-image-wrapper{
-    position: relative;
-    display: inline-block;
+.shop-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.shop-product-image-wrapper:hover .shop-product-image:before {
-    content: "";
-    background: rgba(0, 0, 0, 0.3);
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 350px;
-}
-
-.shop-product-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-    opacity: 0;
-}
-
-.shop-product-image-wrapper:hover .shop-product-button {
-    display: block;
-    opacity: 1;
-}
-
-.shop-product-button button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    border-radius: 100%;
-    width: 50px;
-    height: 50px;
-    border: none;
-    outline: none;
-}
-
-.shop-product-button button:hover {
-    transform: scale(1.1);
-}
-
-.shop-product-info{
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+.shop-product-info {
+  padding: 20px;
+  text-align: left;
 }
 
 .shop-product-info h3 {
-    font-size: 16px;
-    font-weight: 550;
-}
-
-.shop-product-info h3:hover{
-    cursor: pointer;
+  font-size: 1.1em;
+  color: #333;
 }
 
 .shop-product-info p {
-    font-size: 12.5px;
-    font-weight: 300;
+  font-size: 1em;
+  color: #888;
 }
+  
 
 .shop-buttons{
     display: flex;

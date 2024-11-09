@@ -359,6 +359,24 @@ header nav .nav-menu-bar a svg:hover{
     margin: 100px 30px;
 }
 
+/*----------------------------------------- shop -----------------------------------------*/
+
+.shop-title h3 {
+    font-size: 1.2em;
+  }
+
+  .shop-title p {
+    font-size: 0.8em;
+  }
+
+  .shop-product-info h3 {
+    font-size: 0.9em;
+  }
+
+  .shop-buttons {
+    flex-direction: column;
+  }
+
 /*----------------------------------------- quick view -----------------------------------------*/
 
 #quick-view .quick-view{
@@ -606,20 +624,21 @@ header nav .nav-menu-bar a svg:hover{
     font-weight: 250;
 }
 
-/*----------------------------------------- footer -----------------------------------------*/
+/*----------------------------------------- shop -----------------------------------------*/
 
-.shop-title{
-    padding: 40px;
-}
+.shop-title h3 {
+    font-size: 1.5em;
+  }
 
-.shop-title h1{
-    font-size: 45px;
-}
+  .shop-title p {
+    font-size: 0.9em;
+  }
 
-.shop-title p{
-    padding: 0 40px;
-    font-size: 20px;
-}
+  .shop-product-info h3 {
+    font-size: 1em;
+  }
+
+/*----------------------------------------- quick view -----------------------------------------*/
 
 #quick-view .quick-view{
     flex-direction: column;
