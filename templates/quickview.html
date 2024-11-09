@@ -7,14 +7,14 @@
     <div class="quick-view">
         <div class="quick-view-images">
             <div class="quick-view-images-top">
-                <img id="imagepr{{product.id}}" src="/media/{{ product.product_image_1 }}" alt="{{ product.product_name }}">
-                <img src="/media/{{ product.product_image_2 }}" alt="{{ product.product_name }}">
+                <div><img id="imagepr{{product.id}}" src="/media/{{ product.product_image_1 }}" alt="{{ product.product_name }}"></div>
+                <div><img src="/media/{{ product.product_image_2 }}" alt="{{ product.product_name }}"></div>
             </div>
 
             <div class="quick-view-images-bottom">
-                <img src="/media/{{ product.product_image_3 }}" alt="{{ product.product_name }}">
-                <img src="/media/{{ product.product_image_4 }}" alt="{{ product.product_name }}">
-                <img src="/media/{{ product.product_image_5 }}" alt="{{ product.product_name }}">
+                <div><img src="/media/{{ product.product_image_3 }}" alt="{{ product.product_name }}"></div>
+                <div><img src="/media/{{ product.product_image_4 }}" alt="{{ product.product_name }}"></div>
+                <div><img src="/media/{{ product.product_image_5 }}" alt="{{ product.product_name }}"></div>
             </div>
         </div>
 
@@ -54,11 +54,11 @@
                     <button id="increasepr{{product.id}}" class="quick-view-info-cart-quantity-button"><span>+</span></button>
                 </div>
                 
-                <span id="divpr{{product.id}}" class="divpr">
+                <div id="divpr{{product.id}}" class="divpr">
                     <button id="pr{{product.id}}" class="cart">
                       ADD TO CART <i class="fa-solid fa-cart-shopping"></i>
                     </button>
-                </span>
+                </div>
             </div>
 
             <p class="quick-view-info-features">SKU: <span>{{ product.id }}</span></p>

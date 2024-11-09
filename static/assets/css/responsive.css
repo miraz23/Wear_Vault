@@ -359,6 +359,27 @@ header nav .nav-menu-bar a svg:hover{
     margin: 100px 30px;
 }
 
+/*----------------------------------------- quick view -----------------------------------------*/
+
+#quick-view .quick-view{
+    flex-direction: column;
+}
+
+#quick-view .quick-view-images{
+    width: 100%;
+}
+
+#quick-view .quick-view-info{
+    width: 100%;
+    padding: 40px 0 0 0;
+}
+
+.quick-view-info-cart{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
 /*----------------------------------------- footer -----------------------------------------*/
 
 .footer{
@@ -598,6 +619,19 @@ header nav .nav-menu-bar a svg:hover{
 .shop-title p{
     padding: 0 40px;
     font-size: 20px;
+}
+
+#quick-view .quick-view{
+    flex-direction: column;
+}
+
+#quick-view .quick-view-images{
+    width: 100%;
+}
+
+#quick-view .quick-view-info{
+    width: 100%;
+    padding: 40px 0 0 0;
 }
 
 /*----------------------------------------- footer -----------------------------------------*/
