@@ -77,9 +77,6 @@ document.addEventListener("DOMContentLoaded", function (){
             768:{
                 slidesPerView: 2,
             },
-            821:{
-                slidesPerView: 3,
-            },
             1025:{
                 slidesPerView: 4,
             },
@@ -87,11 +84,17 @@ document.addEventListener("DOMContentLoaded", function (){
                 slidesPerView: 5,
             },
             1600:{
-                slidesPerView: 7,
+                slidesPerView: 6,
             },
             2000:{
+                slidesPerView: 7,
+            },
+            2400:{
+                slidesPerView: 8,
+            },
+            2800:{
                 slidesPerView: 9,
-            }
+            },
         }
     });
     

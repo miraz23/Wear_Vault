@@ -886,7 +886,7 @@ nav .nav-menu-icon{
 
 .arrivals-wrapper{
     overflow: hidden;
-    width: 2000px;
+    width: 90%;
     display: flex;
     align-items: center;
     padding: 10px;
@@ -894,10 +894,9 @@ nav .nav-menu-icon{
 
 .arrivals-list .arrivals-product{
     color: #000;
-    user-select: none;
-    display: flex;
-    flex-direction: column;
     border-radius: 8px;
+    width: calc(100% / 5);
+    overflow: hidden;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -905,54 +904,10 @@ nav .nav-menu-icon{
     text-decoration: none;
 }
 
-.arrivals-product-container {
-    position: relative;
-    display: inline-block;
-}
-
-.arrivals-product-container:hover .arrivals-product-image:before {
-    content: "";
-    background: rgba(0, 0, 0, 0.3);
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-}
-
-.arrivals-product-svg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-    opacity: 0;
-}
-
-.arrivals-product-container:hover .arrivals-product-svg {
-    display: block;
-    opacity: 1;
-}
-
 .arrivals-list .arrivals-product img{
     width: 100%;
-    height: 350px;
-}
-
-.arrivals-product-svg button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    border-radius: 100%;
-    width: 50px;
-    height: 50px;
-    border: none;
-    outline: none;
-}
-
-.arrivals-product-svg button:hover {
-    transform: scale(1.1);
+    height: 100%;
+    aspect-ratio: 4/5;
 }
 
 .arrivals .arrivals-product-info{
@@ -974,7 +929,7 @@ nav .nav-menu-icon{
 }
 
 .arrivals-wrapper .arrivals-slide-button{
-    color: #444;
+    color: #000;
 }
 
 .arrivals-wrapper .arrivals-slide-button:hover{
@@ -1248,7 +1203,7 @@ nav .nav-menu-icon{
 
 .shop-product-image {
   width: 100%;
-  height: 350px;
+  aspect-ratio: 4/6;
   overflow: hidden;
 }
 

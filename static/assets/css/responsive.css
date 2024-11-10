@@ -269,10 +269,6 @@ header nav .nav-menu-bar a svg:hover{
     align-items: center;
 }
 
-.category-items .category-row{
-    grid-template-columns: repeat(1, 0fr);
-}
-
 /* --------------------------------------------- arrivals --------------------------------------------- */
 
 .arrivals-title h3{
@@ -284,21 +280,8 @@ header nav .nav-menu-bar a svg:hover{
     font-weight: 250;
 }
 
-.arrivals .arrivals-wrapper{
-    margin: 0 10px 40px;
-}
-
 .arrivals .arrivals-wrapper .arrivals-slide-button{
     display: none;
-}
-
-.arrivals-list .arrivals-product{
-    overflow: hidden;
-}
-
-.arrivals-list .arrivals-product-image img{
-    min-width: 91vw;
-    min-height: 70vh;
 }
 
 .arrivals-product .arrivals-product-info{
@@ -580,21 +563,10 @@ header nav .nav-menu-bar a svg:hover{
     font-family: "Rock salt";
 }
 
-/* --------------------------------------------- category ---------------------------------------------*/
-
-.category-items .category-row{
-    grid-template-columns: repeat(2, 0fr);
-}
-
 /* --------------------------------------------- arrivals --------------------------------------------- */
 
 .arrivals .arrivals-wrapper .arrivals-slide-button{
     display: none;
-}
-
-.arrivals-list .arrivals-product-image img{
-    min-width: 100%;
-    min-height: 55vh;
 }
 
 .arrivals .arrivals-product-info h3 {
@@ -683,21 +655,5 @@ header nav .nav-menu-bar a svg:hover{
 .footer-link li{
     font-size: 18px;
 }
-
-}
-
-
-@media (min-width: 2100px){
-    /* --------------------------------------------- category ---------------------------------------------*/
-
-.category-items .category-row{
-    grid-template-columns: repeat(6, 0fr);
-}
-
-/* --------------------------------------------- arrivals --------------------------------------------- */
-
-.arrivals-wrapper{
-    width: 2000px;
-}    
 
 }
