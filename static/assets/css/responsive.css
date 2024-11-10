@@ -314,31 +314,30 @@ header nav .nav-menu-bar a svg:hover{
     font-size: 25px;
 }
 
-/* --------------------------------------------- trending --------------------------------------------- */
+/*----------------------------------------- trending -----------------------------------------*/
 
-.trending-product{
-    display: flex;
+#trending .trending{
     flex-direction: column;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
+    padding: 0 30px;
 }
 
-.trending-product .trending-product-image{
-    order: 1;
+.trending .trending-product{
+    width: calc(100%);
+    flex-direction: column;
 }
 
-.trending-product .trending-product-info p{
-    padding: 10px 0;
+.trending-product .trending-single {
+    width: calc(100%);
 }
 
-.trending-product .trending-product-image img{
-    margin: 0 0 40px 0;
+.trending-product .trending-double{
+    width: calc(100%);
+    flex-direction: row;
 }
 
-.trending-product .trending-product-info{
-    order: 2;
-    padding-right: 0;
+.trending-double .trending-double-image{
+    width: calc(100% / 2);
+    height: auto;
 }
 
 /*----------------------------------------- about -----------------------------------------*/
@@ -605,6 +604,32 @@ header nav .nav-menu-bar a svg:hover{
 
 .arrivals .arrivals-product-info p {
     font-size: 20px;
+}
+
+/*----------------------------------------- trending -----------------------------------------*/
+
+#trending .trending{
+    flex-direction: column;
+    padding: 0 100px;
+}
+
+.trending .trending-product{
+    width: calc(100%);
+    flex-direction: column;
+}
+
+.trending-product .trending-single {
+    width: calc(100%);
+}
+
+.trending-product .trending-double{
+    width: calc(100%);
+    flex-direction: row;
+}
+
+.trending-double .trending-double-image{
+    width: calc(100% / 2);
+    height: auto;
 }
 
 /*----------------------------------------- about -----------------------------------------*/
