@@ -359,6 +359,10 @@ header nav .nav-menu-bar a svg:hover{
     flex-direction: column;
   }
 
+  .shop .shop-product {
+    width: calc(100% / 1 - 10px);
+  }
+
 /*----------------------------------------- quick view -----------------------------------------*/
 
 #quick-view .quick-view{
@@ -633,6 +637,10 @@ header nav .nav-menu-bar a svg:hover{
 
   .shop-product-info h3 {
     font-size: 1em;
+  }
+
+  .shop .shop-product {
+    width: calc(100% / 3 - 10px);
   }
 
 /*----------------------------------------- quick view -----------------------------------------*/

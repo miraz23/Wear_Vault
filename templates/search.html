@@ -16,22 +16,45 @@
         </form>
     </div>
     
-    <div class="search-category">
+    <div class="search-content">
         <h2>Our Products</h2>
         <div class="search-category-container">
-
-            {% for product, range, nSlides in allProds %}
-            {% for i in product %}
-
             <div class="search-category-item">
-                <a href="/shop/product-details/{{ i.id }}/">
-                    <img src="/media/{{i.product_image_1}}">
-                    <div class="search-overlay">{{i.product_name}} <br> ${{i.product_price}} </div>
+                <a href="{% url 'shop_category' 'drop-shoulders' %}">
+                    <img src="{% static '/images/prod-1.JPG' %}">
+                    <div class="search-overlay">Drop<br>Shoulders</div>
                 </a>
             </div>
-
-            {% endfor %}
-            {% endfor %}
+            <div class="search-category-item">
+                <a href="{% url 'shop_category' 'baggy-joggers' %}">
+                    <img src="{% static '/images/prod-2.JPG' %}">
+                    <div class="search-overlay">Baggy<br>Joggers</div>
+                </a>
+            </div>
+            <div class="search-category-item">
+                <a href="{% url 'shop_category' 'baggy-shirts' %}">
+                    <img src="{% static '/images/prod-3.JPG' %}">
+                    <div class="search-overlay">Baggy<br>Shirts</div>
+                </a>
+            </div>
+            <div class="search-category-item">
+                <a href="{% url 'shop_category' 'cargo-pants' %}">
+                    <img src="{% static '/images/prod-4.JPG' %}">
+                    <div class="search-overlay">Cargo<br>Pants</div>
+                </a>
+            </div>
+            <div class="search-category-item">
+                <a href="{% url 'shop_category' 'head-wear' %}">
+                    <img src="{% static '/images/prod-5.JPG' %}">
+                    <div class="search-overlay">Head<br>Wear</div>
+                </a>
+            </div>
+            <div class="search-category-item">
+                <a href="{% url 'shop_category' 'baggy-shorts' %}">
+                    <img src="{% static '/images/prod-6.JPG' %}">
+                    <div class="search-overlay">Baggy<br>Shorts</div>
+                </a>
+            </div>
         </div>
     </div>
     
