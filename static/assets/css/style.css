@@ -1489,6 +1489,65 @@ select option {
     transform: scale(1.02);
 }
 
+.checkout .payment-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.checkout .payment-option {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.checkout .payment-option input {
+    display: none;
+}
+
+.checkout .payment-option input:checked + .payment-content {
+    border: 1px solid #0070ba;
+    box-shadow: 0 0 5px rgba(0, 112, 186, 0.5);
+}
+
+.checkout .payment-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.checkout .payment-content span {
+    font-weight: bold;
+}
+
+.checkout .payment-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkout .payment-icons img {
+    height: 24px;
+    width: auto;
+}
+
+.checkout .payment-icons span {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.checkout .payment-option:hover {
+    border: 1px solid #0070ba;
+    box-shadow: 0 0 5px rgba(0, 112, 186, 0.5);
+}
+
 /*----------------------------------------- payment confirmation -----------------------------------------*/
 
 .payment-confirmation {

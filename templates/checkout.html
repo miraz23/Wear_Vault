@@ -1,6 +1,7 @@
 {% extends "base.html" %} 
 {% block title %}Wear Vault | Checkout{% endblock title %} 
 {% block content %} 
+{% load static %}
 
 <section id="checkout">
     <div class="checkout">
@@ -75,8 +76,35 @@
                     </div>
                     <br>
 
+                    <div class="form-group col-md-6">
+                        <div class="payment-container">
+                            <label for="paymentMethod">Choose Payment Method:</label>
 
-                    <button id="btn" type="submit">Place Order</button>
+                            <label class="payment-option">
+                                <input type="radio" name="payment_method" value="paypal" required>
+                                <div class="payment-content">
+                                    <span>PayPal</span>
+                                    <img src="{% static '/images/paypal.png' %}" alt="PayPal" height="24">
+                                </div>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment_method" value="stripe" required>
+                                <div class="payment-content">
+                                    <span>Credit or Debit Card</span>
+                                    <div class="payment-icons">
+                                        <img src="{% static '/images/visa.png' %}" alt="Visa">
+                                        <img src="{% static '/images/mastercard.png' %}" alt="Mastercard">
+                                        <span>+3</span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-12 d-flex justify-content-center">
+                        <button id="btn-place-order" type="submit">Place Order</button>
+                    </div>      
                 </form>
             </div>
         </div>
