@@ -14,6 +14,8 @@ from django.utils import timezone
 from django.utils.dateparse import parse_date, parse_datetime, parse_time
 from django.utils.functional import cached_property
 
+from .base import Database
+
 
 class DatabaseOperations(BaseDatabaseOperations):
     cast_char_field_without_max_length = "text"
@@ -261,10 +263,6 @@ class DatabaseOperations(BaseDatabaseOperations):
         if value is None:
             return None
 
-        # Expression values are adapted by the database.
-        if hasattr(value, "resolve_expression"):
-            return value
-
         # SQLite doesn't support tz-aware datetimes
         if timezone.is_aware(value):
             if settings.USE_TZ:
@@ -280,10 +278,6 @@ class DatabaseOperations(BaseDatabaseOperations):
     def adapt_timefield_value(self, value):
         if value is None:
             return None
-
-        # Expression values are adapted by the database.
-        if hasattr(value, "resolve_expression"):
-            return value
 
         # SQLite doesn't support tz-aware datetimes
         if timezone.is_aware(value):
@@ -358,11 +352,6 @@ class DatabaseOperations(BaseDatabaseOperations):
 
     def convert_booleanfield_value(self, value, expression, connection):
         return bool(value) if value in (1, 0) else value
-
-    def bulk_insert_sql(self, fields, placeholder_rows):
-        placeholder_rows_sql = (", ".join(row) for row in placeholder_rows)
-        values_sql = ", ".join(f"({sql})" for sql in placeholder_rows_sql)
-        return f"VALUES {values_sql}"
 
     def combine_expression(self, connector, sub_expressions):
         # SQLite doesn't have a ^ operator, so use the user-defined POWER
@@ -439,3 +428,6 @@ class DatabaseOperations(BaseDatabaseOperations):
             update_fields,
             unique_fields,
         )
+
+    def force_group_by(self):
+        return ["GROUP BY TRUE"] if Database.sqlite_version_info < (3, 39) else []

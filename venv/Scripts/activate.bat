@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=D:\Projects\Wear_Vault\venv
+set VIRTUAL_ENV=D:\Projects\Wearvault\wearvault\venv
 
 if not defined PROMPT set PROMPT=$P$G
 

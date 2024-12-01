@@ -235,6 +235,7 @@
         </div>
     </section>
 
+    {% if trending_products|length == 6 %}
     <section id="trending">
         <div class="trending-title">
             <h3>Trending Now</h3>
@@ -308,5 +309,6 @@
             </div>
         </div>
     </section>
+    {% endif %}
 
 {% endblock content %}

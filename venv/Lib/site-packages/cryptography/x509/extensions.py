@@ -892,9 +892,7 @@ class PolicyInformation:
 
     def __hash__(self) -> int:
         if self.policy_qualifiers is not None:
-            pq: tuple[str | UserNotice, ...] | None = tuple(
-                self.policy_qualifiers
-            )
+            pq = tuple(self.policy_qualifiers)
         else:
             pq = None
 
@@ -1988,10 +1986,12 @@ class IssuingDistributionPoint(ExtensionType):
                 "must all be boolean."
             )
 
+        # Per RFC5280 Section 5.2.5, the Issuing Distribution Point extension
+        # in a CRL can have only one of onlyContainsUserCerts,
+        # onlyContainsCACerts, onlyContainsAttributeCerts set to TRUE.
         crl_constraints = [
             only_contains_user_certs,
             only_contains_ca_certs,
-            indirect_crl,
             only_contains_attribute_certs,
         ]
 
@@ -1999,7 +1999,7 @@ class IssuingDistributionPoint(ExtensionType):
             raise ValueError(
                 "Only one of the following can be set to True: "
                 "only_contains_user_certs, only_contains_ca_certs, "
-                "indirect_crl, only_contains_attribute_certs"
+                "only_contains_attribute_certs"
             )
 
         if not any(
@@ -2157,6 +2157,287 @@ class MSCertificateTemplate(ExtensionType):
 
     def __hash__(self) -> int:
         return hash((self.template_id, self.major_version, self.minor_version))
+
+    def public_bytes(self) -> bytes:
+        return rust_x509.encode_extension_value(self)
+
+
+class NamingAuthority:
+    def __init__(
+        self,
+        id: ObjectIdentifier | None,
+        url: str | None,
+        text: str | None,
+    ) -> None:
+        if id is not None and not isinstance(id, ObjectIdentifier):
+            raise TypeError("id must be an ObjectIdentifier")
+
+        if url is not None and not isinstance(url, str):
+            raise TypeError("url must be a str")
+
+        if text is not None and not isinstance(text, str):
+            raise TypeError("text must be a str")
+
+        self._id = id
+        self._url = url
+        self._text = text
+
+    @property
+    def id(self) -> ObjectIdentifier | None:
+        return self._id
+
+    @property
+    def url(self) -> str | None:
+        return self._url
+
+    @property
+    def text(self) -> str | None:
+        return self._text
+
+    def __repr__(self) -> str:
+        return (
+            f"<NamingAuthority("
+            f"id={self.id}, url={self.url}, text={self.text})>"
+        )
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, NamingAuthority):
+            return NotImplemented
+
+        return (
+            self.id == other.id
+            and self.url == other.url
+            and self.text == other.text
+        )
+
+    def __hash__(self) -> int:
+        return hash(
+            (
+                self.id,
+                self.url,
+                self.text,
+            )
+        )
+
+
+class ProfessionInfo:
+    def __init__(
+        self,
+        naming_authority: NamingAuthority | None,
+        profession_items: typing.Iterable[str],
+        profession_oids: typing.Iterable[ObjectIdentifier] | None,
+        registration_number: str | None,
+        add_profession_info: bytes | None,
+    ) -> None:
+        if naming_authority is not None and not isinstance(
+            naming_authority, NamingAuthority
+        ):
+            raise TypeError("naming_authority must be a NamingAuthority")
+
+        profession_items = list(profession_items)
+        if not all(isinstance(item, str) for item in profession_items):
+            raise TypeError(
+                "Every item in the profession_items list must be a str"
+            )
+
+        if profession_oids is not None:
+            profession_oids = list(profession_oids)
+            if not all(
+                isinstance(oid, ObjectIdentifier) for oid in profession_oids
+            ):
+                raise TypeError(
+                    "Every item in the profession_oids list must be an "
+                    "ObjectIdentifier"
+                )
+
+        if registration_number is not None and not isinstance(
+            registration_number, str
+        ):
+            raise TypeError("registration_number must be a str")
+
+        if add_profession_info is not None and not isinstance(
+            add_profession_info, bytes
+        ):
+            raise TypeError("add_profession_info must be bytes")
+
+        self._naming_authority = naming_authority
+        self._profession_items = profession_items
+        self._profession_oids = profession_oids
+        self._registration_number = registration_number
+        self._add_profession_info = add_profession_info
+
+    @property
+    def naming_authority(self) -> NamingAuthority | None:
+        return self._naming_authority
+
+    @property
+    def profession_items(self) -> list[str]:
+        return self._profession_items
+
+    @property
+    def profession_oids(self) -> list[ObjectIdentifier] | None:
+        return self._profession_oids
+
+    @property
+    def registration_number(self) -> str | None:
+        return self._registration_number
+
+    @property
+    def add_profession_info(self) -> bytes | None:
+        return self._add_profession_info
+
+    def __repr__(self) -> str:
+        return (
+            f"<ProfessionInfo(naming_authority={self.naming_authority}, "
+            f"profession_items={self.profession_items}, "
+            f"profession_oids={self.profession_oids}, "
+            f"registration_number={self.registration_number}, "
+            f"add_profession_info={self.add_profession_info!r})>"
+        )
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, ProfessionInfo):
+            return NotImplemented
+
+        return (
+            self.naming_authority == other.naming_authority
+            and self.profession_items == other.profession_items
+            and self.profession_oids == other.profession_oids
+            and self.registration_number == other.registration_number
+            and self.add_profession_info == other.add_profession_info
+        )
+
+    def __hash__(self) -> int:
+        if self.profession_oids is not None:
+            profession_oids = tuple(self.profession_oids)
+        else:
+            profession_oids = None
+        return hash(
+            (
+                self.naming_authority,
+                tuple(self.profession_items),
+                profession_oids,
+                self.registration_number,
+                self.add_profession_info,
+            )
+        )
+
+
+class Admission:
+    def __init__(
+        self,
+        admission_authority: GeneralName | None,
+        naming_authority: NamingAuthority | None,
+        profession_infos: typing.Iterable[ProfessionInfo],
+    ) -> None:
+        if admission_authority is not None and not isinstance(
+            admission_authority, GeneralName
+        ):
+            raise TypeError("admission_authority must be a GeneralName")
+
+        if naming_authority is not None and not isinstance(
+            naming_authority, NamingAuthority
+        ):
+            raise TypeError("naming_authority must be a NamingAuthority")
+
+        profession_infos = list(profession_infos)
+        if not all(
+            isinstance(info, ProfessionInfo) for info in profession_infos
+        ):
+            raise TypeError(
+                "Every item in the profession_infos list must be a "
+                "ProfessionInfo"
+            )
+
+        self._admission_authority = admission_authority
+        self._naming_authority = naming_authority
+        self._profession_infos = profession_infos
+
+    @property
+    def admission_authority(self) -> GeneralName | None:
+        return self._admission_authority
+
+    @property
+    def naming_authority(self) -> NamingAuthority | None:
+        return self._naming_authority
+
+    @property
+    def profession_infos(self) -> list[ProfessionInfo]:
+        return self._profession_infos
+
+    def __repr__(self) -> str:
+        return (
+            f"<Admission(admission_authority={self.admission_authority}, "
+            f"naming_authority={self.naming_authority}, "
+            f"profession_infos={self.profession_infos})>"
+        )
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Admission):
+            return NotImplemented
+
+        return (
+            self.admission_authority == other.admission_authority
+            and self.naming_authority == other.naming_authority
+            and self.profession_infos == other.profession_infos
+        )
+
+    def __hash__(self) -> int:
+        return hash(
+            (
+                self.admission_authority,
+                self.naming_authority,
+                tuple(self.profession_infos),
+            )
+        )
+
+
+class Admissions(ExtensionType):
+    oid = ExtensionOID.ADMISSIONS
+
+    def __init__(
+        self,
+        authority: GeneralName | None,
+        admissions: typing.Iterable[Admission],
+    ) -> None:
+        if authority is not None and not isinstance(authority, GeneralName):
+            raise TypeError("authority must be a GeneralName")
+
+        admissions = list(admissions)
+        if not all(
+            isinstance(admission, Admission) for admission in admissions
+        ):
+            raise TypeError(
+                "Every item in the contents_of_admissions list must be an "
+                "Admission"
+            )
+
+        self._authority = authority
+        self._admissions = admissions
+
+    __len__, __iter__, __getitem__ = _make_sequence_methods("_admissions")
+
+    @property
+    def authority(self) -> GeneralName | None:
+        return self._authority
+
+    def __repr__(self) -> str:
+        return (
+            f"<Admissions(authority={self._authority}, "
+            f"admissions={self._admissions})>"
+        )
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Admissions):
+            return NotImplemented
+
+        return (
+            self.authority == other.authority
+            and self._admissions == other._admissions
+        )
+
+    def __hash__(self) -> int:
+        return hash((self.authority, tuple(self._admissions)))
 
     def public_bytes(self) -> bytes:
         return rust_x509.encode_extension_value(self)

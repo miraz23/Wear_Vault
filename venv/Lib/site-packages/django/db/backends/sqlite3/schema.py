@@ -150,6 +150,9 @@ class DatabaseSchemaEditor(BaseDatabaseSchemaEditor):
             body.pop(old_field.name, None)
             mapping.pop(old_field.column, None)
             body[new_field.name] = new_field
+            rename_mapping[old_field.name] = new_field.name
+            if new_field.generated:
+                continue
             if old_field.null and not new_field.null:
                 if new_field.db_default is NOT_PROVIDED:
                     default = self.prepare_default(self.effective_default(new_field))
@@ -162,7 +165,6 @@ class DatabaseSchemaEditor(BaseDatabaseSchemaEditor):
                 mapping[new_field.column] = case_sql
             else:
                 mapping[new_field.column] = self.quote_name(old_field.column)
-            rename_mapping[old_field.name] = new_field.name
         # Remove any deleted fields
         if delete_field:
             del body[delete_field.name]
@@ -181,14 +183,6 @@ class DatabaseSchemaEditor(BaseDatabaseSchemaEditor):
         unique_together = [
             [rename_mapping.get(n, n) for n in unique]
             for unique in model._meta.unique_together
-        ]
-
-        # RemovedInDjango51Warning.
-        # Work out the new value for index_together, taking renames into
-        # account
-        index_together = [
-            [rename_mapping.get(n, n) for n in index]
-            for index in model._meta.index_together
         ]
 
         indexes = model._meta.indexes
@@ -213,7 +207,6 @@ class DatabaseSchemaEditor(BaseDatabaseSchemaEditor):
             "app_label": model._meta.app_label,
             "db_table": model._meta.db_table,
             "unique_together": unique_together,
-            "index_together": index_together,  # RemovedInDjango51Warning.
             "indexes": indexes,
             "constraints": constraints,
             "apps": apps,
@@ -229,7 +222,6 @@ class DatabaseSchemaEditor(BaseDatabaseSchemaEditor):
             "app_label": model._meta.app_label,
             "db_table": "new__%s" % strip_quotes(model._meta.db_table),
             "unique_together": unique_together,
-            "index_together": index_together,  # RemovedInDjango51Warning.
             "indexes": indexes,
             "constraints": constraints,
             "apps": apps,
@@ -238,6 +230,14 @@ class DatabaseSchemaEditor(BaseDatabaseSchemaEditor):
         body_copy["Meta"] = meta
         body_copy["__module__"] = model.__module__
         new_model = type("New%s" % model._meta.object_name, model.__bases__, body_copy)
+
+        # Remove the automatically recreated default primary key, if it has
+        # been deleted.
+        if delete_field and delete_field.attname == new_model._meta.pk.attname:
+            auto_pk = new_model._meta.pk
+            delattr(new_model, auto_pk.attname)
+            new_model._meta.local_fields.remove(auto_pk)
+            new_model.pk = None
 
         # Create a new table with the updated schema.
         self.create_model(new_model)

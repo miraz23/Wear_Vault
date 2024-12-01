@@ -101,23 +101,11 @@ class Backend:
     def openssl_version_number(self) -> int:
         return rust_openssl.openssl_version()
 
-    def _evp_md_from_algorithm(self, algorithm: hashes.HashAlgorithm):
-        if algorithm.name in ("blake2b", "blake2s"):
-            alg = f"{algorithm.name}{algorithm.digest_size * 8}".encode(
-                "ascii"
-            )
-        else:
-            alg = algorithm.name.encode("ascii")
-
-        evp_md = self._lib.EVP_get_digestbyname(alg)
-        return evp_md
-
     def hash_supported(self, algorithm: hashes.HashAlgorithm) -> bool:
         if self._fips_enabled and not isinstance(algorithm, self._fips_hashes):
             return False
 
-        evp_md = self._evp_md_from_algorithm(algorithm)
-        return evp_md != self._ffi.NULL
+        return rust_openssl.hashes.hash_supported(algorithm)
 
     def signature_hash_supported(
         self, algorithm: hashes.HashAlgorithm
@@ -132,7 +120,13 @@ class Backend:
         if self._fips_enabled:
             return False
         else:
-            return hasattr(rust_openssl.kdf, "derive_scrypt")
+            return hasattr(rust_openssl.kdf.Scrypt, "derive")
+
+    def argon2_supported(self) -> bool:
+        if self._fips_enabled:
+            return False
+        else:
+            return hasattr(rust_openssl.kdf.Argon2id, "derive")
 
     def hmac_supported(self, algorithm: hashes.HashAlgorithm) -> bool:
         # FIPS mode still allows SHA1 for HMAC

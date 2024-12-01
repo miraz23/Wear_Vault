@@ -1,17 +1,15 @@
 import bisect
 import copy
-import inspect
-import warnings
 from collections import defaultdict
 
 from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import FieldDoesNotExist, ImproperlyConfigured
+from django.core.signals import setting_changed
 from django.db import connections
 from django.db.models import AutoField, Manager, OrderWrt, UniqueConstraint
 from django.db.models.query_utils import PathInfo
 from django.utils.datastructures import ImmutableList, OrderedSet
-from django.utils.deprecation import RemovedInDjango51Warning
 from django.utils.functional import cached_property
 from django.utils.module_loading import import_string
 from django.utils.text import camel_case_to_spaces, format_lazy
@@ -43,7 +41,6 @@ DEFAULT_NAMES = (
     "proxy",
     "swappable",
     "auto_created",
-    "index_together",  # RemovedInDjango51Warning.
     "apps",
     "default_permissions",
     "select_on_save",
@@ -119,7 +116,6 @@ class Options:
         self.indexes = []
         self.constraints = []
         self.unique_together = []
-        self.index_together = []  # RemovedInDjango51Warning.
         self.select_on_save = False
         self.default_permissions = ("add", "change", "delete", "view")
         self.permissions = []
@@ -205,19 +201,11 @@ class Options:
                     self.original_attrs[attr_name] = getattr(self, attr_name)
 
             self.unique_together = normalize_together(self.unique_together)
-            self.index_together = normalize_together(self.index_together)
-            if self.index_together:
-                warnings.warn(
-                    f"'index_together' is deprecated. Use 'Meta.indexes' in "
-                    f"{self.label!r} instead.",
-                    RemovedInDjango51Warning,
-                )
             # App label/class name interpolation for names of constraints and
             # indexes.
-            if not getattr(cls._meta, "abstract", False):
-                for attr_name in {"constraints", "indexes"}:
-                    objs = getattr(self, attr_name, [])
-                    setattr(self, attr_name, self._format_names_with_class(cls, objs))
+            if not self.abstract:
+                self.constraints = self._format_names(self.constraints)
+                self.indexes = self._format_names(self.indexes)
 
             # verbose_name_plural is a special case because it uses a 's'
             # by default.
@@ -243,15 +231,16 @@ class Options:
                 self.db_table, connection.ops.max_name_length()
             )
 
-    def _format_names_with_class(self, cls, objs):
+        if self.swappable:
+            setting_changed.connect(self.setting_changed)
+
+    def _format_names(self, objs):
         """App label/class name interpolation for object names."""
+        names = {"app_label": self.app_label.lower(), "class": self.model_name}
         new_objs = []
         for obj in objs:
             obj = obj.clone()
-            obj.name = obj.name % {
-                "app_label": cls._meta.app_label.lower(),
-                "class": cls.__name__.lower(),
-            }
+            obj.name %= names
             new_objs.append(obj)
         return new_objs
 
@@ -406,13 +395,15 @@ class Options:
             )
         return True
 
-    @property
+    @cached_property
     def verbose_name_raw(self):
         """Return the untranslated verbose name."""
+        if isinstance(self.verbose_name, str):
+            return self.verbose_name
         with override(None):
             return str(self.verbose_name)
 
-    @property
+    @cached_property
     def swapped(self):
         """
         Has this model been swapped out for another? If so, return the model
@@ -439,6 +430,10 @@ class Options:
                 ):
                     return swapped_for
         return None
+
+    def setting_changed(self, *, setting, **kwargs):
+        if setting == self.swappable and "swapped" in self.__dict__:
+            del self.swapped
 
     @cached_property
     def managers(self):
@@ -701,16 +696,24 @@ class Options:
                 return res
         return []
 
-    def get_parent_list(self):
+    @cached_property
+    def all_parents(self):
         """
-        Return all the ancestors of this model as a list ordered by MRO.
+        Return all the ancestors of this model as a tuple ordered by MRO.
         Useful for determining if something is an ancestor, regardless of lineage.
         """
         result = OrderedSet(self.parents)
         for parent in self.parents:
-            for ancestor in parent._meta.get_parent_list():
+            for ancestor in parent._meta.all_parents:
                 result.add(ancestor)
-        return list(result)
+        return tuple(result)
+
+    def get_parent_list(self):
+        """
+        Return all the ancestors of this model as a list ordered by MRO.
+        Backward compatibility method.
+        """
+        return list(self.all_parents)
 
     def get_ancestor_link(self, ancestor):
         """
@@ -973,11 +976,15 @@ class Options:
     @cached_property
     def _property_names(self):
         """Return a set of the names of the properties defined on the model."""
-        names = []
-        for name in dir(self.model):
-            attr = inspect.getattr_static(self.model, name)
-            if isinstance(attr, property):
-                names.append(name)
+        names = set()
+        seen = set()
+        for klass in self.model.__mro__:
+            names |= {
+                name
+                for name, value in klass.__dict__.items()
+                if isinstance(value, property) and name not in seen
+            }
+            seen |= set(klass.__dict__)
         return frozenset(names)
 
     @cached_property
