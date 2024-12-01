@@ -275,6 +275,15 @@ document.addEventListener("DOMContentLoaded", function (){
     let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
     updateCartPanel(cart);
 
+    // Checkout button functionality
+    document.getElementById('checkout-btn').addEventListener('click', ()=>{
+        if (Object.keys(cart).length === 0) {
+            alert("Your cart is empty! Please add items to your cart before checking out.");
+        } else {
+            window.location.href = "/checkout";
+        }
+    });
+
     // Function to update the cart when quantity changes
     function updateCartQuantity(idstr, color, size) {
         let qtyInput = document.getElementById('quantity' + idstr);
