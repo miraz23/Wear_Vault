@@ -197,6 +197,7 @@
         </div>
     </section>
 
+    {% if latest_arrivals %}
     <section id="arrivals">
         <div class="arrivals-title">
             <div class="arrivals-title-info">
@@ -234,6 +235,7 @@
             </div>
         </div>
     </section>
+    {% endif %}
 
     {% if trending_products|length == 6 %}
     <section id="trending">

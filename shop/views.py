@@ -12,12 +12,18 @@ import stripe
 
 def shop(request, category=None):
     allProds = []
-    
+
     if category:
         prod = product.objects.filter(product_category=category)
-        n = len(prod)
-        nSlides = n // 4 + ceil((n / 4) - (n // 4))
-        allProds.append([prod, range(1, nSlides), nSlides])
+        if prod.exists():
+            n = len(prod)
+            nSlides = n // 4 + ceil((n / 4) - (n // 4))
+            allProds.append([prod, range(1, nSlides), nSlides])
+        else:
+            cat = category.replace("-", " ").title()
+            return render(request, "shop.html", {
+                'message': f"No products available in the '{cat}' category. Please check back later!"
+            })
     else:
         catprods = product.objects.values('product_category', 'id')
         cats = {item['product_category'] for item in catprods}
@@ -27,7 +33,10 @@ def shop(request, category=None):
             nSlides = n // 4 + ceil((n / 4) - (n // 4))
             allProds.append([prod, range(1, nSlides), nSlides])
     
-    data = {'allProds': allProds}
+    data = {
+        'allProds': allProds,
+        'message': None if allProds else "No products available at the moment. Please check back later!"
+    }
     return render(request, "shop.html", data)
 
 def productDetails(request, id):

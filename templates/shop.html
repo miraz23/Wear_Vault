@@ -9,22 +9,26 @@
   </div>
 
   <div class="shop">
-    {% for product, range, nSlides in allProds %}
-      {% for i in product %}
-        <div class="shop-product">
-          <a href="/shop/product-details/{{ i.id }}/">
-            <div class="shop-product-image">
-              <img src="/media/{{i.product_image_1}}" alt="Not Found"/>
+    {% if message %}
+      <p class="no-products-message" style="font-style: italic">{{ message }}</p>
+    {% else %}
+      {% for product, range, nSlides in allProds %}
+        {% for i in product %}
+          <div class="shop-product">
+            <a href="/shop/product-details/{{ i.id }}/">
+              <div class="shop-product-image">
+                <img src="/media/{{i.product_image_1}}" alt="Not Found"/>
+              </div>
+            
+            <div class="shop-product-info">
+              <h3 id="namepr{{i.id}}">{{i.product_name}}</h3>
+              <p>$ <span id="pricepr{{i.id}}"> {{i.product_price}}</span></p>
             </div>
-          
-          <div class="shop-product-info">
-            <h3 id="namepr{{i.id}}">{{i.product_name}}</h3>
-            <p>$ <span id="pricepr{{i.id}}"> {{i.product_price}}</span></p>
+            </a>
           </div>
-          </a>
-        </div>
+        {% endfor %}
       {% endfor %}
-    {% endfor %}
+    {% endif %}
   </div>
 
   <div class="shop-buttons">
