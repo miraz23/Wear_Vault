@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils.html import format_html
 import json
+from PIL import Image
+from io import BytesIO
+from django.core.files.base import ContentFile
 
 # Create your models here.
 
@@ -32,6 +35,23 @@ class product(models.Model):
     product_image_4 = models.ImageField(upload_to='images')
     product_image_5 = models.ImageField(upload_to='images')
     latest_arrival = models.CharField(max_length=3, choices=LATEST_ARRIVAL_CHOICES, default='no')
+
+    def save(self, *args, **kwargs):
+        for image_field in ['product_image_1', 'product_image_2', 'product_image_3', 'product_image_4', 'product_image_5']:
+            image = getattr(self, image_field)
+            if image and not image.closed:
+                img = Image.open(image)
+                img = img.convert("RGB")
+                output = BytesIO()
+                
+                max_size = (1080, 1080)
+                img.thumbnail(max_size, Image.Resampling.LANCZOS)
+                
+                img.save(output, format='JPEG', quality=100)
+                output.seek(0)
+                setattr(self, image_field, ContentFile(output.read(), image.name))
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.product_name

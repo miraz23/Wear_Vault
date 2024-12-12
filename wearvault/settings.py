@@ -168,6 +168,11 @@ STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 
 
+SQUARE_ACCESS_TOKEN = 'EAAAl6S1dV5w_xPfwj5M3GHfLFJUPCv8snIKlF383GYqxghZ9spRBfEjfziDr6lc'
+SQUARE_APPLICATION_ID = 'sandbox-sq0idb-dgikI-SvRJSDzUFQmbM_EA'
+SQUARE_LOCATION_ID = 'L5H3JAQ8PY61C'
+SQUARE_ENVIRONMENT = 'sandbox'
+
 #Paypal Integration
 import paypalrestsdk
 

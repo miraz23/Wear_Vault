@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function (){
 
     document.getElementById("search-menu-icon").addEventListener("click", function () {
         document.getElementById("search-panel").classList.toggle("search-open");
+        navMenu.classList.remove('open');
     });
     
     document.getElementById("search-close").addEventListener("click", function () {
@@ -127,16 +128,21 @@ document.addEventListener("DOMContentLoaded", function (){
             const container = document.querySelector(".search-category-container");
             container.innerHTML = "";
     
-            data.results.forEach(item => {
-                const productHTML = `
-                    <div class="search-category-item">
-                        <a href="/shop/product-details/${item.id}/">
-                            <img src="/media/${item.product_image_1}">
-                            <div class="search-overlay">${item.product_name}<br> $${item.product_price}</div>
-                        </a>
-                    </div>`;
-                container.innerHTML += productHTML;
-            });
+            if (data.results.length === 0) {
+                container.innerHTML = `<div class="no-results" style="font-style: italic">No products found for "${searchQuery}".</div>`;
+            } 
+            else {
+                data.results.forEach(item => {
+                    const productHTML = `
+                        <div class="search-category-item">
+                            <a href="/shop/product-details/${item.id}/">
+                                <img src="/media/${item.product_image_1}">
+                                <div class="search-overlay">${item.product_name}<br> $${item.product_price}</div>
+                            </a>
+                        </div>`;
+                    container.innerHTML += productHTML;
+                });
+            }
         });
     });
 

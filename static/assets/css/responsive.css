@@ -280,10 +280,6 @@ header nav .nav-menu-bar a svg:hover{
     font-weight: 250;
 }
 
-.arrivals .arrivals-wrapper .arrivals-slide-button{
-    display: none;
-}
-
 .arrivals-product .arrivals-product-info{
     margin: 10px;
 }
@@ -449,7 +445,7 @@ header nav .nav-menu{
 }
   
 header nav .nav-menu.open {
-    width: 450px;
+    width: 350px;
     opacity: 1;
 }
 
@@ -498,32 +494,9 @@ header nav .nav-menu-bar a svg:hover{
 .nav-log .sign-panel,
 .nav-log .reset-panel,
 .nav-log .reset-link-panel,
-.nav-log .log-panel {
-    width: 450px;
-}
-
-.cart-content .cart-item img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    margin-right: 10px;
-}
-
-.cart-item-details .cart-item-name {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0;
-}
-
-.cart-item-details .cart-item-quantity,
-.cart-item-details .cart-item-price {
-    font-size: 18px;
-    margin: 0;
-    color: #666;
-}
-
+.nav-log .log-panel,
 .nav-cart .cart-panel {
-    width: 450px;
+    width: 350px;
 }
 
 /* --------------------------------------------- home ---------------------------------------------*/
@@ -568,10 +541,6 @@ header nav .nav-menu-bar a svg:hover{
 }
 
 /* --------------------------------------------- arrivals --------------------------------------------- */
-
-.arrivals .arrivals-wrapper .arrivals-slide-button{
-    display: none;
-}
 
 .arrivals .arrivals-product-info h3 {
     font-size: 25px;
