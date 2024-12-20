@@ -280,6 +280,10 @@ header nav .nav-menu-bar a svg:hover{
     font-weight: 250;
 }
 
+/*.arrivals .arrivals-wrapper .arrivals-slide-button{*/
+/*    display: none;*/
+/*}*/
+
 .arrivals-product .arrivals-product-info{
     margin: 10px;
 }
@@ -379,6 +383,13 @@ header nav .nav-menu-bar a svg:hover{
     display: flex;
     align-items: center;
 }
+
+/*----------------------------------------- checkout -----------------------------------------*/
+
+.checkout-list{
+    overflow: scroll;
+}
+
 
 /*----------------------------------------- footer -----------------------------------------*/
 
@@ -541,6 +552,10 @@ header nav .nav-menu-bar a svg:hover{
 }
 
 /* --------------------------------------------- arrivals --------------------------------------------- */
+
+/*.arrivals .arrivals-wrapper .arrivals-slide-button{*/
+/*    display: none;*/
+/*}*/
 
 .arrivals .arrivals-product-info h3 {
     font-size: 25px;

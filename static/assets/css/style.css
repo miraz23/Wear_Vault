@@ -1554,7 +1554,10 @@ select option {
 .payment-confirmation {
     display: flex;
     flex-direction: column;
-    margin: 180px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0 20px;
 }
 
 .payment-confirmation-icon {
