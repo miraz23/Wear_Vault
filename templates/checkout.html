@@ -99,9 +99,45 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Disable the PayPal button initially
+        const paypalButtonContainer = document.getElementById('paypal-button-container');
+        paypalButtonContainer.style.pointerEvents = "none"; // Disable clicks
+        paypalButtonContainer.style.opacity = "0.5"; // Visual indicator of disabled state
+
+        // Form validation function
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.querySelector('.email').value.trim();
+            const address1 = document.getElementById('address1').value.trim();
+            const city = document.getElementById('city').value.trim();
+            const state = document.getElementById('state').value.trim();
+            const zipCode = document.getElementById('zip_code').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+
+            // Check if all required fields are filled
+            return name && email && address1 && city && state && zipCode && phone;
+        }
+
+        // Enable PayPal button when the form is valid
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function() {
+                if (validateForm()) {
+                    paypalButtonContainer.style.pointerEvents = "auto"; // Enable clicks
+                    paypalButtonContainer.style.opacity = "1"; // Visual indicator of enabled state
+                } else {
+                    paypalButtonContainer.style.pointerEvents = "none"; // Disable clicks
+                    paypalButtonContainer.style.opacity = "0.5"; // Visual indicator of disabled state
+                }
+            });
+        });
 
         paypal.Buttons({
             createOrder: function(data, actions) {
+                // Ensure form validation before creating the order
+                if (!validateForm()) {
+                    alert('Please fill out the form completely before proceeding to payment.');
+                    return;
+                }
 
                 return actions.order.create({
                     purchase_units: [{
@@ -150,7 +186,7 @@
                         alert('Something went wrong. Please try again.');
                     });
                 });
-            },                              
+            },
             onCancel: function(data) {
                 alert('Payment cancelled.');
                 window.location.href = '/shop/payment/cancel/';

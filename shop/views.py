@@ -92,7 +92,7 @@ def payment_success(request):
             zip_code=zip_code,
             oid=transaction_id,
             amountpaid=amount_paid,  # Save amount paid
-            paymentstatus="Paid",
+            paymentstatus="Success",
             phone=phone,
         )
         new_order.save()
