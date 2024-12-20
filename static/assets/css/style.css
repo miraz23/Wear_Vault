@@ -1473,7 +1473,21 @@ select option {
     margin: 0;
 }
 
-.checkout-form button{
+.checkout .place-order {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#paypal-button-container {
+    width: 100%;
+    max-width: 350px;
+}
+
+
+/* .checkout-form button{
     margin: 40px auto 0;
     width: 250px;
     padding: 10px;
@@ -1547,7 +1561,7 @@ select option {
 .checkout .payment-option:hover {
     border: 1px solid #0070ba;
     box-shadow: 0 0 5px rgba(0, 112, 186, 0.5);
-}
+} */
 
 /*----------------------------------------- payment confirmation -----------------------------------------*/
 

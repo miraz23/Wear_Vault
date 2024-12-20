@@ -443,7 +443,9 @@ document.addEventListener("DOMContentLoaded", function (){
         // Update the cart panel HTML
         document.querySelector('.cart-content').innerHTML = cartContent;
         document.querySelector('.cart-footer h5').innerHTML = `Total: $${total.toFixed(2)}`;
-        document.getElementById('cart').textContent = totalItems;
+
+        document.getElementById('cart-count-desktop').textContent = totalItems;
+        document.getElementById('cart-count-mobile').textContent = totalItems;
     }
 
     // Clear the cart

@@ -15,10 +15,12 @@
             <div class="checkout-review">
                 <h2>Step 1 - My Cart Checkout - Review Your Cart Items</h2>
                 <div>
-                    <ul class="list-group" id="items">
-
-                    </ul>
-                 
+                    <div class="checkout-list">
+                        <ul class="list-group" id="items">
+                        
+                        </ul>
+                    </div>
+                    
                     <div class="checkout-total">
                         <p>Your Cart Total Is <b>$ <span id="totalprice"></span> <span id="amount"></span></b>. Enter your details below & place your order. Thank you for using Wear Vault.</p>
                     </div>
@@ -39,7 +41,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{user.email}}" required>
+                            <input type="email" class="form-control email" id="email" name="email" value="{{user.email}}" required>
                         </div>
 
                     </div>
@@ -49,8 +51,8 @@
                             <input type="text" class="form-control" id="address1" name="address1" required>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="inputAddress">Address line 2</label>
-                            <input type="text" class="form-control" id="address2" name="address2" required>
+                            <label for="inputAddress">Address line 2(Optional)</label>
+                            <input type="text" class="form-control" id="address2" name="address2">
                         </div>
                     </div>
 
@@ -76,39 +78,91 @@
                     </div>
                     <br>
 
-                    <div class="form-group col-md-6">
-                        <div class="payment-container">
-                            <label for="paymentMethod">Choose Payment Method:</label>
+                    <div class="payment-options col-md-12">
+                        <h2>Step 3 - Payment</h2>
 
-                            <label class="payment-option">
-                                <input type="radio" name="payment_method" value="paypal" required>
-                                <div class="payment-content">
-                                    <span>PayPal</span>
-                                    <img src="{% static '/images/paypal.png' %}" alt="PayPal" height="24">
-                                </div>
-                            </label>
-
-                            <label class="payment-option">
-                                <input type="radio" name="payment_method" value="stripe" required>
-                                <div class="payment-content">
-                                    <span>Credit or Debit Card</span>
-                                    <div class="payment-icons">
-                                        <img src="{% static '/images/visa.png' %}" alt="Visa">
-                                        <img src="{% static '/images/mastercard.png' %}" alt="Mastercard">
-                                        <span>+3</span>
-                                    </div>
-                                </div>
-                            </label>
+                        <div class="place-order">
+                            <p>Select your preferred payment method:</p>
+                        
+                            <!-- PayPal Buttons -->
+                            <div id="paypal-button-container"></div>
                         </div>
                     </div>
                     
-                    <div class="col-lg-12 d-flex justify-content-center">
-                        <button id="btn-place-order" type="submit">Place Order</button>
-                    </div>      
+                      
                 </form>
             </div>
         </div>
     </div>
 </section>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: document.getElementById('amt').value
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    console.log("Transaction details:", details);
+            
+                    // Prepare the form data for submission
+                    const formData = new FormData();
+                    formData.append('transaction_id', details.id); // PayPal Transaction ID
+                    formData.append('items_json', document.getElementById('itemsJson').value);
+                    formData.append('amount', document.getElementById('amt').value);
+                    formData.append('name', document.getElementById('name').value);
+                    formData.append('email', document.querySelector('.email').value);
+                    formData.append('address1', document.getElementById('address1').value);
+                    formData.append('address2', document.getElementById('address2').value);
+                    formData.append('city', document.getElementById('city').value);
+                    formData.append('state', document.getElementById('state').value);
+                    formData.append('zip_code', document.getElementById('zip_code').value);
+                    formData.append('phone', document.getElementById('phone').value);
+                    formData.append('amount_paid', details.purchase_units[0].amount.value);
+
+                    // Send data to the backend
+                    fetch('/shop/payment/success/', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                        },
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.href = '/shop/payment/success/';
+                        } else {
+                            alert('Error saving the order. Please contact support.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Something went wrong. Please try again.');
+                    });
+                });
+            },                              
+            onCancel: function(data) {
+                alert('Payment cancelled.');
+                window.location.href = '/shop/payment/cancel/';
+            },
+            onError: function(err) {
+                console.error('Payment error:', err);
+                alert('Something went wrong with the payment. Please try again.');
+            }
+        }).render('#paypal-button-container');
+    });
+</script>
+
+
 
 {% endblock content %}

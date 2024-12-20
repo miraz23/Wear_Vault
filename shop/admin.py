@@ -2,7 +2,7 @@ from django.contrib import admin
 from shop.models import product, order, orderUpdate
 
 admin.site.register(product)
-admin.site.register(orderUpdate)
+# admin.site.register(orderUpdate)
 
 class orderAdmin(admin.ModelAdmin):
     list_display = ('email', 'formatted_items')
