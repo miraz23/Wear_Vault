@@ -72,3 +72,6 @@ def contactUs(request):
         return redirect('/')
     
     return render(request, "contact.html")
+
+def developer(request):
+    return render(request, "developer.html")

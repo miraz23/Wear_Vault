@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function (){
                 totalPrice += qty * itemPrice;
             
                 var listItem = document.createElement('li');
-                listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+                listItem.className = 'd-flex justify-content-between align-items-center pb-2';
             
                 var nameDiv = document.createElement('div');
                 nameDiv.className = 'col-md-3';

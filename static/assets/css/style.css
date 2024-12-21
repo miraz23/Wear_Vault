@@ -1486,24 +1486,6 @@ select option {
     max-width: 350px;
 }
 
-
-/* .checkout-form button{
-    margin: 40px auto 0;
-    width: 250px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    color: #fff;
-    outline: none;
-    border: none;
-    background-color: #222;
-    transition: transform 0.3s ease;
-}
-
-.checkout-form button:hover{
-    transform: scale(1.02);
-}
-
 .checkout .payment-container {
     display: flex;
     flex-direction: column;
@@ -1513,9 +1495,10 @@ select option {
 
 .checkout .payment-option {
     display: flex;
+    width: 350px;
     align-items: center;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
     transition: border 0.3s ease, box-shadow 0.3s ease;
 }
@@ -1535,7 +1518,7 @@ select option {
     align-items: center;
     width: 100%;
     padding: 1rem;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 .checkout .payment-content span {
@@ -1561,7 +1544,26 @@ select option {
 .checkout .payment-option:hover {
     border: 1px solid #0070ba;
     box-shadow: 0 0 5px rgba(0, 112, 186, 0.5);
-} */
+}  
+
+.paypal-button {
+    background-color: #ffc439;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 7px;
+    width: 350px;
+}
+
+#paypal-button-container, #paypalpay{
+    padding: 0;
+    width: 350px;
+}
+
 
 /*----------------------------------------- payment confirmation -----------------------------------------*/
 
@@ -1628,6 +1630,78 @@ select option {
     background-color: #b67c54;
     cursor: pointer;
 }
+
+/*----------------------------------------- developer -----------------------------------------*/
+
+
+#profile-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.profile-card {
+    background-color: #bab3a6;
+    width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.profile-card h2 {
+    font-size: 22px;
+    color: #2d6a4f;
+    margin: 10px 0;
+}
+
+.profile-card p {
+    font-size: 14px;
+    color: #5a5a5a;
+    margin: 5px 0;
+}
+
+.profile-card .contact-info {
+    margin-top: 15px;
+}
+
+.profile-card .contact-info p {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+}
+
+.profile-card .contact-info p i {
+    font-size: 18px;
+    color: #2d6a4f;
+}
+
+.profile-card .contact-info p span {
+    font-size: 14px;
+    color: #000;
+}
+
+.profile-social{
+    display: flex; 
+    gap: 10px; 
+    justify-content: center; 
+}
+
+.profile-social a{
+    text-decoration: none;
+    color: #000;
+}
+
 
 /*----------------------------------------- footer -----------------------------------------*/
 

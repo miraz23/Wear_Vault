@@ -83,13 +83,37 @@
 
                         <div class="place-order">
                             <p>Select your preferred payment method:</p>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment_method" value="paypal" required>
+                                <div class="payment-content">
+                                    <span>PayPal</span>
+                                    <img src="{% static '/images/paypal.png' %}" alt="PayPal" height="24">
+                                </div>
+                            </label>
+
+                            <div id="paypalpay" class="col-lg-12 d-flex justify-content-center">
+                                <button id="btn-place-order" type="submit" class="paypal-button"> <img src="{% static '/images/paypal.png' %}" alt="PayPal" height="24"> </button>
+                            </div>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment_method" value="card" required>
+                                <div class="payment-content">
+                                    <span>Credit or Debit Card</span>
+                                    <div class="payment-icons">
+                                        <img src="{% static '/images/visa.png' %}" alt="Visa">
+                                        <img src="{% static '/images/mastercard.png' %}" alt="Mastercard">
+                                        <span>+3</span>
+                                    </div>
+                                </div>
+                            </label>
                         
                             <!-- PayPal Buttons -->
                             <div id="paypal-button-container"></div>
+                            
                         </div>
                     </div>
                     
-                      
                 </form>
             </div>
         </div>
@@ -99,10 +123,23 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+
+        const paypalRadio = document.querySelector('input[value="paypal"]');
+        const cardRadio = document.querySelector('input[value="card"]');
+        
+
         // Disable the PayPal button initially
         const paypalButtonContainer = document.getElementById('paypal-button-container');
         paypalButtonContainer.style.pointerEvents = "none"; // Disable clicks
         paypalButtonContainer.style.opacity = "0.5"; // Visual indicator of disabled state
+        paypalButtonContainer.style.display = "none"; // Visual indicator of disabled state
+
+
+        const paypalpay = document.getElementById('btn-place-order');
+        paypalpay.style.pointerEvents = "none";
+        paypalpay.style.opacity = "0.5";
+        paypalpay.style.display = "none";
+
 
         // Form validation function
         function validateForm() {
@@ -122,18 +159,37 @@
         document.querySelectorAll('input').forEach(input => {
             input.addEventListener('input', function() {
                 if (validateForm()) {
-                    paypalButtonContainer.style.pointerEvents = "auto"; // Enable clicks
-                    paypalButtonContainer.style.opacity = "1"; // Visual indicator of enabled state
+                    
+                    if (cardRadio.checked) {
+                        paypalButtonContainer.style.pointerEvents = "auto";
+                        paypalButtonContainer.style.opacity = "1";
+                        paypalButtonContainer.style.display = "block";
+                        paypalpay.style.display = "none";
+                    }
+
+                    if (paypalRadio.checked) {
+                        paypalpay.style.pointerEvents = "auto";
+                        paypalpay.style.opacity = "1";
+                        paypalpay.style.display = "block";
+                        paypalButtonContainer.style.display = "none";
+                    }
+                        
                 } else {
-                    paypalButtonContainer.style.pointerEvents = "none"; // Disable clicks
-                    paypalButtonContainer.style.opacity = "0.5"; // Visual indicator of disabled state
+                    paypalButtonContainer.style.pointerEvents = "none";
+                    paypalButtonContainer.style.opacity = "0.5";
+
+                    paypalpay.style.pointerEvents = "none";
+                    paypalpay.style.opacity = "0.5";
                 }
             });
         });
 
         paypal.Buttons({
-            createOrder: function(data, actions) {
-                // Ensure form validation before creating the order
+            
+            fundingSource: paypal.FUNDING.CARD, // This ensures only the card button is rendered.
+
+            createOrder: function (data, actions) {
+
                 if (!validateForm()) {
                     alert('Please fill out the form completely before proceeding to payment.');
                     return;
@@ -142,18 +198,18 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: document.getElementById('amt').value
-                        }
-                    }]
+                            value: document.getElementById('amt').value, // Total amount from the form
+                        },
+                    }],
                 });
             },
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    console.log("Transaction details:", details);
-            
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (details) {
+                    console.log("Transaction completed by " + details.payer.name.given_name);
+        
                     // Prepare the form data for submission
                     const formData = new FormData();
-                    formData.append('transaction_id', details.id); // PayPal Transaction ID
+                    formData.append('transaction_id', details.id);
                     formData.append('items_json', document.getElementById('itemsJson').value);
                     formData.append('amount', document.getElementById('amt').value);
                     formData.append('name', document.getElementById('name').value);
@@ -165,7 +221,7 @@
                     formData.append('zip_code', document.getElementById('zip_code').value);
                     formData.append('phone', document.getElementById('phone').value);
                     formData.append('amount_paid', details.purchase_units[0].amount.value);
-
+        
                     // Send data to the backend
                     fetch('/shop/payment/success/', {
                         method: 'POST',
@@ -187,15 +243,16 @@
                     });
                 });
             },
-            onCancel: function(data) {
+            onCancel: function (data) {
                 alert('Payment cancelled.');
                 window.location.href = '/shop/payment/cancel/';
             },
-            onError: function(err) {
+            onError: function (err) {
                 console.error('Payment error:', err);
                 alert('Something went wrong with the payment. Please try again.');
             }
         }).render('#paypal-button-container');
+        
     });
 </script>
 
