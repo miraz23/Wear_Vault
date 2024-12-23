@@ -739,9 +739,13 @@ nav .nav-menu-icon{
     display: none;
 }
 
+.banner-image{
+    width: calc(100% / 3);
+    max-width: max-content;
+}
+
 .banner-image img {
-    width: 400px;
-    height: 450px;
+    width: 100%;
     margin: 20px;
     transform: rotate(5deg);
     border: 10px solid #fff;
