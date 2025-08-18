@@ -7,14 +7,14 @@
     <div class="quick-view">
         <div class="quick-view-images">
             <div class="quick-view-images-top">
-                <div><img id="imagepr{{product.id}}" src="/media/{{ product.product_image_1 }}" alt="{{ product.product_name }}"></div>
-                <div><img src="/media/{{ product.product_image_2 }}" alt="{{ product.product_name }}"></div>
+                <div><img id="imagepr{{product.id}}" src="{{ product.product_image_1.url }}" alt="{{ product.product_name }}"></div>
+                <div><img src="{{ product.product_image_2.url }}" alt="{{ product.product_name }}"></div>
             </div>
 
             <div class="quick-view-images-bottom">
-                <div><img src="/media/{{ product.product_image_3 }}" alt="{{ product.product_name }}"></div>
-                <div><img src="/media/{{ product.product_image_4 }}" alt="{{ product.product_name }}"></div>
-                <div><img src="/media/{{ product.product_image_5 }}" alt="{{ product.product_name }}"></div>
+                <div><img src="{{ product.product_image_3.url }}" alt="{{ product.product_name }}"></div>
+                <div><img src="{{ product.product_image_4.url }}" alt="{{ product.product_name }}"></div>
+                <div><img src="{{ product.product_image_5.url }}" alt="{{ product.product_name }}"></div>
             </div>
         </div>
 

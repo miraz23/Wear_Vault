@@ -29,11 +29,11 @@ class product(models.Model):
     product_desc = models.TextField()
     product_color = models.TextField()
     product_size = models.TextField()
-    product_image_1 = models.ImageField(upload_to='images')
-    product_image_2 = models.ImageField(upload_to='images')
-    product_image_3 = models.ImageField(upload_to='images')
-    product_image_4 = models.ImageField(upload_to='images')
-    product_image_5 = models.ImageField(upload_to='images')
+    product_image_1 = models.ImageField(upload_to='product-images/')
+    product_image_2 = models.ImageField(upload_to='product-images/')
+    product_image_3 = models.ImageField(upload_to='product-images/')
+    product_image_4 = models.ImageField(upload_to='product-images/')
+    product_image_5 = models.ImageField(upload_to='product-images/')
     latest_arrival = models.CharField(max_length=3, choices=LATEST_ARRIVAL_CHOICES, default='no')
 
     def save(self, *args, **kwargs):
