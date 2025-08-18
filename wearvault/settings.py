@@ -20,7 +20,6 @@ from dotenv import load_dotenv
 load_dotenv()
 import cloudinary
 import cloudinary_storage
-os.environ.setdefault('WHITENOISE_SKIP_COMPRESS', '1')
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -34,16 +33,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#$4aghal-etm2neut2h7m)ca^f105gd^jw3l1yyunosm76@pu!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'wearvault.onrender.com']
-
-# Required when DEBUG=False and serving over HTTPS behind a proxy (e.g., Render)
-CSRF_TRUSTED_ORIGINS = [
-    'https://wearvault.onrender.com',
-    'http://127.0.0.1:8000',
-]
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -176,12 +168,9 @@ STORAGES = {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-
-# Backwards-compat for third-party apps that still read STATICFILES_STORAGE (e.g., cloudinary_storage)
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 
 CLOUDINARY_STORAGE = {

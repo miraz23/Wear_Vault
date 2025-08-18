@@ -11,7 +11,7 @@ services:
     name: wearvault
     runtime: python
     buildCommand: "./build.sh"
-    startCommand: "python -m gunicorn wearvault.wsgi:application"
+    startCommand: "python -m gunicorn wearvault.wsgi:application -k uvicorn.workers.UvicornWorker"
     # envVars:
     #   - key: DATABASE_URL
     #     fromDatabase:
